@@ -1,9 +1,7 @@
 package abstraction;
 
-import java.util.List;
 import java.util.Observable;
 
-import presentation.MainEventHandler;
 import shapeSceneFX.Point;
 
 public class Level extends Observable {
