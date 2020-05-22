@@ -23,6 +23,7 @@ public class CtrlLevel implements Observer {
 	private Level level;
 	private PresLevel presLevel;
 	public CtrlLevel() {
+		initImage();
 		CtrlElementScene.currentLevel = this;
 		level = new Level();
 		presLevel = new PresLevel();
@@ -118,5 +119,8 @@ public class CtrlLevel implements Observer {
 			//System.out.println(c.getElementCollidable().getCoord());
 			//System.out.println(rect.getCoord() + " " + rect.getDimension());
 		}
+	}
+	
+	public void initImage() {
 	}
 }

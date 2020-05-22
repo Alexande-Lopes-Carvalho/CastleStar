@@ -9,6 +9,10 @@ public class PresImage extends PresElementScene {
 		img = loadPixelatedImage(_img, MainEventHandler.pxSize);
 	}
 	
+	public PresImage(Image _img) {
+		img = _img;
+	}
+	
 	public void render() {
 		image(img, getCoord());
 	}
