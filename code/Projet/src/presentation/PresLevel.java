@@ -6,13 +6,22 @@ import java.util.List;
 
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
+import shapeSceneFX.EventHandling.TransferableEvent;
 
 public class PresLevel extends EventHandler {
 	private Point camera;
 	private List<PresElementScene> listElementScene;
+	private List<PresPlayer> listPlayer;
 	public PresLevel() {
 		camera = new Point(0, 0);
 		listElementScene = new ArrayList<PresElementScene>();
+		listPlayer = new ArrayList<PresPlayer>();
+	}
+	
+	protected void calc(long timePassed) {
+		for(PresElementScene e : listElementScene) {
+			e.calcEvent(timePassed);
+		}
 	}
 	
 	public void render() {
@@ -21,10 +30,12 @@ public class PresLevel extends EventHandler {
 		translate(translateCam);
 		sortByRenderOrder();
 		for(PresElementScene k : listElementScene) {
-			if(doRender(k)) { // si k apparaitra dans la fenetre alors on appele sa fonction render
+			if(k.doRender(camera)) { // si k apparaitra dans la fenetre alors on appele sa fonction render
+				//System.out.println(k.getRenderPrio());
 				k.render();
 			}
 		}
+		//System.out.println();
 		translateBack(translateCam);
 	}	
 	
@@ -44,15 +55,18 @@ public class PresLevel extends EventHandler {
 		listElementScene.add(e);
 	}
 	
+	public void add(PresPlayer e) {
+		listPlayer.add(e);
+	}
+	
 	public void remove(PresElementScene e) {
 		listElementScene.remove(e);
 	}
 	
-	public boolean doRender(PresElementScene e) {
-		return (e.getCoord().getX() <= camera.getX() && e.getCoord().getX()+e.getWidth() >= camera.getX()+width()) || between(e.getCoord().getX(), camera.getX(), camera.getX()+width()) || between(e.getCoord().getX()+e.getWidth(), camera.getX(), camera.getX()+width());
+	public void transferEvent(TransferableEvent e) {
+		for(PresPlayer k : listPlayer) {
+			//System.out.println("transferEvent to " + k);
+			k.addEvent(e.in(0));
+		}
 	}
-	
-	private static boolean between(double value, double inf, double sup) {
-		return value >= inf && value <= sup;
-	} 
 }

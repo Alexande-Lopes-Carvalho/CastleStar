@@ -12,4 +12,8 @@ public class ElementCollidable extends ElementScene {
 	public Polygon getPolygon() {
 		return polygon;
 	}
+	
+	public Point getCenterHitbox() {
+		return getCoord().copy().add(polygon.getCenter());
+	}
 }

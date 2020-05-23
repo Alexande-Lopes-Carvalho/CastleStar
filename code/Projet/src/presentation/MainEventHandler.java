@@ -13,6 +13,8 @@ public class MainEventHandler extends EventHandler {
 	public void setup() {
 		size(pxSize*402, pxSize*160);
 		Lootable.initImage();
+		PresWarrior.initImage();
+		PresPlayer.initImage();
 		ctrlLevel = new CtrlLevel_1();
 		presLevel = ctrlLevel.getPresLevel();
 	}
@@ -23,9 +25,13 @@ public class MainEventHandler extends EventHandler {
 	
 	public void render() {
 		presLevel.render();
+		stroke(255);
+		text(Math.round(frameRate())+"", 50, 50);
+		stroke(0);
 	}
 	
 	public void transferEvent(TransferableEvent e) {
-		presLevel.addEvent(e.in(0));
+		//System.out.println("TransferEvent From MainEventHandler");
+		presLevel.addEvent(e.transfer().in(0));
 	}
 }

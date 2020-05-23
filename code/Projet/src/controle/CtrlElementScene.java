@@ -24,6 +24,9 @@ public class CtrlElementScene implements Observer {
 	public void update(Observable o, Object arg) {
 		if(arg.equals(ElementScene.RENDER_PRIORITY_UPDATE)) {
 			presElementScene.setRenderPriority(elementScene.getRenderPriority());
+		} else if(arg.equals(ElementScene.COORD_UPDATE)) {
+			//System.out.println("UPDATE SET COORD");
+			presElementScene.setCoord(elementScene.getCoord());
 		}
 	}
 	

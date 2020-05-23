@@ -16,19 +16,16 @@ public class PresImage extends PresElementScene {
 	public void render() {
 		image(img, getCoord());
 	}
-	
-	public void setCoord(Point _coord) {
-		super.setCoord(_coord);
-		setRenderPriority(getCoord().getY()+getHeight()/MainEventHandler.pxSize);
-	}
 
-	@Override
 	public double getWidth() {
 		return img.getWidth();
 	}
 
-	@Override
 	public double getHeight() {
 		return img.getHeight();
+	}
+	
+	public boolean doRender(Point camera) {
+		return (getCoord().getX() <= camera.getX() && getCoord().getX()+getWidth() >= camera.getX()+width()) || between(getCoord().getX(), camera.getX(), camera.getX()+width()) || between(getCoord().getX()+getWidth(), camera.getX(), camera.getX()+width());
 	}
 }

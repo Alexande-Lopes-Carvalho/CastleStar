@@ -8,6 +8,7 @@ import shapeSceneFX.Point;
 public class Entity extends ElementCollidable {
 	public static final Object DAMAGE = 2;
 	public static final Object HEAL = 3;
+	public static final Object MOVE = 4;
 	private int life, maxLife;
 	public Entity(int _maxLife, Point _coord, Polygon _polygon) {
 		super(_coord, _polygon);

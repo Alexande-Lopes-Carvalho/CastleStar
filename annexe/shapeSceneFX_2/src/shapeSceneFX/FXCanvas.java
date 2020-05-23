@@ -38,6 +38,7 @@ public class FXCanvas extends Scene {
 	private int mouseCount;
 	private EventHandler eventHandler;
 	private float frameRate;
+	private KeyCode lastKeyPress; // utilisé supprimé la generation d'evenement keyPress lorsqu'une touche est maintenu enfoncé
 
 	/**
 	 * Lance un canvas, et execute la fonction setup de _eventHandler avant
@@ -78,9 +79,15 @@ public class FXCanvas extends Scene {
 			eventHandler.addEvent(toMillis(System.nanoTime() - oldTime), e);
 		});
 		setOnKeyPressed((e) -> {
-			eventHandler.addEvent(toMillis(System.nanoTime() - oldTime), e);
+			if(e.getCode() != lastKeyPress) {
+				lastKeyPress = e.getCode();
+				eventHandler.addEvent(toMillis(System.nanoTime() - oldTime), e);
+			}
 		});
 		setOnKeyReleased((e) -> {
+			if(e.getCode() == lastKeyPress) {
+				lastKeyPress = null;
+			}
 			eventHandler.addEvent(toMillis(System.nanoTime() - oldTime), e);
 		});
 		setOnKeyTyped((e) -> {

@@ -10,9 +10,10 @@ public class ElementScene extends Observable {
 	private Point coord;
 	private double renderPriority, renderPriorityAdd;
 	public ElementScene(Point _coord, double _renderPriorityAdd) {
-		this(_coord);
+		coord = _coord;
 		//System.out.println(_renderPriorityAdd);
 		renderPriorityAdd = _renderPriorityAdd;
+		setRenderPriority(calcRenderPriority());
 	}
 	
 	public ElementScene(Point _coord) {

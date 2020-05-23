@@ -19,7 +19,8 @@ import shapeSceneFX.Point;
 public class CtrlLevel implements Observer {
 	private List<CtrlElementScene> ctrlElementSceneList;
 	private List<CtrlElementCollidable> ctrlElementCollidableList;
-	//private List<CtrlPlayer> ctrlPlayerList;
+	private List<CtrlEntity> ctrlEntityList;
+	private List<CtrlPlayer> ctrlPlayerList;
 	private Level level;
 	private PresLevel presLevel;
 	public CtrlLevel() {
@@ -31,6 +32,8 @@ public class CtrlLevel implements Observer {
 		level.addObserver(this);
 		ctrlElementSceneList = new ArrayList<CtrlElementScene>();
 		ctrlElementCollidableList = new ArrayList<CtrlElementCollidable>();
+		ctrlEntityList = new ArrayList<CtrlEntity>();
+		ctrlPlayerList = new ArrayList<CtrlPlayer>();
 	}
 	
 	/*public void updateCamera() {
@@ -64,9 +67,31 @@ public class CtrlLevel implements Observer {
 		ctrlElementCollidableList.add(e);
 	}
 	
+	public void add(CtrlEntity e) {
+		add((CtrlElementCollidable) e);
+		ctrlEntityList.add(e);
+	}
+	
+	public void add(CtrlPlayer e) {
+		add((CtrlEntity) e);
+		ctrlPlayerList.add(e);
+		presLevel.add(e.getPresPlayer());
+	}
+	
 	public void remove(CtrlEntity e) {
+		ctrlElementSceneList.remove(e);
 		ctrlElementCollidableList.remove(e);
+		ctrlEntityList.remove(e);
 		presLevel.remove(e.getPresElementScene());
+	}
+	
+	public void remove(CtrlPlayer e) {
+		remove((CtrlEntity) e);
+		ctrlPlayerList.remove(e);
+	}
+	
+	public void playerMoved(CtrlPlayer ctrlPlayer) {
+		
 	}
 	
 	public PresLevel getPresLevel() {
@@ -84,10 +109,11 @@ public class CtrlLevel implements Observer {
 			coord.add(pres.getWidth()/MainEventHandler.pxSize, 0);
 			for(int i = 1; i < fileAr.length; i++) {
 				//System.out.println(fileAr[i].getPath() + " " + coord);
-				CtrlElementScene a = new CtrlElementScene(new ElementScene(coord.copy()), new PresImage(fileAr[i].getPath()));
+				PresImage pi = new PresImage(fileAr[i].getPath());
+				CtrlElementScene a = new CtrlElementScene(new ElementScene(coord.copy()), pi);
 				a.setRenderPriority(-1);
 				add(a);
-				coord.add(a.getPresElementScene().getWidth()/MainEventHandler.pxSize, 0);
+				coord.add(pi.getWidth()/MainEventHandler.pxSize, 0);
 			}
 			rect.getDimension().add(coord.getX()-_coord.getX(), 0);
 			CtrlElementCollidable c = new CtrlElementCollidable(new ElementCollidable(_coord.copy(), rect), pres);
@@ -109,9 +135,10 @@ public class CtrlLevel implements Observer {
 			coord.add(pres.getWidth()/MainEventHandler.pxSize, 0);
 			for(int i = 1; i < fileAr.length; i++) {
 				//System.out.println(fileAr[i].getPath() + " " + coord);
-				CtrlElementScene a = new CtrlElementScene(new ElementScene(coord.copy()), new PresImage(fileAr[i].getPath()));
+				PresImage pi = new PresImage(fileAr[i].getPath());
+				CtrlElementScene a = new CtrlElementScene(new ElementScene(coord.copy()), pi);
 				add(a);
-				coord.add(a.getPresElementScene().getWidth()/MainEventHandler.pxSize, 0);
+				coord.add(pi.getWidth()/MainEventHandler.pxSize, 0);
 			} 
 			rect.getDimension().add(coord.getX()-_coord.getX(), 0);
 			CtrlElementCollidable c = new CtrlElementCollidable(new ElementCollidable(_coord.copy(), rect), pres);

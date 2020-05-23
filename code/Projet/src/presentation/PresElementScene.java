@@ -15,22 +15,28 @@ public abstract class PresElementScene extends EventHandler implements Comparabl
 	}
 	
 	public void setCoord(Point _coord) {
-		coord.set(_coord.copy().mult(MainEventHandler.pxSize));
+		// pour eviter les image flou on arrondie les coordonné
+		Point newCoord = _coord.copy().mult(MainEventHandler.pxSize);
+		newCoord.set(Math.round(newCoord.getX()), Math.round(newCoord.getY()));
+		coord.set(newCoord);
 	}
 	
 	public void setRenderPriority(double _renderPriority) {
 		renderPriority = _renderPriority;
 	}
 	
-	public abstract double getWidth();
-	public abstract double getHeight();
+	public abstract boolean doRender(Point camera);
 
 	@Override
 	public int compareTo(PresElementScene arg0) {
-		return (int)(renderPriority-arg0.renderPriority);
+		return ((renderPriority-arg0.renderPriority < 0)? -1 : (renderPriority-arg0.renderPriority > 0)? 1 : 0);
 	}
 	
 	public double getRenderPrio() {
 		return renderPriority;
+	}
+	
+	public static boolean between(double value, double inf, double sup) {
+		return value >= inf && value <= sup;
 	}
 }
