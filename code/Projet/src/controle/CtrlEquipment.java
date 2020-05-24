@@ -39,7 +39,7 @@ public abstract class CtrlEquipment implements Observer {
 	public void setCtrlWarrior(CtrlWarrior _ctrlWarrior) {
 		ctrlWarrior = _ctrlWarrior;
 		handleCtrlWarrior();
-		System.out.println("handleCtrlWarrior");
+		//System.out.println("handleCtrlWarrior");
 	}
 	
 	public CtrlWarrior getCtrlWarrior() {
@@ -48,7 +48,7 @@ public abstract class CtrlEquipment implements Observer {
 	
 	public void update(Observable o, Object arg) {
 		if(arg.equals(Warrior.LOOKINGTO_UPDATE)) {
-			presHand.setOrentation(ctrlWarrior.getWarrior().getFacingLeft(), ctrlWarrior.getWarrior().getLookingTo().getAngle().getZ());
+			presHand.setOrentation(ctrlWarrior.getWarrior().getFacingLeft(), ctrlWarrior.getWarrior().getLookingTo());
 		}
 	}
 }

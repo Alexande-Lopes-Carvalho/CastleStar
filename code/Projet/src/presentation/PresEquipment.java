@@ -29,14 +29,15 @@ public class PresEquipment extends PresElementScene {
 		img = _img;
 	}
 	
-	public void setOrentation(boolean _facingLeft, double _rotation) {
+	public void setOrentation(boolean _facingLeft, Point _lookingTo) {
 		facingLeft = _facingLeft;
-		rotation = _rotation+((facingLeft)? Math.PI: 0);
 		if(facingLeft) {
 			imgCoord = new Point(-img[indexImage].getCoord().getX(), img[indexImage].getCoord().getY());
 		} else {
 			imgCoord = img[indexImage].getCoord();
 		}
+		//rotation = _rotation+((facingLeft)? Math.PI: 0);
+		rotation = _lookingTo.copy().add(imgCoord.copy().div(MainEventHandler.pxSize).getVector(new Point(0, 0))).getAngle().getZ()+((facingLeft)? Math.PI: 0);
 	}
 	
 	public int getIndexImage() {

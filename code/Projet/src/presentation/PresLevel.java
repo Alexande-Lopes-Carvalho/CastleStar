@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import controle.CtrlLevel;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.EventHandler;
@@ -13,6 +14,7 @@ public class PresLevel extends EventHandler {
 	private Point camera;
 	private List<PresElementScene> listElementScene;
 	private List<PresPlayer> listPlayer;
+	private CtrlLevel ctrlLevel;
 	public PresLevel() {
 		camera = new Point(0, 0);
 		listElementScene = new ArrayList<PresElementScene>();
@@ -26,6 +28,7 @@ public class PresLevel extends EventHandler {
 	}
 	
 	public void render() {
+		ctrlLevel.updateCamera();
 		background(0);
 		Point translateCam = camera.copy().mult(-1);
 		translate(translateCam);
@@ -44,12 +47,17 @@ public class PresLevel extends EventHandler {
 		Collections.sort(listElementScene);
 	}
 	
+	public void setCtrlLevel(CtrlLevel _ctrlLevel) {
+		ctrlLevel = _ctrlLevel;
+	}
+	
 	public Point getCamera() {
 		return camera;
 	}
 	
 	public void setCamera(Point coord) {
 		camera.set(coord.copy().mult(MainEventHandler.pxSize));
+		camera.set(Math.round(camera.getX()), Math.round(camera.getY()));
 	}
 	
 	public void add(PresElementScene e) {

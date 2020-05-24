@@ -21,7 +21,7 @@ public class PresPlayer extends PresWarrior {
 	}
 	
 	public void render() {
-		getCtrlWarrior().lookingTo(new Point(mouseX(), mouseY()).sub(getCoord()));
+		getCtrlWarrior().lookingTo(new Point(mouseX(), mouseY()).add(CtrlPlayer.currentLevel.getPresLevel().getCamera()).sub(getCoord()));
 		super.render();
 	}
 	
@@ -91,7 +91,7 @@ public class PresPlayer extends PresWarrior {
 				new OrientedImage("./data/Character/Equipment/Shield/1.png", backEquipment)};
 		img_bowFront = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Bow/Front/0.png", frontEquipment),
 				new OrientedImage("./data/Character/Equipment/Bow/Front/1.png", frontEquipment)};
-		img_bowBack = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Bow/Back/0.png", frontEquipment)};
+		img_bowBack = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Bow/Back/0.png", backEquipment)};
 	}
 	
 	public OrientedImage[] getSword() {

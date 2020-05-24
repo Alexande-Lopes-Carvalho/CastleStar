@@ -17,7 +17,7 @@ public class Warrior extends Entity {
 	}
 	
 	public void setLookingTo(Point a) {
-		if(a.getDist() >= 5) {
+		if(Math.abs(a.getX()) >= 5) {
 			lookingTo.set(a);
 			facingLeft = lookingTo.getX() < 0;
 			setChanged();

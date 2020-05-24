@@ -16,7 +16,7 @@ public class CtrlHandBack extends CtrlEquipment {
 
 	@Override
 	public void handleCtrlWarrior() {
-		System.out.println("pass");
+		//System.out.println("pass");
 		getPresEquipment().set(getCtrlWarrior().getPresWarrior().getHandBack());
 	}
 

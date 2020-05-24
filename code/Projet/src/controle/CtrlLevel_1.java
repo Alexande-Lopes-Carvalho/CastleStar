@@ -20,9 +20,10 @@ public class CtrlLevel_1 extends CtrlLevel {
 		add(bigBarrel(new Point(145, 55)));
 		add(bigBarrel(new Point(213, 55)));
 		
-		CtrlPlayer p = new CtrlPlayer(new Player(0, new Point(50, 0), 10, new Point(30, 70)), new PresPlayer()); 
+		CtrlPlayer p = new CtrlPlayer(new Player(10, new Point(50, 0), 10, new Point(30, 70)), new PresPlayer()); 
 		p.equip(new CtrlSword());
 		p.equip(new CtrlShield());
+		//p.equip(new CtrlBow());
 		add(p);
 	}
 	

@@ -28,6 +28,7 @@ public class CtrlLevel implements Observer {
 		CtrlElementScene.currentLevel = this;
 		level = new Level();
 		presLevel = new PresLevel();
+		presLevel.setCtrlLevel(this);
 		presLevel.setCamera(level.getCamera());
 		level.addObserver(this);
 		ctrlElementSceneList = new ArrayList<CtrlElementScene>();
@@ -36,17 +37,15 @@ public class CtrlLevel implements Observer {
 		ctrlPlayerList = new ArrayList<CtrlPlayer>();
 	}
 	
-	/*public void updateCamera() {
-		List<Player> p = new Arraylist<Player>();
-		for(Player k : ctrlPlayerList) {
-			p.add(k.getPlayer());
-		}
-		level.updateCamera(p);
-	}*/
+	public void updateCamera() {
+		level.updateCamera(ctrlPlayerList);
+	}
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		presLevel.setCamera(level.getCamera());
+		if(arg1.equals(Level.CAMERA_UPDATE)) {
+			presLevel.setCamera(level.getCamera());
+		}
 	}
 	
 	public List<CtrlElementScene> getCtrlElementSceneList(){
