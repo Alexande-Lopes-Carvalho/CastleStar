@@ -30,13 +30,14 @@ public class PresWeapon extends PresEquipment {
 	public class ActionEvent implements Event{
 		@Override
 		public void handleEvent() {
-			setIndexImage((getIndexImage()+1)%getLengthImg());
-			if(getIndexImage() == 0) {
+			AnimatedOrientedImage a = getAnimatedOrientedImage();
+			a.setIndex((a.getIndex()+1)%a.getLength());
+			if(a.getIndex() == 0) {
 				action = false;
 				getCtrlEquipment().use();
 				return;
 			}
-			addEvent(new ActionEvent().in(actionTime/getLengthImg()));
+			addEvent(new ActionEvent().in(actionTime/a.getLength()));
 		}
 	}
 }

@@ -5,63 +5,48 @@ import javafx.scene.image.Image;
 import shapeSceneFX.Point;
 
 public class PresEquipment extends PresElementScene {
-	private OrientedImage[] img;
+	private AnimatedOrientedImage img;
 	private boolean facingLeft;
 	private double rotation;
 	private CtrlEquipment ctrlEquipment;
-	private int indexImage;
 	private Point imgCoord;
 	public PresEquipment() {
-		indexImage = 0;
+		imgCoord = new Point(0, 0);
 	}
 	
 	public void render() {
 		//System.out.println("in render PresEquipment");
 		translate(imgCoord);
 		rotate(rotation);
-		image(img[indexImage].getImage(facingLeft), 0, 0);
+		image(getImage(), 0, 0);
 		rotateBack(rotation);
 		translateBack(imgCoord);
 		//System.out.println("out render PresEquipment");
 	}
 	
-	public void set(OrientedImage[] _img) {
+	public void set(AnimatedOrientedImage _img) {
 		img = _img;
 	}
 	
 	public void setOrentation(boolean _facingLeft, Point _lookingTo) {
 		facingLeft = _facingLeft;
 		if(facingLeft) {
-			imgCoord = new Point(-img[indexImage].getCoord().getX(), img[indexImage].getCoord().getY());
+			imgCoord.set(-img.getCoord().getX(), img.getCoord().getY());
 		} else {
-			imgCoord = img[indexImage].getCoord();
+			imgCoord.set(img.getCoord());
 		}
 		//rotation = _rotation+((facingLeft)? Math.PI: 0);
 		rotation = _lookingTo.copy().add(imgCoord.copy().div(MainEventHandler.pxSize).getVector(new Point(0, 0))).getAngle().getZ()+((facingLeft)? Math.PI: 0);
 	}
 	
-	public int getIndexImage() {
-		return indexImage;
+	public AnimatedOrientedImage getAnimatedOrientedImage() {
+		return img;
 	}
 	
-	public void setIndexImage(int _indexImage) {
-		if(_indexImage >= 0 && _indexImage < getLengthImg()) {
-			indexImage = _indexImage;
-		}
+	public Image getImage() {
+		return img.getImage(facingLeft);
 	}
-	
-	public int getLengthImg() {
-		return img.length;
-	}
-	
-	public Image getCurrentImage() {
-		return img[indexImage].getImage(facingLeft);
-	}
-	
-	public Point getOrientedImageCoord() {
-		return img[indexImage].getCoord();
-	}
-	
+
 	public void setCtrlEquipment(CtrlEquipment _ctrlEquipment) {
 		ctrlEquipment = _ctrlEquipment;
 	}

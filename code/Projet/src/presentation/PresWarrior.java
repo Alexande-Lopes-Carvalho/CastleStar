@@ -130,8 +130,8 @@ public class PresWarrior extends PresElementScene {
 
 	@Override
 	public boolean doRender(Point camera) {  // A FAIRE
-		Image frontEquipment = presEquipment[1].getCurrentImage(), backEquipment = presEquipment[0].getCurrentImage();
-		Point frontCoord = presEquipment[1].getOrientedImageCoord().copy().add(presEquipment[1].getCoord()), backCoord = presEquipment[0].getOrientedImageCoord().copy().add(presEquipment[0].getCoord());
+		Image frontEquipment = presEquipment[1].getImage(), backEquipment = presEquipment[0].getImage();
+		Point frontCoord = presEquipment[1].getAnimatedOrientedImage().getCoord().copy().add(presEquipment[1].getCoord()), backCoord = presEquipment[0].getAnimatedOrientedImage().getCoord().copy().add(presEquipment[0].getCoord());
 		double maxLength = Math.max(Math.sqrt(Math.pow(frontEquipment.getWidth(), 2)+ Math.pow(frontEquipment.getHeight(), 2)),Math.sqrt(Math.pow(backEquipment.getWidth(), 2)+ Math.pow(backEquipment.getHeight(), 2)))/2.;
 		//System.out.println(maxLength + " " + (backCoord.getX()-(frontCoord.getX())) + " " + frontCoord.getX() + " " + backCoord.getX());
 		Point posDim = new Point(getCoord().getX()+frontCoord.getX()-maxLength, backCoord.getX()-(frontCoord.getX())+2*maxLength);
@@ -148,29 +148,29 @@ public class PresWarrior extends PresElementScene {
 	 * méthode qui seront overridé par Player et Enemy si les texture sont existante
 	 * (pour construire les PresHand)
 	 */
-	public OrientedImage[] getSword() {
-		return new OrientedImage[] {new OrientedImage(missingTexture, new Point(0, 0))};
+	public AnimatedOrientedImage getSword() {
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
-	public OrientedImage[] getShield() {
-		return new OrientedImage[]{new OrientedImage(missingTexture, new Point(0, 0))};
+	public AnimatedOrientedImage getShield() {
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
-	public OrientedImage[] getBowFront() {
-		return new OrientedImage[] {new OrientedImage(missingTexture, new Point(0, 0))};
+	public AnimatedOrientedImage getBowFront() {
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
-	public OrientedImage[] getBowBack(){
-		return new OrientedImage[] {new OrientedImage(missingTexture, new Point(0, 0))};
+	public AnimatedOrientedImage getBowBack(){
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
-	public OrientedImage[] getHandBack() {
+	public AnimatedOrientedImage getHandBack() {
 		//System.out.println("image WarriorgetHandBack");
-		return new OrientedImage[] {new OrientedImage(missingTexture, new Point(0, 0))};
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
-	public OrientedImage[] getHandFront() {
+	public AnimatedOrientedImage getHandFront() {
 		//System.out.println("image WarriorgetHandFront");
-		return new OrientedImage[] {new OrientedImage(missingTexture, new Point(0, 0))};
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 }

@@ -37,9 +37,9 @@ public class PresShield extends PresEquipment {
 	public void setProtect(boolean _protect) {
 		protect = _protect;
 		if(protect) {
-			setIndexImage(1);
+			getAnimatedOrientedImage().setIndex(1);
 		} else {
-			setIndexImage(0);
+			getAnimatedOrientedImage().setIndex(0);
 		}
 	}
 	

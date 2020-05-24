@@ -9,10 +9,10 @@ public class PresPlayer extends PresWarrior {
 	private static OrientedImage img_shoulder;
 	private static OrientedImage img_leg;
 	private static OrientedImage[] img_walkingLegs;
-	private static OrientedImage[] img_handFront, img_handBack;
-	private static OrientedImage[] img_sword;
-	private static OrientedImage[] img_shield;
-	private static OrientedImage[] img_bowFront, img_bowBack;
+	private static AnimatedOrientedImage img_handFront, img_handBack;
+	private static AnimatedOrientedImage img_sword;
+	private static AnimatedOrientedImage img_shield;
+	private static AnimatedOrientedImage img_bowFront, img_bowBack;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
 	private boolean left, right, up, down;
@@ -72,49 +72,45 @@ public class PresPlayer extends PresWarrior {
 	public static void initImage() {
 		frontEquipment.mult(MainEventHandler.pxSize);
 		backEquipment.mult(MainEventHandler.pxSize);
-		img_body = new OrientedImage("./data/Character/Body.png", new Point(-6, -30).mult(MainEventHandler.pxSize));
-		img_shoulder = new OrientedImage("./data/Character/Shoulder.png", new Point(-5, -22).mult(MainEventHandler.pxSize));
-		img_leg = new OrientedImage("./data/Character/Leg.png", new Point(-6, -13).mult(MainEventHandler.pxSize));
-		img_walkingLegs = new OrientedImage[]{new OrientedImage("./data/Character/Walking/0.png", new Point(-10, -13).mult(MainEventHandler.pxSize)),
-				new OrientedImage("./data/Character/Walking/1.png", new Point(-7, -13).mult(MainEventHandler.pxSize)),
-				new OrientedImage("./data/Character/Walking/2.png", new Point(-8, -13).mult(MainEventHandler.pxSize)),
-				new OrientedImage("./data/Character/Walking/3.png", new Point(-5, -13).mult(MainEventHandler.pxSize))};
+		img_body = new OrientedImage(new Point(-6, -30).mult(MainEventHandler.pxSize), "./data/Character/Body.png");
+		img_shoulder = new OrientedImage(new Point(-5, -22).mult(MainEventHandler.pxSize), "./data/Character/Shoulder.png");
+		img_leg = new OrientedImage(new Point(-6, -13).mult(MainEventHandler.pxSize), "./data/Character/Leg.png");
+		img_walkingLegs = new OrientedImage[]{new OrientedImage(new Point(-10, -13).mult(MainEventHandler.pxSize), "./data/Character/Walking/0.png"),
+				new OrientedImage(new Point(-7, -13).mult(MainEventHandler.pxSize), "./data/Character/Walking/1.png"),
+				new OrientedImage(new Point(-8, -13).mult(MainEventHandler.pxSize), "./data/Character/Walking/2.png"),
+				new OrientedImage(new Point(-5, -13).mult(MainEventHandler.pxSize), "./data/Character/Walking/3.png")};
 		
-		img_handBack = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Hand/Back.png", backEquipment)};
-		img_handFront = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Hand/Front.png", frontEquipment)};
+		img_handBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Hand/Back.png");
+		img_handFront = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Hand/Front.png");
 		
-		img_sword = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Sword/0.png", frontEquipment),
-				new OrientedImage("./data/Character/Equipment/Sword/1.png", frontEquipment), 
-				new OrientedImage("./data/Character/Equipment/Sword/2.png", frontEquipment)};
+		img_sword = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Sword");
 		
-		img_shield = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Shield/0.png", backEquipment),
-				new OrientedImage("./data/Character/Equipment/Shield/1.png", backEquipment)};
-		img_bowFront = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Bow/Front/0.png", frontEquipment),
-				new OrientedImage("./data/Character/Equipment/Bow/Front/1.png", frontEquipment)};
-		img_bowBack = new OrientedImage[] {new OrientedImage("./data/Character/Equipment/Bow/Back/0.png", backEquipment)};
+		img_shield = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Shield");
+		img_bowFront = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Bow/Front");
+		img_bowBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Bow/Back");
 	}
 	
-	public OrientedImage[] getSword() {
+	public AnimatedOrientedImage getSword() {
 		return img_sword;
 	}
 	
-	public OrientedImage[] getShield() {
+	public AnimatedOrientedImage getShield() {
 		return img_shield;
 	}
 	
-	public OrientedImage[] getBowFront() {
+	public AnimatedOrientedImage getBowFront() {
 		return img_bowFront;
 	}
 	
-	public OrientedImage[] getBowBack() {
+	public AnimatedOrientedImage getBowBack() {
 		return img_bowBack;
 	}
 	
-	public OrientedImage[] getHandBack() {
+	public AnimatedOrientedImage getHandBack() {
 		return img_handBack;
 	}
 	
-	public OrientedImage[] getHandFront() {
+	public AnimatedOrientedImage getHandFront() {
 		return img_handFront;
 	}
 }

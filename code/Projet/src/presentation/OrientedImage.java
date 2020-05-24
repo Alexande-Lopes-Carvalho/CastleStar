@@ -10,17 +10,17 @@ import shapeSceneFX.EventHandling.EventHandler;
 public class OrientedImage {
 	private Image[] img = new Image[2];
 	private Point coord;
-	public OrientedImage(String path, Point _coord) {
-		this(EventHandler.loadPixelatedImage(path, MainEventHandler.pxSize), _coord);
+	public OrientedImage(Point _coord, String path) {
+		this(_coord, EventHandler.loadPixelatedImage(path, MainEventHandler.pxSize));
 	}
 	
-	public OrientedImage(Image image, Point _coord) {
+	public OrientedImage(Point _coord, Image image) {
 		img[0] = image;
 		img[1] = reverseImage(img[0]);
 		coord = _coord;
 	}
 	
-	public OrientedImage(Image[] image, Point _coord) {
+	public OrientedImage(Point _coord, Image[] image) {
 		img = image;
 		coord = _coord;
 	}

@@ -22,12 +22,12 @@ public class PresBow extends PresEquipment {
 	
 	public void activate() {
 		isShooting = true;
-		setIndexImage(1);
+		getAnimatedOrientedImage().setIndex(1);
 	}
 	
 	public void desactivate() {
 		isShooting = false;
-		setIndexImage(0);
+		getAnimatedOrientedImage().setIndex(0);
 	}
 	
 	public void shoot() {
