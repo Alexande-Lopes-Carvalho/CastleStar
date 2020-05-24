@@ -18,7 +18,9 @@ public class CtrlEntity extends CtrlElementCollidable {
 		if(arg.equals(Entity.MOVE)) {
 			getPresElementScene().setCoord(entity.getCoord());
 		} else if(arg.equals(Entity.DAMAGE)) {
-			
+			if(entity.isDead()) {
+				kill();
+			}
 		} else if(arg.equals(Entity.HEAL)) {
 			
 		}

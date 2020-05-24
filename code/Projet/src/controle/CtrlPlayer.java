@@ -1,5 +1,6 @@
 package controle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import abstraction.Player;
@@ -18,7 +19,7 @@ public class CtrlPlayer extends CtrlWarrior {
 
 	@Override
 	public List<CtrlEntity> getListOfEnemy() {
-		return null;
+		return new ArrayList<CtrlEntity>(); // A FAIRE
 	}
 	
 	public void move(Point deplacement) {
@@ -28,5 +29,9 @@ public class CtrlPlayer extends CtrlWarrior {
 	
 	public PresPlayer getPresPlayer() {
 		return presPlayer;
+	}
+	
+	public void kill() {
+		currentLevel.remove(this);
 	}
 }

@@ -14,8 +14,6 @@ public class PresPlayer extends PresWarrior {
 	private static OrientedImage[] img_shield;
 	private static OrientedImage[] img_bowFront, img_bowBack;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
-	private static double speed = 0.1;
-	private static Point speedCoef = new Point(0.09, 0.06);
 	private CtrlPlayer ctrlPlayer;
 	private boolean left, right, up, down;
 	public PresPlayer() {
@@ -28,9 +26,10 @@ public class PresPlayer extends PresWarrior {
 	}
 	
 	public void calc(long timePassed) {
+		super.calc(timePassed);
 		if(getWalk()) {
-			Point deplacement = new Point(((left ^ right)? speedCoef.getX()*((right)? 1 : -1) : 0), ((up ^ down)? speedCoef.getY()*((down)? 1 : -1) :0));
-			deplacement.div(deplacement.getDist()).mult(speed*timePassed);
+			Point deplacement = new Point(((left ^ right)? getSpeedCoef().getX()*((right)? 1 : -1) : 0), ((up ^ down)? getSpeedCoef().getY()*((down)? 1 : -1) :0));
+			deplacement.div(deplacement.getDist()).mult(getSpeed()*timePassed);
 			getCtrlPlayer().move(deplacement);
 		}
 	}

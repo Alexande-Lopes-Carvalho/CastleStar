@@ -1,6 +1,5 @@
 package controle;
 
-import abstraction.Equipment;
 import abstraction.Hand;
 import presentation.PresEquipment;
 
@@ -12,12 +11,12 @@ public class CtrlHandFront extends CtrlEquipment {
 	}
 
 	@Override
-	void use() {
+	public void use() {
 		// ne fait rien
 	}
 
 	@Override
-	void handleCtrlWarrior() {
+	public void handleCtrlWarrior() {
 		getPresEquipment().set(getCtrlWarrior().getPresWarrior().getHandFront());
 	}
 	

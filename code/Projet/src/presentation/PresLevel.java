@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import shapeSceneFX.Point;
+import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.EventHandler;
 import shapeSceneFX.EventHandling.TransferableEvent;
 
@@ -60,13 +61,26 @@ public class PresLevel extends EventHandler {
 	}
 	
 	public void remove(PresElementScene e) {
-		listElementScene.remove(e);
+		addEvent(new RemovePresElementSceneEvent(e).in(0));
 	}
 	
 	public void transferEvent(TransferableEvent e) {
+		addEvent(e.in(0));
 		for(PresPlayer k : listPlayer) {
 			//System.out.println("transferEvent to " + k);
-			k.addEvent(e.in(0));
+			k.addEvent(e.transfer().in(0));
+		}
+	}
+	
+	public class RemovePresElementSceneEvent implements Event{ // Present pour ne pas avoir de ConcurrentModificationException lors de la suppression (calc(long timePassed))
+		private PresElementScene e;
+		public RemovePresElementSceneEvent(PresElementScene _e) {
+			e = _e;
+		}
+		
+		@Override
+		public void handleEvent() {
+			listElementScene.remove(e);
 		}
 	}
 }

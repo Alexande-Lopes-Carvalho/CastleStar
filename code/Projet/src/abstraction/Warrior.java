@@ -3,29 +3,17 @@ package abstraction;
 import shapeSceneFX.Point;
 
 public class Warrior extends Entity {
-	public static final Object SHIELD_PROTECT_UPDATE = 5;
-	public static final Object LOOKINGTO_UPDATE = 6;
-	public static final Object NBARROW_UPDATE = 7;
-	public static final Object WALKING_UPDATE = 8;
+	public static final Object LOOKINGTO_UPDATE = 5;
+	public static final Object NBARROW_UPDATE = 6;
+	public static final Object WALKING_UPDATE = 7;
 	private boolean facingLeft;
-	private boolean shieldProtect;
 	private Point lookingTo;
 	private int nbArrow;
 	private boolean walking;
-	public Warrior(int _nbArrow, Point _lookingTo,int _maxLife, Point _coord, Polygon _polygon) {
-		super(_maxLife, _coord, _polygon);
+	public Warrior(int _nbArrow, Point _lookingTo, double _speed,int _maxLife, Point _coord, Polygon _polygon) {
+		super(_speed,_maxLife, _coord, _polygon);
 		lookingTo = _lookingTo;
 		setNbArrow(_nbArrow);
-	}
-	
-	public void setShieldProtect(boolean value) {
-		shieldProtect = value;
-		setChanged();
-		notifyObservers(SHIELD_PROTECT_UPDATE);
-	}
-	
-	public boolean getShieldProtect() {
-		return shieldProtect;
 	}
 	
 	public void setLookingTo(Point a) {

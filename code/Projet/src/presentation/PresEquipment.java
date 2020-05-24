@@ -1,13 +1,14 @@
 package presentation;
 
 import controle.CtrlEquipment;
+import javafx.scene.image.Image;
 import shapeSceneFX.Point;
 
 public class PresEquipment extends PresElementScene {
 	private OrientedImage[] img;
 	private boolean facingLeft;
 	private double rotation;
-	private CtrlEquipment ctrlHand;
+	private CtrlEquipment ctrlEquipment;
 	private int indexImage;
 	private Point imgCoord;
 	public PresEquipment() {
@@ -38,13 +39,38 @@ public class PresEquipment extends PresElementScene {
 		}
 	}
 	
-	public void setCtrlHand(CtrlEquipment _ctrlHand) {
-		ctrlHand = _ctrlHand;
+	public int getIndexImage() {
+		return indexImage;
+	}
+	
+	public void setIndexImage(int _indexImage) {
+		if(_indexImage >= 0 && _indexImage < getLengthImg()) {
+			indexImage = _indexImage;
+		}
+	}
+	
+	public int getLengthImg() {
+		return img.length;
+	}
+	
+	public Image getCurrentImage() {
+		return img[indexImage].getImage(facingLeft);
+	}
+	
+	public Point getOrientedImageCoord() {
+		return img[indexImage].getCoord();
+	}
+	
+	public void setCtrlEquipment(CtrlEquipment _ctrlEquipment) {
+		ctrlEquipment = _ctrlEquipment;
+	}
+	
+	public CtrlEquipment getCtrlEquipment() {
+		return ctrlEquipment;
 	}
 	
 	@Override
 	public boolean doRender(Point camera) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }

@@ -5,9 +5,12 @@ import javafx.scene.image.Image;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.ScheduledEvent;
+import shapeSceneFX.EventHandling.TransferableEvent;
 
 public class PresWarrior extends PresElementScene {
 	private static Image[] missingTexture;
+	private static Point speedCoef = new Point(3, 2);
+	private double speed;
 	private CtrlWarrior ctrlWarrior;
 	private OrientedImage body, shoulder, leg;
 	private PresEquipment[] presEquipment;
@@ -105,11 +108,35 @@ public class PresWarrior extends PresElementScene {
 		presEquipment[1] = e;
 		//System.out.println("front " + (presEquipment[1] == null));
 	}
+	
+	public void transferEvent(TransferableEvent e) {
+		addEvent(e.in(0));
+		for(PresEquipment k : presEquipment) {
+			k.addEvent(e.in(0));
+		}
+	}
+	
+	public Point getSpeedCoef() {
+		return speedCoef;
+	}
+	
+	public void setSpeed(double _speed) {
+		speed = _speed;
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
 
 	@Override
 	public boolean doRender(Point camera) {  // A FAIRE
-		// TODO Auto-generated method stub
-		return true;
+		Image frontEquipment = presEquipment[1].getCurrentImage(), backEquipment = presEquipment[0].getCurrentImage();
+		Point frontCoord = presEquipment[1].getOrientedImageCoord().copy().add(presEquipment[1].getCoord()), backCoord = presEquipment[0].getOrientedImageCoord().copy().add(presEquipment[0].getCoord());
+		double maxLength = Math.max(Math.sqrt(Math.pow(frontEquipment.getWidth(), 2)+ Math.pow(frontEquipment.getHeight(), 2)),Math.sqrt(Math.pow(backEquipment.getWidth(), 2)+ Math.pow(backEquipment.getHeight(), 2)))/2.;
+		//System.out.println(maxLength + " " + (backCoord.getX()-(frontCoord.getX())) + " " + frontCoord.getX() + " " + backCoord.getX());
+		Point posDim = new Point(getCoord().getX()+frontCoord.getX()-maxLength, backCoord.getX()-(frontCoord.getX())+2*maxLength);
+		//System.out.println(getCoord() + " " + posDim);
+		return (posDim.getX() <= camera.getX() && posDim.getX()+posDim.getY() >= camera.getX()+width()) || between(posDim.getX(), camera.getX(), camera.getX()+width()) || between(posDim.getX()+posDim.getY(), camera.getX(), camera.getX()+width());
 	}
 	
 	public static void initImage() {

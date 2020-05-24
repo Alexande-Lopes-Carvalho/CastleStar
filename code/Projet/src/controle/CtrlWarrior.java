@@ -11,22 +11,21 @@ import shapeSceneFX.Point;
 public abstract class CtrlWarrior extends CtrlEntity {
 	private PresWarrior presWarrior;
 	private Warrior warrior;
-	//private CtrlShield ctrlShield;
+	private CtrlShield ctrlShield;
 	private CtrlHandBack ctrlHandBack;
 	private CtrlHandFront ctrlHandFront;
-	//private CtrlShield ;
 	private CtrlEquipment front, back;
 	public CtrlWarrior(Warrior _warrior, PresWarrior _presWarrior) {
 		super(_warrior, _presWarrior);
 		warrior = _warrior;
 		presWarrior = _presWarrior;
+		presWarrior.setSpeed(warrior.getSpeed());
 		presWarrior.setLookingTo(warrior.getLookingTo().copy().mult(MainEventHandler.pxSize));
 		presWarrior.setCtrlWarrior(this);
 		ctrlHandBack = new CtrlHandBack();
 		ctrlHandBack.setCtrlWarrior(this);
 		ctrlHandFront = new CtrlHandFront();
-		ctrlHandFront.setCtrlWarrior(this);
-		ctrlHandFront.putOnWarrior();
+		equip(ctrlHandFront);
 	}
 	
 	public abstract List<CtrlEntity> getListOfEnemy();
@@ -36,8 +35,6 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		super.update(o, arg);
 		if(arg.equals(Warrior.LOOKINGTO_UPDATE)) {
 			presWarrior.setLookingTo(warrior.getLookingTo());
-		} else if(arg.equals(Warrior.SHIELD_PROTECT_UPDATE)) {
-			// ctrlShield ...
 		} else if(arg.equals(Warrior.WALKING_UPDATE)) {
 			presWarrior.setWalk(warrior.getWalking());
 		}
@@ -51,20 +48,36 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		return presWarrior;
 	}
 	
-	/*public void protect(){
-	 
-	 }*/
-	
-	/*public void attack() {
-		
-	}*/
-	
 	public void lookingTo(Point point) {
 		warrior.setLookingTo(point.copy().div(MainEventHandler.pxSize));
 	}
 	
 	public void setWalking(boolean value) {
 		warrior.setWalking(value);
+	}
+	
+	public void damage(int damage) {
+		if(ctrlShield == back) {
+			damage = ctrlShield.damage(damage);
+		}
+		if(damage != 0) {
+			warrior.damage(damage);
+		}
+		//System.out.println(warrior.getLife());
+	}
+	
+	public void kill() {
+		currentLevel.remove(this);
+	}
+	
+	public void equip(CtrlEquipment e) {
+		e.setCtrlWarrior(this);
+		e.putOnWarrior();
+	}
+	
+	public void equip(CtrlShield e) {
+		ctrlShield = e;
+		equip((CtrlEquipment)e);
 	}
 	
 	public void putEquipment(CtrlEquipment _front, CtrlEquipment _back) {
@@ -80,7 +93,7 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		front = _front;
 		getWarrior().addObserver(front);
 		getPresWarrior().setPresEquipmentFront(front.getPresEquipment());
-		putEquipmentBack(ctrlHandBack);
+		putEquipmentBack((ctrlShield == null)? ctrlHandBack : ctrlShield);
 	}
 	
 	public void putEquipmentBack(CtrlEquipment _back) {

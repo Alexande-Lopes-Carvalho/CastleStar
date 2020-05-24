@@ -17,9 +17,11 @@ public abstract class CtrlEquipment implements Observer {
 		equipment.addObserver(this);
 	}
 	
-	abstract void use();
-	abstract void handleCtrlWarrior();
-	abstract void putOnWarrior();
+	public void use() {
+		equipment.use(ctrlWarrior.getWarrior(), ctrlWarrior.getListOfEnemy());
+	}
+	public abstract void handleCtrlWarrior();
+	public abstract void putOnWarrior();
 	
 	public Equipment getEquipment() {
 		return equipment;
@@ -27,7 +29,7 @@ public abstract class CtrlEquipment implements Observer {
 	
 	public void setPresEquipment(PresEquipment _presHand) {
 		presHand = _presHand;
-		presHand.setCtrlHand(this);
+		presHand.setCtrlEquipment(this);
 	}
 	
 	public PresEquipment getPresEquipment() {

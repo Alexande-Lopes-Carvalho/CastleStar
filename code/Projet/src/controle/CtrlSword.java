@@ -2,26 +2,27 @@ package controle;
 
 import abstraction.Weapon;
 import presentation.PresWeapon;
-/*
+
 public class CtrlSword extends CtrlEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;
 	public CtrlSword() {
-		this(new Weapon(1, 9.d));
+		this(new Weapon(1, 9.d, 270));
 	}
 	
 	public CtrlSword(Weapon _weapon) {
 		super(_weapon);
-		presWeapon = new PresWeapon();
+		weapon = (Weapon)getEquipment();
+		presWeapon = new PresWeapon(weapon.getActionTime());
 		setPresEquipment(presWeapon);
 	}
+
 	@Override
-	void use() {
-		// TODO Auto-generated method stub
-		
+	public void handleCtrlWarrior() {
+		getPresEquipment().set(getCtrlWarrior().getPresWarrior().getSword());
 	}
-	@Override
-	void handleCtrlWarrior() {
-		
+	
+	public void putOnWarrior() {
+		getCtrlWarrior().putEquipmentFront(this);
 	}
-}*/
+}

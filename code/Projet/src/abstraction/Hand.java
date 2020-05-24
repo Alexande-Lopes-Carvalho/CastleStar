@@ -2,10 +2,10 @@ package abstraction;
 
 import java.util.List;
 
-import controle.CtrlWarrior;
+import controle.CtrlEntity;
 
 public class Hand extends Equipment {
 	@Override
-	void use(Warrior warrior, List<CtrlWarrior> enemy) {
+	public void use(Warrior warrior, List<? extends CtrlEntity> enemy) {
 	}
 }
