@@ -10,16 +10,16 @@ public abstract class Polygon {
 	public Polygon() {
 		coord = new Point(0, 0);
 	}
-	abstract boolean pointInside(Point point);
+	abstract public boolean pointInside(Point point);
 	/*
 	 * utilisé pour calculé automatiquement le RenderPriorityAdd d'un ElementCollidable
 	 * 
 	 */
-	abstract double getHighestY();
+	abstract public double getHighestY();
 	/*
 	 * utilisé pour les operation "coup d'épée" ect ...
 	 */
-	abstract Point getCenter();
+	abstract public Point getCenter();
 	public void setCoord(Point _coord) {
 		coord.set(_coord);
 	}

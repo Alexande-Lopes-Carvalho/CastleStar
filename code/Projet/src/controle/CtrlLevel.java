@@ -56,6 +56,10 @@ public class CtrlLevel implements Observer {
 		return ctrlElementCollidableList;
 	}
 	
+	public List<CtrlEntity> getCtrlEntityList(){
+		return ctrlEntityList;
+	}
+	
 	public void add(CtrlElementScene e) {
 		ctrlElementSceneList.add(e);
 		presLevel.add(e.getPresElementScene());
@@ -103,7 +107,7 @@ public class CtrlLevel implements Observer {
 		Point coord = _coord.copy();
 		if(fileAr.length >= 1) {
 			PresImage pres = new PresImage(fileAr[0].getPath());
-			Rectangle rect = new Rectangle(new Point(0, pres.getHeight()/MainEventHandler.pxSize), new Point(0, 1));
+			Rectangle rect = new Rectangle(new Point(0, pres.getHeight()/MainEventHandler.pxSize), new Point(0, 10));
 			
 			coord.add(pres.getWidth()/MainEventHandler.pxSize, 0);
 			for(int i = 1; i < fileAr.length; i++) {
@@ -129,7 +133,7 @@ public class CtrlLevel implements Observer {
 		Point coord = _coord.copy();
 		if(fileAr.length >= 1) {
 			PresImage pres = new PresImage(fileAr[0].getPath());
-			Rectangle rect = new Rectangle(new Point(0, pres.getHeight()/MainEventHandler.pxSize-1), new Point(0, 1));
+			Rectangle rect = new Rectangle(new Point(0, pres.getHeight()/MainEventHandler.pxSize-10), new Point(0, 10));
 			 
 			coord.add(pres.getWidth()/MainEventHandler.pxSize, 0);
 			for(int i = 1; i < fileAr.length; i++) {

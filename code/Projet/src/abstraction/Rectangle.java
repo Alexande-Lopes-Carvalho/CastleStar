@@ -48,4 +48,8 @@ public class Rectangle extends Polygon {
 	public void setDimension(Point _dimension) {
 		dimension.set(_dimension);
 	}
+	
+	public String toString() {
+		return "Rectangle coord left top " + getCoord() + " dimension : " + dimension;
+	}
 }

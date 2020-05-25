@@ -26,6 +26,10 @@ public class CtrlEntity extends CtrlElementCollidable {
 		}
 	}
 	
+	public Entity getEntity() {
+		return entity;
+	}
+	
 	public void kill() {
 		currentLevel.remove(this);
 	}

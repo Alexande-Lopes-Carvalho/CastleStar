@@ -77,7 +77,8 @@ public abstract class CtrlWarrior extends CtrlEntity {
 	
 	public void equip(CtrlShield e) {
 		ctrlShield = e;
-		equip((CtrlEquipment)e);
+		e.setCtrlWarrior(this);
+		equip(front); // on réequipe le front pour savoir si on peut mettre le shield en main secondaire
 	}
 	
 	public void putEquipment(CtrlEquipment _front, CtrlEquipment _back) {
@@ -86,7 +87,6 @@ public abstract class CtrlWarrior extends CtrlEntity {
 	}
 	
 	public void putEquipmentFront(CtrlEquipment _front) {
-		//System.out.println("putEquipmentFront");
 		if(front != null) {
 			getWarrior().deleteObserver(front);
 		}
@@ -97,7 +97,6 @@ public abstract class CtrlWarrior extends CtrlEntity {
 	}
 	
 	public void putEquipmentBack(CtrlEquipment _back) {
-		//System.out.println("putEquipmentBack");
 		if(back != null) {
 			getWarrior().deleteObserver(_back);
 		}

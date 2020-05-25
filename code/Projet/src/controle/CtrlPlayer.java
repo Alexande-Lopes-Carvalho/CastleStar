@@ -19,7 +19,9 @@ public class CtrlPlayer extends CtrlWarrior {
 
 	@Override
 	public List<CtrlEntity> getListOfEnemy() {
-		return new ArrayList<CtrlEntity>(); // A FAIRE
+		List<CtrlEntity> l = new ArrayList<CtrlEntity>(currentLevel.getCtrlEntityList()); // POUR TEST, A FAIRE CORRECTEMENT
+		l.remove(this);
+		return l;
 	}
 	
 	public void move(Point deplacement) {
