@@ -1,7 +1,9 @@
+package abstraction;
 
-public abstract class Item {
+public abstract class Item extends ElementScene{
 	
-	public Item() {
+	public Item(Point coord) {
+		super(coord);
 		
 	}
 	public void pickedUpBy(Player player) {

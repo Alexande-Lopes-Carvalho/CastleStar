@@ -1,10 +1,11 @@
+package abstraction;
 import java.util.ArrayList;
 
 public class WeaponItem extends Item{
 	private Weapon weapon;
 	private String messAddWeapon;
-	public WeaponItem(){
-		super();
+	public WeaponItem(Point coord){
+		super(coord);
 		messAddWeapon = "Weapon has been add to you inventory";
 	}
 	public void pickUpBy(Player player) {

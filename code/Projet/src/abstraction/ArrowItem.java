@@ -1,8 +1,8 @@
-
+package abstraction;
 public class ArrowItem extends Item{
 	private int nbArrow ;
-	public ArrowItem(int nbArrow) {
-		super();
+	public ArrowItem(Point coord,int nbArrow) {
+		super(coord);
 		this.nbArrow = nbArrow;
 		
 	}
