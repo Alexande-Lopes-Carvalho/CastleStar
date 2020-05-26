@@ -10,7 +10,7 @@ public class WeaponItem extends Item{
 	}
 	public void pickUpBy(CtrlPlayer ctrlPlayer) {
 		 
-		CtrlInventory ctrlInventory = ctrlplayer.getCtrlInventory();	
+		CtrlInventory ctrlInventory = ctrlplayer.getCtrlInventory();//a ajouter dans Ctrl Inventory	
 		try {
 			ctrlInventory.getInventory().addWeapon(weapon);
 		}
