@@ -1,8 +1,5 @@
 package abstraction;
 
-import java.util.List;
-
-import controle.CtrlElementCollidable;
 import shapeSceneFX.Point;
 
 public class Player extends Warrior {

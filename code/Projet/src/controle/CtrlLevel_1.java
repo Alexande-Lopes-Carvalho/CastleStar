@@ -2,7 +2,6 @@ package controle;
 
 import abstraction.ConvexPolygon;
 import abstraction.ElementCollidable;
-import abstraction.ElementScene;
 import abstraction.Player;
 import abstraction.Rectangle;
 import javafx.scene.image.Image;

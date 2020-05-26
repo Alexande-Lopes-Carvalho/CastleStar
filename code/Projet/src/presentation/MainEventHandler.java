@@ -15,6 +15,7 @@ public class MainEventHandler extends EventHandler {
 		Lootable.initImage();
 		PresWarrior.initImage();
 		PresPlayer.initImage();
+		PresOrc.initImage();
 		ctrlLevel = new CtrlLevel_1();
 		presLevel = ctrlLevel.getPresLevel();
 	}
