@@ -16,7 +16,7 @@ public class Arrow extends ElementScene{
 	private List<? extends CtrlEntity> enemyList;
 	public Arrow(boolean _facingLeft, int _damage, List<? extends CtrlEntity> _enemyList,Point _coord, Rectangle _rect) {
 		super(_coord, _rect.getCoord().getY()+_rect.getDimension().getY()/2.);
-		System.out.println(getRenderPriority() + " renderPrio " + (_rect.getCoord().getY()+_rect.getDimension().getY()/2.) + " " + _coord);
+		//System.out.println(getRenderPriority() + " renderPrio " + (_rect.getCoord().getY()+_rect.getDimension().getY()/2.) + " " + _coord);
 		facingLeft = _facingLeft;
 		damage = _damage;
 		enemyList = _enemyList;
@@ -25,7 +25,7 @@ public class Arrow extends ElementScene{
 	}
 	
 	public void move(Point deplacement) {
-		System.out.println(deplacement.getX());
+		//System.out.println(deplacement.getX());
 		dist += deplacement.getX();
 		Rectangle r = new Rectangle(getCoord().copy().add(rect.getCoord()), new Point(deplacement.getX()+rect.getDimension().getX(), rect.getDimension().getY()));
 		setCoord(getCoord().copy().add(deplacement));

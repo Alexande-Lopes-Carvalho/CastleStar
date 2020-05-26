@@ -30,7 +30,7 @@ public class PresArrow extends PresElementScene {
 	}
 
 	public void render() {
-		System.out.println(getCoord());
+		//System.out.println(getCoord());
 		if (facingLeft) {
 			image(arrow.getImage(facingLeft), getCoord().getX() - getWidth(), getCoord().getY());
 		} else {
