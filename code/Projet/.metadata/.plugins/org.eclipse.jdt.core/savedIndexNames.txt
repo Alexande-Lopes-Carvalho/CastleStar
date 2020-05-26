@@ -1,1 +1,0 @@
-INDEX VERSION 1.131+/home/eisti/git/repo/projetjavas2/code/Projet/.metadata/.plugins/org.eclipse.jdt.core
