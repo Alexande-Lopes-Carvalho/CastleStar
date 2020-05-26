@@ -8,11 +8,11 @@ public class WeaponItem extends Item{
 		super(coord);
 		messAddWeapon = "Weapon has been add to you inventory";
 	}
-	public void pickUpBy(Player player) {
+	public void pickUpBy(CtrlPlayer ctrlPlayer) {
 		 
-		Inventaire inventaire = player.getInventory();	
+		CtrlInventory ctrlInventory = ctrlplayer.getCtrlInventory();	
 		try {
-			inventaire.addWeapon(weapon);
+			ctrlInventory.getInventory().addWeapon(weapon);
 		}
 		catch(InventoryOutOfBound e) {
 			messAddWeapon = "your Inventory is full";
