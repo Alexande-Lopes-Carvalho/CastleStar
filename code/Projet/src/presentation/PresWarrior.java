@@ -156,8 +156,8 @@ public class PresWarrior extends PresElementScene {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
-	public AnimatedOrientedImage getBowFront() {
-		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
+	public AnimatedProjectileLauncher getBowFront() {
+		return new AnimatedProjectileLauncher(new Point(0, 0), new Point(0, 0), missingTexture);
 	}
 	
 	public AnimatedOrientedImage getBowBack(){

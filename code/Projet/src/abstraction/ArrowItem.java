@@ -1,13 +1,19 @@
 package abstraction;
+
+import controle.CtrlPlayer;
+import shapeSceneFX.Point;
+
 public class ArrowItem extends Item{
-	private int nbArrow ;
-	public ArrowItem(Point coord,int nbArrow) {
-		super(coord);
+	private int nbArrow;
+	public ArrowItem(int nbArrow, Point coord) {
+		super(coord, new Ellipse(new Point(0, 0), 13.5));
 		this.nbArrow = nbArrow;
 		
 	}
-	public void pickUpBy(Player player) {
-		player.setNbArrow(player.getNbArrow()+nbArrow);
-	}
 
+	@Override
+	public boolean pickedUpBy(CtrlPlayer player) {
+		player.getPlayer().setNbArrow(player.getPlayer().getNbArrow()+nbArrow);
+		return true;
+	}
 }

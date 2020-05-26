@@ -61,7 +61,7 @@ public class PresLevel extends EventHandler {
 	}
 	
 	public void add(PresElementScene e) {
-		listElementScene.add(e);
+		addEvent(new AddPresElementSceneEvent(e).in(0));
 	}
 	
 	public void add(PresPlayer e) {
@@ -89,6 +89,17 @@ public class PresLevel extends EventHandler {
 		@Override
 		public void handleEvent() {
 			listElementScene.remove(e);
+		}
+	}
+	
+	public class AddPresElementSceneEvent implements Event{
+		private PresElementScene e;
+		public AddPresElementSceneEvent(PresElementScene _e) {
+			e = _e;
+		}
+		@Override
+		public void handleEvent() {
+			listElementScene.add(e);
 		}
 	}
 }

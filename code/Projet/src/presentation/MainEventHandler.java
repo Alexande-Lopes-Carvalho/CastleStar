@@ -12,10 +12,12 @@ public class MainEventHandler extends EventHandler {
 	private PresLevel presLevel;
 	public void setup() {
 		size(pxSize*402, pxSize*160);
+		Items.initImage();
 		Lootable.initImage();
 		PresWarrior.initImage();
 		PresPlayer.initImage();
 		PresOrc.initImage();
+		PresArrow.initImage();
 		ctrlLevel = new CtrlLevel_1();
 		presLevel = ctrlLevel.getPresLevel();
 	}

@@ -1,25 +1,21 @@
 package controle;
 
-import PresItem.PresItem;
 import abstraction.Item;
+import presentation.MainEventHandler;
+import presentation.PresImage;
 
 public class CtrlItem extends CtrlElementScene{
 	private Item item;
-	private PresItem presItem;
+	private PresImage presItem;
 	
-	public CtrlItem(Item item, PresItem presItem) {
+	public CtrlItem(Item item, PresImage presItem) {
 		super(item,presItem);
 		this.item = item;
 		this.presItem = presItem;
-		
-	}
-	public void playerMoved(Player player) {
-		
-		if(player.PointInside(this.item.getCoord())) {
-			this.item.pickUpBy(player);
-			
-		}
-		
+		presItem.setCoord(item.getCoord().copy().sub((presItem.getWidth()/2.)/MainEventHandler.pxSize, (presItem.getHeight()/2.)/MainEventHandler.pxSize));
 	}
 	
+	public boolean playerMoved(CtrlPlayer player) {
+		return item.playerMoved(player);
+	}
 }

@@ -10,6 +10,7 @@ public class PresEquipment extends PresElementScene {
 	private double rotation;
 	private CtrlEquipment ctrlEquipment;
 	private Point imgCoord;
+	private boolean lockArm;
 	public PresEquipment() {
 		imgCoord = new Point(0, 0);
 	}
@@ -36,7 +37,27 @@ public class PresEquipment extends PresElementScene {
 			imgCoord.set(img.getCoord());
 		}
 		//rotation = _rotation+((facingLeft)? Math.PI: 0);
-		rotation = _lookingTo.copy().add(imgCoord.copy().div(MainEventHandler.pxSize).getVector(new Point(0, 0))).getAngle().getZ()+((facingLeft)? Math.PI: 0);
+		calcRotation(_lookingTo);
+	}
+	
+	public void calcRotation(Point _lookingTo) {
+		if(lockArm) {
+			setRotation((getFacingLeft())? Math.PI*2: 0 );
+		} else {
+			setRotation( _lookingTo.copy().add(imgCoord.copy().div(MainEventHandler.pxSize).getVector(new Point(0, 0))).getAngle().getZ()+((facingLeft)? Math.PI: 0));
+		}
+	}
+	
+	public void setRotation(double value) {
+		rotation = value;
+	}
+	
+	public boolean getFacingLeft() {
+		return facingLeft;
+	}
+	
+	public void setLockArm(boolean a) {
+		lockArm = a;
 	}
 	
 	public AnimatedOrientedImage getAnimatedOrientedImage() {

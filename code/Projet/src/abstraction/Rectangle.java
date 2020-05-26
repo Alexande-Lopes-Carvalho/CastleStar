@@ -22,10 +22,26 @@ public class Rectangle extends Polygon {
 	public Rectangle(Point _coord, Point _dimension){
 		super(_coord);
 		dimension = _dimension;
+		if(dimension.getX() < 0) {
+			getCoord().add(dimension.getX(), 0);
+			dimension.add(-2*dimension.getX(), 0);
+		}
+		if(dimension.getY() < 0) {
+			getCoord().add(0, dimension.getY());
+			dimension.add(0, -2*dimension.getY());
+		}
 	}
 	
 	public Rectangle(Point _dimension) {
 		dimension = _dimension;
+		if(dimension.getX() < 0) {
+			getCoord().add(dimension.getX(), 0);
+			dimension.add(-2*dimension.getX(), 0);
+		}
+		if(dimension.getY() < 0) {
+			getCoord().add(0, dimension.getY());
+			dimension.add(0, -2*dimension.getY());
+		}
 	}
 	
 	@Override

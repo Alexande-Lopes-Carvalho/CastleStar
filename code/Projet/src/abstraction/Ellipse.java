@@ -50,6 +50,10 @@ public class Ellipse extends Polygon {
 		return getCoord();
 	}
 	
+	public Point getDimension() {
+		return dimension;
+	}
+	
 	public String toString() {
 		return "Ellipse : Center at " + getCoord() + " dimension : " + dimension;
 	}

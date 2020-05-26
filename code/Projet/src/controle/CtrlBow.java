@@ -4,7 +4,9 @@ import java.util.Observable;
 
 import abstraction.Bow;
 import abstraction.Warrior;
+import presentation.MainEventHandler;
 import presentation.PresBow;
+import shapeSceneFX.Point;
 
 public class CtrlBow extends CtrlEquipment {
 	private Bow bow;
@@ -16,6 +18,7 @@ public class CtrlBow extends CtrlEquipment {
 		presBow = new PresBow(bow.getCooldownTime(), this);
 		setPresEquipment(presBow);
 		ctrlBowBack = new CtrlBowBack();
+		ctrlBowBack.getPresEquipment().setLockArm(true);
 	}
 	
 	public void setCtrlWarrior(CtrlWarrior _ctrlWarrior) {
@@ -35,9 +38,13 @@ public class CtrlBow extends CtrlEquipment {
 		}
 	}
 	
+	public void setProjectileCoord(Point p) {
+		bow.setProjectileCoord(p.div(MainEventHandler.pxSize));
+	}
+	
 	@Override
 	public void handleCtrlWarrior() {
-		getPresEquipment().set(getCtrlWarrior().getPresWarrior().getBowFront());
+		presBow.set(getCtrlWarrior().getPresWarrior().getBowFront());
 	}
 
 	@Override

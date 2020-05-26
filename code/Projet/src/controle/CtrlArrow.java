@@ -1,16 +1,23 @@
 package controle;
 
-import PresItem.PresArrow;
+
+import presentation.MainEventHandler;
+import presentation.PresArrow;
+import shapeSceneFX.Point;
+
+import java.util.Observable;
+
 import abstraction.Arrow;
 
 public class CtrlArrow extends CtrlElementScene{
 	private Arrow arrow;
 	private PresArrow presArrow;
-	public CtrlArrow(Arrow arrow,PresArrow presArrow) {
-		super(arrow,presArrow);
+	public CtrlArrow(Arrow arrow) {
+		super(arrow, new PresArrow(arrow.getCoord(), arrow.getCelerity(), arrow.getFacingLeft()));
 		this.arrow = arrow;
-		this.presArrow = presArrow;
+		presArrow = (PresArrow) getPresElementScene();
 		presArrow.setCtrlArrow(this);
+		arrow.addObserver(this);
 	}
 	public Arrow getArrow() {
 		return arrow;
@@ -19,11 +26,16 @@ public class CtrlArrow extends CtrlElementScene{
 	public PresArrow getPresArrow() {
 		return presArrow;
 	}
+	
+	public void update(Observable o, Object arg) {
+		super.update(o, arg);
+		if(arg.equals(Arrow.KILL)) {
+			currentLevel.remove((CtrlElementScene)this);
+		}
+	}
+	
 	public void move(Point deplacement){
-		//d'ou viens currrentlevel? 
-		Arrow.move(deplacement/presArrow.pxSize,currentLevel.getCtrlElementCollidableList());
-		presArrow.()
-		
-		
+		//d'ou viens currrentlevel? => CtrlElementScene via un champ static
+		arrow.move(deplacement.div(MainEventHandler.pxSize));
 	}
 }

@@ -5,6 +5,7 @@ import abstraction.ElementCollidable;
 import abstraction.Player;
 import abstraction.Rectangle;
 import javafx.scene.image.Image;
+import presentation.Items;
 import presentation.MainEventHandler;
 import presentation.PresImage;
 import presentation.PresPlayer;
@@ -90,10 +91,17 @@ public class CtrlLevel_1 extends CtrlLevel {
 		
 		add(rightWall(new Point(2609, 0)));
 		
+		
+		add(Items.shield(new Point(330, 105)));
+		add(Items.heart(2, new Point(401, 96)));
+		add(Items.arrow(5, new Point(421, 120)));
+		add(Items.sword(new Point(539, 104)));
+
+		
 		CtrlPlayer p = new CtrlPlayer(new Player(10, new Point(50, 0), 10, new Point(110, 110)), new PresPlayer()); 
-		p.equip(new CtrlSword());
-		p.equip(new CtrlShield());
-		//p.equip(new CtrlBow());
+		//p.equip(new CtrlSword());
+		//p.equip(new CtrlShield());
+		p.equip(new CtrlBow());
 		add(p);
 	}
 	

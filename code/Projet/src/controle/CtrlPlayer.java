@@ -33,6 +33,10 @@ public class CtrlPlayer extends CtrlWarrior {
 		return presPlayer;
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	public void kill() {
 		currentLevel.remove(this);
 	}

@@ -12,7 +12,8 @@ public class PresPlayer extends PresWarrior {
 	private static AnimatedOrientedImage img_handFront, img_handBack;
 	private static AnimatedOrientedImage img_sword;
 	private static AnimatedOrientedImage img_shield;
-	private static AnimatedOrientedImage img_bowFront, img_bowBack;
+	private static AnimatedOrientedImage img_bowBack;
+	private static AnimatedProjectileLauncher img_bowFront;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
 	private boolean left, right, up, down;
@@ -86,7 +87,7 @@ public class PresPlayer extends PresWarrior {
 		img_sword = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Sword");
 		
 		img_shield = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Shield");
-		img_bowFront = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Bow/Front");
+		img_bowFront = new AnimatedProjectileLauncher(new Point(6, 1).mult(MainEventHandler.pxSize), frontEquipment, "./data/Character/Equipment/Bow/Front");
 		img_bowBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Bow/Back");
 	}
 	
@@ -98,7 +99,7 @@ public class PresPlayer extends PresWarrior {
 		return img_shield;
 	}
 	
-	public AnimatedOrientedImage getBowFront() {
+	public AnimatedProjectileLauncher getBowFront() {
 		return img_bowFront;
 	}
 	
