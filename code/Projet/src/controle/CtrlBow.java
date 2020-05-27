@@ -6,14 +6,15 @@ import abstraction.Bow;
 import abstraction.Warrior;
 import presentation.MainEventHandler;
 import presentation.PresBow;
+import presentation.PresInventory;
 import shapeSceneFX.Point;
 
-public class CtrlBow extends CtrlEquipment {
+public class CtrlBow extends CtrlInventoryEquipment {
 	private Bow bow;
 	private PresBow presBow;
 	private CtrlBowBack ctrlBowBack;
 	public CtrlBow() {
-		super(new Bow(200));
+		super(new Bow(200), PresInventory.bow);
 		bow = (Bow)getEquipment();
 		presBow = new PresBow(bow.getCooldownTime(), this);
 		setPresEquipment(presBow);

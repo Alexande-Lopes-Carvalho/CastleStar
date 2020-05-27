@@ -1,9 +1,10 @@
 package controle;
 
 import abstraction.Weapon;
+import presentation.PresInventory;
 import presentation.PresWeapon;
 
-public class CtrlSword extends CtrlEquipment {
+public class CtrlSword extends CtrlInventoryEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;
 	public CtrlSword() {
@@ -11,7 +12,7 @@ public class CtrlSword extends CtrlEquipment {
 	}
 	
 	public CtrlSword(Weapon _weapon) {
-		super(_weapon);
+		super(_weapon, PresInventory.sword);
 		weapon = (Weapon)getEquipment();
 		presWeapon = new PresWeapon(weapon.getActionTime());
 		setPresEquipment(presWeapon);

@@ -41,6 +41,9 @@ public class PresLevel extends EventHandler {
 		}
 		//System.out.println();
 		translateBack(translateCam);
+		for(PresPlayer k : listPlayer) {
+			k.getPresInventory().render();
+		}
 	}	
 	
 	public void sortByRenderOrder() {

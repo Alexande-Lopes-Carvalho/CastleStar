@@ -70,6 +70,10 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		currentLevel.remove(this);
 	}
 	
+	public CtrlEquipment getHandFront() {
+		return ctrlHandFront;
+	}
+	
 	public void equip(CtrlEquipment e) {
 		e.setCtrlWarrior(this);
 		e.putOnWarrior();

@@ -109,11 +109,8 @@ public class PresWarrior extends PresElementScene {
 		//System.out.println("front " + (presEquipment[1] == null));
 	}
 	
-	public void transferEvent(TransferableEvent e) {
-		addEvent(e.in(0));
-		for(PresEquipment k : presEquipment) {
-			k.addEvent(e.in(0));
-		}
+	public PresEquipment[] getPresEquipment() {
+		return presEquipment;
 	}
 	
 	public Point getSpeedCoef() {

@@ -3,6 +3,7 @@ package presentation;
 import controle.CtrlPlayer;
 import javafx.scene.input.KeyCode;
 import shapeSceneFX.Point;
+import shapeSceneFX.EventHandling.TransferableEvent;
 
 public class PresPlayer extends PresWarrior {
 	private static OrientedImage img_body;
@@ -17,6 +18,7 @@ public class PresPlayer extends PresWarrior {
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
 	private boolean left, right, up, down;
+	private PresInventory presInventory;
 	public PresPlayer() {
 		super(img_body, img_shoulder, img_leg, img_walkingLegs);
 	}
@@ -28,6 +30,7 @@ public class PresPlayer extends PresWarrior {
 	
 	public void calc(long timePassed) {
 		super.calc(timePassed);
+		presInventory.calcEvent(timePassed);
 		if(getWalk()) {
 			Point deplacement = new Point(((left ^ right)? getSpeedCoef().getX()*((right)? 1 : -1) : 0), ((up ^ down)? getSpeedCoef().getY()*((down)? 1 : -1) :0));
 			deplacement.div(deplacement.getDist()).mult(getSpeed()*timePassed);
@@ -68,6 +71,22 @@ public class PresPlayer extends PresWarrior {
 	
 	public CtrlPlayer getCtrlPlayer() {
 		return ctrlPlayer;
+	}
+	
+	public void setPresInventory(PresInventory _presInventory) {
+		presInventory = _presInventory;
+	}
+	
+	public PresInventory getPresInventory() {
+		return presInventory;
+	}
+	
+	public void transferEvent(TransferableEvent e) {
+		addEvent(e.in(0));
+		getPresInventory().addEvent(e.transfer().in(0));
+		for(PresEquipment k : getPresEquipment()) {
+			k.addEvent(e.in(0));
+		}
 	}
 	
 	public static void initImage() {

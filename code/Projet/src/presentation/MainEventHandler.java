@@ -18,6 +18,7 @@ public class MainEventHandler extends EventHandler {
 		PresPlayer.initImage();
 		PresOrc.initImage();
 		PresArrow.initImage();
+		PresInventory.initImage();
 		ctrlLevel = new CtrlLevel_1();
 		presLevel = ctrlLevel.getPresLevel();
 	}
@@ -29,7 +30,7 @@ public class MainEventHandler extends EventHandler {
 	public void render() {
 		presLevel.render();
 		stroke(255);
-		text(Math.round(frameRate())+"", 50, 50);
+		text(Math.round(frameRate())+"", 15, 170);
 		stroke(0);
 	}
 	

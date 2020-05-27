@@ -2,7 +2,6 @@ package presentation;
 
 import controle.CtrlBow;
 import javafx.scene.input.MouseButton;
-import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 
 public class PresBow extends PresEquipment {

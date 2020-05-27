@@ -3,6 +3,7 @@ package controle;
 import java.util.ArrayList;
 import java.util.List;
 
+import abstraction.Inventory;
 import abstraction.Player;
 import presentation.PresPlayer;
 import shapeSceneFX.Point;
@@ -10,11 +11,15 @@ import shapeSceneFX.Point;
 public class CtrlPlayer extends CtrlWarrior {
 	private PresPlayer presPlayer;
 	private Player player;
+	private CtrlInventory ctrlInventory;
 	public CtrlPlayer(Player _player, PresPlayer _presPlayer) {
 		super(_player, _presPlayer);
 		player = _player;
 		presPlayer = _presPlayer;
 		presPlayer.setCtrlPlayer(this);
+		ctrlInventory = new CtrlInventory(new Inventory(0, 4), this);
+		player.addObserver(ctrlInventory);
+		presPlayer.setPresInventory(ctrlInventory.getPresInventory());
 	}
 
 	@Override
@@ -39,5 +44,9 @@ public class CtrlPlayer extends CtrlWarrior {
 	
 	public void kill() {
 		currentLevel.remove(this);
+	}
+	
+	public CtrlInventory getCtrlInventory() {
+		return ctrlInventory;
 	}
 }

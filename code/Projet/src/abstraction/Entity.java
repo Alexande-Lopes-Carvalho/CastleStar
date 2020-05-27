@@ -44,6 +44,10 @@ public class Entity extends ElementCollidable {
 	public int getLife() {
 		return life;
 	}
+	
+	public int getMaxLife() {
+		return maxLife;
+	}
 
 	public double getSpeed() {
 		return speed;
