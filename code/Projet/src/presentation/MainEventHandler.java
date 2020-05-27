@@ -16,6 +16,7 @@ public class MainEventHandler extends EventHandler {
 		PresWarrior.initImage();
 		PresPlayer.initImage();
 		PresOrc.initImage();
+		PresSkeleton.initImage();
 		PresArrow.initImage();
 		PresInventory.initImage();
 		ctrlLevel = new CtrlLevel_1();
