@@ -5,7 +5,6 @@ import java.util.List;
 import controle.CtrlArrow;
 import controle.CtrlElementScene;
 import controle.CtrlEntity;
-import controle.CtrlLevel;
 import shapeSceneFX.Point;
 
 public class Bow extends Equipment {

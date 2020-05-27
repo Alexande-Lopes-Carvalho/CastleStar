@@ -32,19 +32,39 @@ public class Items {
 		return new CtrlItem(new ShieldItem(new CtrlShield(), coord), new PresImage(shield));
 	}
 	
+	public static CtrlItem shield() {
+		return new CtrlItem(new ShieldItem(new CtrlShield(), new Point(0, 0)), new PresImage(shield));
+	}
+	
 	public static CtrlItem arrow(int value, Point coord) {
 		return new CtrlItem(new ArrowItem(value, coord), new PresImage(arrow));
+	}
+	
+	public static CtrlItem arrow(int value) {
+		return new CtrlItem(new ArrowItem(value, new Point(0, 0)), new PresImage(arrow));
 	}
 	
 	public static CtrlItem heart(int value, Point coord) {
 		return new CtrlItem(new HeartItem(value, coord), new PresImage(heart));
 	}
 	
+	public static CtrlItem heart(int value) {
+		return new CtrlItem(new HeartItem(value, new Point(0, 0)), new PresImage(heart));
+	}
+	
 	public static CtrlItem sword(Point coord) {
 		return new CtrlItem(new SwordItem(new CtrlSword(),coord), new PresImage(sword));
 	}
 	
+	public static CtrlItem sword() {
+		return new CtrlItem(new SwordItem(new CtrlSword(), new Point(0, 0)), new PresImage(sword));
+	}
+	
 	public static CtrlItem bow(Point coord) {
 		return new CtrlItem(new BowItem(new CtrlBow(), coord), new PresImage(bow));
+	}
+	
+	public static CtrlItem bow() {
+		return new CtrlItem(new BowItem(new CtrlBow(), new Point(0, 0)), new PresImage(bow));
 	}
 }

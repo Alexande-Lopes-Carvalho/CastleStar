@@ -22,6 +22,7 @@ public class CtrlLevel implements Observer {
 	private List<CtrlEntity> ctrlEntityList;
 	private List<CtrlPlayer> ctrlPlayerList;
 	private List<CtrlItem> ctrlItemList;
+	private List<CtrlLootable> ctrlLootableList;
 	private Level level;
 	private PresLevel presLevel;
 	public CtrlLevel() {
@@ -37,6 +38,7 @@ public class CtrlLevel implements Observer {
 		ctrlEntityList = new ArrayList<CtrlEntity>();
 		ctrlPlayerList = new ArrayList<CtrlPlayer>();
 		ctrlItemList = new ArrayList<CtrlItem>();
+		ctrlLootableList = new ArrayList<CtrlLootable>();
 	}
 	
 	public void updateCamera() {
@@ -82,6 +84,11 @@ public class CtrlLevel implements Observer {
 		ctrlEntityList.add(e);
 	}
 	
+	public void add(CtrlLootable e) {
+		add((CtrlEntity) e);
+		ctrlLootableList.add(e);
+	}
+	
 	public void add(CtrlPlayer e) {
 		add((CtrlEntity) e);
 		ctrlPlayerList.add(e);
@@ -96,6 +103,14 @@ public class CtrlLevel implements Observer {
 	public void remove(CtrlItem e) {
 		ctrlItemList.remove(e);
 		ctrlElementSceneList.remove(e);
+		presLevel.remove(e.getPresElementScene());
+	}
+	
+	public void remove(CtrlLootable e) {
+		ctrlLootableList.remove(e);
+		ctrlElementSceneList.remove(e);
+		ctrlElementCollidableList.remove(e);
+		ctrlEntityList.remove(e);
 		presLevel.remove(e.getPresElementScene());
 	}
 	

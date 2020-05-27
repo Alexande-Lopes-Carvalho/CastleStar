@@ -6,6 +6,7 @@ import abstraction.Player;
 import abstraction.Rectangle;
 import javafx.scene.image.Image;
 import presentation.Items;
+import presentation.Lootables;
 import presentation.MainEventHandler;
 import presentation.PresImage;
 import presentation.PresPlayer;
@@ -58,15 +59,15 @@ public class CtrlLevel_1 extends CtrlLevel {
 		
 		add(littleTables(new Point(837, 72)));
 		
-		add(Lootable.barrel(new Point(65, 109)));
-		add(Lootable.barrel(new Point(58, 115)));
-		add(Lootable.barrel(new Point(41, 133)));
-		add(Lootable.barrel(new Point(187, 70)));
-		add(Lootable.barrel(new Point(375, 138)));
+		add(Lootables.barrel(new Point(65, 109), Items.heart(1)));
+		add(Lootables.barrel(new Point(58, 115), Items.heart(1), Items.heart(1)));
+		add(Lootables.barrel(new Point(41, 133), Items.heart(1)));
+		add(Lootables.barrel(new Point(187, 70), Items.heart(1), Items.heart(1)));
+		add(Lootables.barrel(new Point(375, 138), Items.heart(1)));
 		
-		add(Lootable.barrel(new Point(1003, 71)));
-		add(Lootable.barrel(new Point(1021, 71)));
-		add(Lootable.barrel(new Point(1039, 71)));
+		add(Lootables.barrel(new Point(1003, 71), Items.heart(1)));
+		add(Lootables.barrel(new Point(1021, 71), Items.heart(1)));
+		add(Lootables.barrel(new Point(1039, 71), Items.heart(1)));
 		
 		add(door(new Point(1179, 0)));
 		
@@ -74,9 +75,9 @@ public class CtrlLevel_1 extends CtrlLevel {
 		add(littleHouse(new Point(1485, 20)));
 		add(littleHouse(new Point(1546, 20)));
 		
-		add(Lootable.barrel(new Point(1621, 71)));
-		add(Lootable.barrel(new Point(1657, 71)));
-		add(Lootable.barrel(new Point(1678, 71)));
+		add(Lootables.barrel(new Point(1621, 71), Items.heart(1)));
+		add(Lootables.barrel(new Point(1657, 71), Items.heart(1)));
+		add(Lootables.barrel(new Point(1678, 71), Items.heart(1)));
 		
 		add(littleHouse(new Point(1707, 20)));
 		
@@ -85,9 +86,9 @@ public class CtrlLevel_1 extends CtrlLevel {
 		add(biggerTable(new Point(2119, 127)));
 		add(biggerTable(new Point(2232, 127)));
 		
-		add(Lootable.barrel(new Point(2309, 71)));
-		add(Lootable.barrel(new Point(2326, 71)));
-		add(Lootable.barrel(new Point(2343, 71)));
+		add(Lootables.barrel(new Point(2309, 71), Items.heart(1)));
+		add(Lootables.barrel(new Point(2326, 71), Items.heart(1)));
+		add(Lootables.barrel(new Point(2343, 71), Items.heart(1)));
 		
 		add(rightWall(new Point(2609, 0)));
 		

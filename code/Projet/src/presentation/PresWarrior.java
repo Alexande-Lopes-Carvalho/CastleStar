@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.ScheduledEvent;
-import shapeSceneFX.EventHandling.TransferableEvent;
 
 public class PresWarrior extends PresElementScene {
 	private static Image[] missingTexture;

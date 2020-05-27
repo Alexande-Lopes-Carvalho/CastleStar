@@ -2,7 +2,6 @@ package presentation;
 
 import controle.CtrlLevel;
 import controle.CtrlLevel_1;
-import controle.Lootable;
 import shapeSceneFX.EventHandling.EventHandler;
 import shapeSceneFX.EventHandling.TransferableEvent;
 
@@ -13,7 +12,7 @@ public class MainEventHandler extends EventHandler {
 	public void setup() {
 		size(pxSize*402, pxSize*160);
 		Items.initImage();
-		Lootable.initImage();
+		Lootables.initImage();
 		PresWarrior.initImage();
 		PresPlayer.initImage();
 		PresOrc.initImage();
