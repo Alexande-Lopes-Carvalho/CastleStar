@@ -1,5 +1,7 @@
 package abstraction;
 
+import java.util.ArrayList;
+
 public abstract class Polygon {
 	private Point coord;
 	public Polygon(Point coord2) {
@@ -21,6 +23,7 @@ public abstract class Polygon {
 	public void setCoord(Point _coord) {
 		coord.set(_coord);
 	}
+	abstract public ArrayList<Point> getPoints();
 	
 	public Point getCoord() {
 		return coord;

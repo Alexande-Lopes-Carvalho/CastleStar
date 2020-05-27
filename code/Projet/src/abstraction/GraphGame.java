@@ -7,31 +7,42 @@ import java.util.List;
 public class GraphGame {
 	private List<Node> startNodeList;
 	private Node EndNode;
+	private Point dimensionNode;
 	private ArrayList<ArrayList<Node>> graph;
 	private int nbreNode;
-	private Position coordPlayerGraph; 
+	private ArrayList<Position> coordPlayerGraph; 
 	
 	
  	public GraphGame(ArrayList<CtrlElementCollidable> ctrlELementCollidableList,List<CtrlPlayer> ctrlPlayerList,Point size, int nbreNode) {
  		this.graph = new ArrayList<ArrayList<Node>>();
  		this.nbreNode = nbreNode;
  		Point dimension = new Point(size.getX()/nbreNode,size.getY()/nbreNode);
+ 		this.dimensionNode = dimension;
  		for (int i = 0 ;i < nbreNode;i++) {
  			ArrayList<Node> listNode = new ArrayList<Node>();
 			for (int j = 0 ;j < nbreNode;j++) {
 				Point coord = new Point(i*size.getX()/nbreNode,j*size.getY()/nbreNode);
 				Node temp = new Node(coord,dimension,i,j,false,false);
 				for(CtrlElementCollidable e : ctrlELementCollidableList) {
-					Point coordElement = e.getElementCollidable().getCoord();
-					if(temp.pointInside(coordElement)) {
-						temp.setHasObstacle(true);
-						if (e instanceof CtrlPlayer) {
-							temp.setHasPlayer(true);
-							this.coordPlayerGraph = new Position(i,j);
-							this.EndNode = temp;
+					ArrayList hitboxElement = e.getElementCollidable().getPolygon().getPoint();
+					for (Point p : hitboxElement) {
+						if(temp.pointInside(p)) {
+							temp.setHasObstacle(true);
+							if (e instanceof CtrlPlayer) {
+								temp.setHasPlayer(true);
+								this.coordPlayerGraph.add(new Position(i,j));
+								this.EndNode = temp;
+							}
+							if (e instanceof CtrlEnnemy) {
+								temp.setHasObstacle(false);
+								startNodeList.add(temp);
+							
+							}
+							
 						}
 						
 					}
+					
 					
 				}
 				
@@ -41,13 +52,19 @@ public class GraphGame {
  		graph.add(listNode);}
  	}
  	
- 	public Position getCoordPlayerGraph() {
+ 	public Point getDimensionNode() {
+		return dimensionNode;
+	}
+
+	public void setDimensionNode(Point dimensionNode) {
+		this.dimensionNode = dimensionNode;
+	}
+
+	public ArrayList<Position> getCoordPlayerGraph() {
 		return coordPlayerGraph;
 	}
 
-	public void setCoordPlayerGraph(Position coordPlayerGraph) {
-		this.coordPlayerGraph = coordPlayerGraph;
-	}
+	
 
 	public int getNbreNode(){
  		return nbreNode;
@@ -179,38 +196,45 @@ public class GraphGame {
  		}
  		return neighbourNodes;
  	}
- 	private int dicho(double coordXY) {
- 		int borneInf = 0;
- 		int borneSup =this.getNbreNode();
- 		int mid = (int)((borneInf+borneSup)/2);
- 		while (graph.get(0).get(0).getDimension().getX()> Math.abs(borneSup-borneInf)) {
- 			mid = (int)((borneInf+borneSup)/2);
- 			
- 			if (graph.get(mid).get(0).getCoord().getX() <coordXY) {
- 	 			borneInf = mid;
- 	 		}
- 	 		else {
- 	 			borneSup = mid;
- 	 		}
- 			
- 		}
- 		return mid;
- 		
- 		
- 	}
-	public void updatePlayerPosition(CtrlPlayer ctrlPlayer) {
-		ctrlPlayer.getElementCollidable().getCoord();
-		int newXPlayer = dicho(ctrlPlayer.getElementCollidable().getCoord().getX());
-		int newYPlayer = dicho(ctrlPlayer.getElementCollidable().getCoord().getY());
-		Node exPlayerPos = graph.get(coordPlayerGraph.getI()).get(coordPlayerGraph.getJ());
-		exPlayerPos.setHasObstacle(false);
-		exPlayerPos.setHasPlayer(false);
-		Node newPlayerPos = graph.get(newXPlayer).get(newYPlayer);
-		newPlayerPos.setHasObstacle(true);
-		newPlayerPos.setHasPlayer(true);
-		this.setCoordPlayerGraph(new Position(newXPlayer,newYPlayer));
+
+	/*permer de chercher le noeud ou se situe un point*/
+	public Position NodeSearch(Point p) {
+		double currentX = 0;
+		double currentY = 0;
+		int i = 0;
+		int j = 0;
+		while (currentX<p.getX()) {
+			currentX+=getDimensionNode().getX();
+			i++;		
+		}
+		while(currentY<p.getY()) {
+			currentY+=getDimensionNode().getY();
+			j++;
+		}
+		return new Position(i,j);
+	}
+	public void updatePlayer(CtrlWarrior ctrlWarrior) {
+		for(Position pos: getCoordPlayerGraph()) {
+			graph.get(pos.getI()).get(pos.getJ()).setHasPlayer(false);
+			graph.get(pos.getI()).get(pos.getJ()).setHasObstacle(false);
+			coordPlayerGraph.remove(pos);
+		}
+		
+		ArrayList<Point> polygonPoint = ctrlPlayer.getPlayer().getPolygone().getPoint();
+		for (Point p:polygonPoint) {
+			Position graphPoint = NodeSearch(p);
+			Node n = graph.get(graphPoint.getI()).get(graphPoint.getJ());
+			n.setHasPlayer(true);
+			n.setHasObstacle(true);
+			coordPlayerGraph.add(graphPoint);
+		}
 		
 	}
 	
+		
+		
+	}
+
+
 
 }

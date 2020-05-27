@@ -1,7 +1,6 @@
 package abstraction;
 
-
-
+import java.util.ArrayList;
 
 /**
  * 
@@ -48,7 +47,14 @@ public class Rectangle extends Polygon {
 	public void setDimension(Point _dimension) {
 		dimension.set(_dimension);
 	}
-	
+	public ArrayList<Point> getPoint(){
+		ArrayList<Point> pointList = new ArrayList<Point>();
+		pointList.add(this.getCoord());
+		pointList.add(new Point(this.getCoord().getX()+getDimension().getX(),this.getCoord().getY()));
+		pointList.add(new Point(this.getCoord().getX(),this.getCoord().getY()-getDimension().getY()));
+		pointList.add(new Point(this.getCoord().getX()+getDimension().getX(),this.getCoord().getY()-getDimension().getY()));
+		return pointList;
+	}
 	public String toString() {
 		return "Rectangle coord left top " + getCoord() + " dimension : " + dimension;
 	}
