@@ -1,18 +1,19 @@
 package abstraction;
 
-public class ElementCollidable {
-	private Point coord;
+import shapeSceneFX.Point;
+
+public class ElementCollidable extends ElementScene {
+	private Polygon polygon; 
+	public ElementCollidable(Point _coord, Polygon _polygon) {
+		super(_coord, _polygon.getHighestY());
+		polygon = _polygon;
+	}
 	
-	public ElementCollidable(Point _coord){
-		coord = _coord;
+	public Polygon getPolygon() {
+		return polygon;
 	}
-
-	public Point getCoord() {
-		return coord;
+	
+	public Point getCenterHitbox() {
+		return getCoord().copy().add(polygon.getCenter());
 	}
-
-	public void setCoord(Point coord) {
-		this.coord = coord;
-	}
-
 }

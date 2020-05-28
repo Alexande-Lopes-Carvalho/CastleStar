@@ -2,28 +2,30 @@ package abstraction;
 
 import java.util.ArrayList;
 
+import shapeSceneFX.Point;
+
 public abstract class Polygon {
 	private Point coord;
-	public Polygon(Point coord2) {
-		coord = coord2;
+	public Polygon(Point _coord) {
+		coord = _coord;
 	}
 	public Polygon() {
 		coord = new Point(0, 0);
 	}
 	abstract public boolean pointInside(Point point);
 	/*
-	 * utilisï¿½ pour calculï¿½ automatiquement le RenderPriorityAdd d'un ElementCollidable
+	 * utilisé pour calculé automatiquement le RenderPriorityAdd d'un ElementCollidable
 	 * 
 	 */
 	abstract public double getHighestY();
 	/*
-	 * utilisï¿½ pour les operation "coup d'ï¿½pï¿½e" ect ...
+	 * utilisé pour les operation "coup d'épée" ect ...
 	 */
 	abstract public Point getCenter();
+	abstract public ArrayList<Point> getPoints();
 	public void setCoord(Point _coord) {
 		coord.set(_coord);
 	}
-	abstract public ArrayList<Point> getPoints();
 	
 	public Point getCoord() {
 		return coord;

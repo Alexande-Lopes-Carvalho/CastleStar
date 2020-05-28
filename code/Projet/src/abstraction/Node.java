@@ -3,6 +3,8 @@ package abstraction;
 import java.util.ArrayList;
 import java.util.List;
 
+import shapeSceneFX.Point;
+
 public class Node extends Rectangle{
 	
 	private boolean hasObstacle;
@@ -11,6 +13,7 @@ public class Node extends Rectangle{
 	private double f_cost;
 	private double h_cost;
 	private double score;
+	private Node parent;
 	public Node(Point coord,Point dimension,int i,int j, boolean hasObstacle,boolean hasPlayer){
 		super(coord,dimension);
 		this.hasObstacle = hasObstacle;
@@ -19,10 +22,19 @@ public class Node extends Rectangle{
 		this.h_cost = 0;
 		this.score = 0;
 		this.positionGraph =new Position(i,j);
+		this.parent = null;
 		
 		
 	}
 	
+	public Node getParent() {
+		return parent;
+	}
+
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
+
 	public Position getPositionGraph() {
 		return positionGraph;
 	}
@@ -77,7 +89,7 @@ public class Node extends Rectangle{
 		this.hasPlayer = hasPlayer;
 	}
 	
-	
+
 	
 	public double distBwNode(Node a) {
 		return this.getCoord().getDist(a.getCoord());
@@ -94,7 +106,19 @@ public class Node extends Rectangle{
 		calcH_cost(start);
 		setScore(this.getF_cost()+this.getH_cost());
 	}
-	
+	public boolean equals(Object o) {
+		if(!(o instanceof Node)) {
+			return false;
+		}
+		Node n = (Node) o;
+		if(this.getPositionGraph().getI() == n.getPositionGraph().getI() &&this.getPositionGraph().getJ() == n.getPositionGraph().getJ()) {
+			return true;
+		}
+		return false;
+	}
+	public String toString() {
+		return "Node Position " + getPositionGraph().getI()+" "+getPositionGraph().getJ()+" "+isHasPlayer();
+	}
 	
 
 	
