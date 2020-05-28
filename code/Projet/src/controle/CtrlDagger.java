@@ -4,26 +4,28 @@ import abstraction.Weapon;
 import presentation.PresInventory;
 import presentation.PresWeapon;
 
-public class CtrlSword extends CtrlInventoryEquipment {
+public class CtrlDagger extends CtrlInventoryEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;
-	public CtrlSword() {
-		this(new Weapon(1, 29d, 270));
+	public CtrlDagger() {
+		this(new Weapon(1, 19, 135));
 	}
 	
-	public CtrlSword(Weapon _weapon) {
-		super(_weapon, PresInventory.sword);
-		weapon = (Weapon)getEquipment();
+	public CtrlDagger(Weapon _weapon) {
+		super(_weapon, PresInventory.dagger);
+		weapon = _weapon;
 		presWeapon = new PresWeapon(weapon.getActionTime());
 		setPresEquipment(presWeapon);
 	}
-
+	
 	@Override
 	public void handleCtrlWarrior() {
-		getPresEquipment().set(getCtrlWarrior().getPresWarrior().getSword());
+		getPresEquipment().set(getCtrlWarrior().getPresWarrior().getDagger());
 	}
-	
+
+	@Override
 	public void putOnWarrior() {
 		getCtrlWarrior().putEquipmentFront(this);
 	}
+
 }

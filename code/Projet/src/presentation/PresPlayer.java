@@ -14,6 +14,8 @@ public class PresPlayer extends PresWarrior {
 	private static AnimatedOrientedImage img_sword;
 	private static AnimatedOrientedImage img_shield;
 	private static AnimatedOrientedImage img_bowBack;
+	private static AnimatedOrientedImage img_lanceFront, img_lanceBack;
+	private static AnimatedOrientedImage img_dagger;
 	private static AnimatedProjectileLauncher img_bowFront;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
@@ -108,10 +110,21 @@ public class PresPlayer extends PresWarrior {
 		img_shield = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Shield");
 		img_bowFront = new AnimatedProjectileLauncher(new Point(6, 1).mult(MainEventHandler.pxSize), frontEquipment, "./data/Character/Equipment/Bow/Front");
 		img_bowBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Bow/Back");
+		
+		img_lanceFront = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Lance/Front");
+		img_lanceBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Lance/Back");
+		
+		img_dagger = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Dagger");
+		
+		System.out.println(img_lanceFront.getImages()[0].length + " " + img_lanceBack.getImages()[0].length);
 	}
 	
 	public AnimatedOrientedImage getSword() {
 		return img_sword;
+	}
+	
+	public AnimatedOrientedImage getDagger() {
+		return img_dagger;
 	}
 	
 	public AnimatedOrientedImage getShield() {
@@ -124,6 +137,14 @@ public class PresPlayer extends PresWarrior {
 	
 	public AnimatedOrientedImage getBowBack() {
 		return img_bowBack;
+	}
+	
+	public AnimatedOrientedImage getLanceFront() {
+		return img_lanceFront;
+	}
+	
+	public AnimatedOrientedImage getLanceBack() {
+		return img_lanceBack;
 	}
 	
 	public AnimatedOrientedImage getHandBack() {

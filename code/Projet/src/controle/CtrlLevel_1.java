@@ -98,6 +98,8 @@ public class CtrlLevel_1 extends CtrlLevel {
 		add(Items.arrow(5, new Point(421, 120)));
 		add(Items.sword(new Point(539, 104)));
 		add(Items.bow(new Point(590, 104)));
+		add(Items.lance(new Point(330, 124)));
+		add(Items.dagger(new Point(401, 124)));
 
 		
 		CtrlPlayer p = new CtrlPlayer(new Player(10, new Point(50, 0), 10, new Point(110, 110)), new PresPlayer()); 

@@ -2,11 +2,15 @@ package presentation;
 
 import abstraction.ArrowItem;
 import abstraction.BowItem;
+import abstraction.DaggerItem;
 import abstraction.HeartItem;
+import abstraction.LanceItem;
 import abstraction.ShieldItem;
 import abstraction.SwordItem;
 import controle.CtrlBow;
+import controle.CtrlDagger;
 import controle.CtrlItem;
+import controle.CtrlLance;
 import controle.CtrlShield;
 import controle.CtrlSword;
 import javafx.scene.image.Image;
@@ -19,6 +23,8 @@ public class Items {
 	private static Image heart;
 	private static Image sword;
 	private static Image bow;
+	private static Image lance;
+	private static Image dagger;
 	
 	public static void initImage() {
 		shield = EventHandler.loadPixelatedImage("./data/Item/Shield.png", MainEventHandler.pxSize);
@@ -26,6 +32,8 @@ public class Items {
 		heart = EventHandler.loadPixelatedImage("./data/Item/Heart.png", MainEventHandler.pxSize);
 		sword = EventHandler.loadPixelatedImage("./data/Item/Sword.png", MainEventHandler.pxSize);
 		bow = EventHandler.loadPixelatedImage("./data/Item/Bow.png", MainEventHandler.pxSize);
+		lance = EventHandler.loadPixelatedImage("./data/Item/Lance.png", MainEventHandler.pxSize);
+		dagger = EventHandler.loadPixelatedImage("./data/Item/Dagger.png", MainEventHandler.pxSize);
 	}
 	
 	public static CtrlItem shield(Point coord) {
@@ -66,5 +74,21 @@ public class Items {
 	
 	public static CtrlItem bow() {
 		return new CtrlItem(new BowItem(new CtrlBow(), new Point(0, 0)), new PresImage(bow));
+	}
+	
+	public static CtrlItem lance(Point coord) {
+		return new CtrlItem(new LanceItem(new CtrlLance(), coord), new PresImage(lance));
+	}
+	
+	public static CtrlItem lance() {
+		return new CtrlItem(new LanceItem(new CtrlLance(), new Point(0, 0)), new PresImage(lance));
+	}
+	
+	public static CtrlItem dagger(Point coord) {
+		return new CtrlItem(new DaggerItem(new CtrlDagger(), coord), new PresImage(dagger));
+	}
+	
+	public static CtrlItem dagger() {
+		return new CtrlItem(new DaggerItem(new CtrlDagger(), new Point(0, 0)), new PresImage(dagger));
 	}
 }

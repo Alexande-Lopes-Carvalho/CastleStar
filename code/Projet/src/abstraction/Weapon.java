@@ -31,7 +31,7 @@ public class Weapon extends Equipment {
 			c = warrior.getCoord().copy().add(r.getCoord().getX()+r.getDimension().getX(),0);
 			for(CtrlEntity k : enemy) {
 				Point a = k.getEntity().getCenterHitbox();
-				if(c.getX() >= a.getX() && range.pointInside(a)) {
+				if(c.getX() >= a.getX() && range.pointInside(a.copy().add(k.getEntity().getRectangle().getDimension().getX()/2., 0))) {
 					k.damage(damage);
 					//System.out.println("DAMAGE");
 				}
@@ -40,7 +40,7 @@ public class Weapon extends Equipment {
 			c = warrior.getCoord().copy().add(r.getCoord().getX(), 0);
 			for(CtrlEntity k : enemy) {
 				Point a = k.getEntity().getCenterHitbox();
-				if(c.getX() <= a.getX() && range.pointInside(a)) {
+				if(c.getX() <= a.getX() && range.pointInside(a.copy().sub(k.getEntity().getRectangle().getDimension().getX()/2., 0))) {
 					k.damage(damage);
 					//System.out.println("DAMAGE");
 				}

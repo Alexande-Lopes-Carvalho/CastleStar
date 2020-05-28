@@ -46,9 +46,13 @@ public abstract class CtrlEquipment implements Observer {
 		return ctrlWarrior;
 	}
 	
+	public void setLooking() {
+		presHand.setOrentation(ctrlWarrior.getWarrior().getFacingLeft(), ctrlWarrior.getWarrior().getLookingTo());
+	}
+	
 	public void update(Observable o, Object arg) {
 		if(arg.equals(Warrior.LOOKINGTO_UPDATE)) {
-			presHand.setOrentation(ctrlWarrior.getWarrior().getFacingLeft(), ctrlWarrior.getWarrior().getLookingTo());
+			setLooking();
 		}
 	}
 }

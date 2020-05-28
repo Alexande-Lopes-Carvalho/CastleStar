@@ -97,6 +97,7 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		front = _front;
 		getWarrior().addObserver(front);
 		getPresWarrior().setPresEquipmentFront(front.getPresEquipment());
+		front.setLooking();
 		putEquipmentBack((ctrlShield == null)? ctrlHandBack : ctrlShield);
 	}
 	
@@ -107,5 +108,6 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		back = _back;
 		getWarrior().addObserver(back);
 		getPresWarrior().setPresEquipmentBack(back.getPresEquipment());
+		back.setLooking();
 	}
 }

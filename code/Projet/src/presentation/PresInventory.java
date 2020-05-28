@@ -10,7 +10,7 @@ public class PresInventory extends EventHandler {
 	private static int pxSize = 3;
 	private static int slotSpace = 7, heartSpace = 1;
 	private static Image inventorySlot, selectedSlot;
-	public static Image sword, bow, arrow;
+	public static Image sword, bow, arrow, lance, dagger;
 	private static Image[] heart;
 	private Point coord;
 	private Image[] inventoryImage;
@@ -101,5 +101,7 @@ public class PresInventory extends EventHandler {
 		bow = loadPixelatedImage("./data/Inventory/Bow.png", pxSize);
 		heart = new Image[] {loadPixelatedImage("./data/Inventory/Heart_0.png", pxSize), loadPixelatedImage("./data/Inventory/Heart_1.png", pxSize), loadPixelatedImage("./data/Inventory/Heart_2.png", pxSize)};
 		arrow = loadPixelatedImage("./data/Inventory/Arrow.png", pxSize);
+		lance = loadPixelatedImage("./data/Inventory/Lance.png", pxSize);
+		dagger = loadPixelatedImage("./data/Inventory/Dagger.png", pxSize);
 	}
 }
