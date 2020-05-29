@@ -12,7 +12,7 @@ public class PresSkeleton extends PresEnemy {
 	private static AnimatedProjectileLauncher img_bowFront;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	public PresSkeleton() {
-		super(img_body, img_shoulder, img_leg, img_walkingLegs);
+		super(img_body, img_shoulder, img_leg, img_walkingLegs, 0);
 	}
 
 	// A COMPLETER
@@ -38,18 +38,18 @@ public class PresSkeleton extends PresEnemy {
 	}
 	
 	public AnimatedProjectileLauncher getBowFront() {
-		return img_bowFront;
+		return new AnimatedProjectileLauncher(img_bowFront);
 	}
 	
 	public AnimatedOrientedImage getBowBack() {
-		return img_bowBack;
+		return new AnimatedOrientedImage(img_bowBack);
 	}
 	
 	public AnimatedOrientedImage getHandBack() {
-		return img_handBack;
+		return new AnimatedOrientedImage(img_handBack);
 	}
 	
 	public AnimatedOrientedImage getHandFront() {
-		return img_handFront;
+		return new AnimatedOrientedImage(img_handFront);
 	}
 }

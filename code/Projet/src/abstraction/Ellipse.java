@@ -57,4 +57,11 @@ public class Ellipse extends Polygon {
 	public String toString() {
 		return "Ellipse : Center at " + getCoord() + " dimension : " + dimension;
 	}
+
+	@Override
+	public Point[] getPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+

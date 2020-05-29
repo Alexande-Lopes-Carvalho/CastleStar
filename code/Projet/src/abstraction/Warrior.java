@@ -12,7 +12,8 @@ public class Warrior extends Entity {
 	private boolean walking;
 	public Warrior(int _nbArrow, Point _lookingTo, double _speed,int _maxLife, Point _coord, Rectangle _rectangle) {
 		super(_speed,_maxLife, _coord, _rectangle);
-		lookingTo = _lookingTo;
+		lookingTo = new Point(0, 0);
+		setLookingTo(_lookingTo);
 		setNbArrow(_nbArrow);
 	}
 	

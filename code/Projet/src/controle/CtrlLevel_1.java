@@ -1,7 +1,10 @@
 package controle;
 
+import abstraction.AStarGraph;
 import abstraction.ConvexPolygon;
 import abstraction.ElementCollidable;
+import abstraction.ElementScene;
+import abstraction.Orc;
 import abstraction.Player;
 import abstraction.Rectangle;
 import javafx.scene.image.Image;
@@ -32,8 +35,8 @@ public class CtrlLevel_1 extends CtrlLevel {
 		
 		add(leftWall(new Point(0, 0)));
 
-		add(bigBarrel(new Point(110, 55)));
-		add(bigBarrel(new Point(145, 55)));
+		add(bigBarrel(new Point(108, 55)));
+		add(bigBarrel(new Point(143, 55)));
 		add(bigBarrel(new Point(213, 55)));
 		
 		add(chair(new Point(81, 91)));
@@ -50,8 +53,8 @@ public class CtrlLevel_1 extends CtrlLevel {
 		
 		add(arrowTarget(new Point(501, 122)));
 		
-		add(bed(new Point(608, 88)));
-		add(bed(new Point(631, 109)));
+		add(bed(new Point(600, 80)));
+		add(bed(new Point(628, 106)));
 		
 		add(door(new Point(652, 0)));
 		
@@ -93,21 +96,33 @@ public class CtrlLevel_1 extends CtrlLevel {
 		add(rightWall(new Point(2609, 0)));
 		
 		
-		add(Items.shield(new Point(330, 105)));
-		add(Items.heart(2, new Point(401, 96)));
-		add(Items.arrow(5, new Point(421, 120)));
-		add(Items.sword(new Point(539, 104)));
-		add(Items.bow(new Point(590, 104)));
-		add(Items.lance(new Point(330, 124)));
-		add(Items.dagger(new Point(401, 124)));
-
+		//add(Items.shield(new Point(330, 105)));
+		//add(Items.heart(2, new Point(401, 96)));
+		//add(Items.arrow(5, new Point(421, 120)));
+		add(Items.sword(new Point(399, 96)));
+		//add(Items.bow(new Point(590, 104)));
+		add(Items.lance(new Point(418, 115)));
+		add(Items.dagger(new Point(437, 134)));
 		
+		add(new CtrlOrc(new Orc(new Point(1047, 97)), false));
+		add(new CtrlOrc(new Orc(new Point(1047, 128)), false));
+		add(Items.shield(new Point(1435, 117)));
+		add(new CtrlOrc(new Orc(new Point(1633, 117)), true));
+		
+		add(new CtrlOrc(new Orc(new Point(1776, 107)), false));
+		add(new CtrlOrc(new Orc(new Point(1798, 125)), false));
+		add(new CtrlOrc(new Orc(new Point(1918, 117)), false));
+		
+		add(new CtrlOrc(new Orc(new Point(2260, 96)), true));
+		add(new CtrlOrc(new Orc(new Point(2307, 128)), true));
+
+		//System.out.println("PLAYR");
 		CtrlPlayer p = new CtrlPlayer(new Player(10, new Point(50, 0), 10, new Point(110, 110)), new PresPlayer()); 
-		//p.damage(8);
-		//p.equip(new CtrlSword());
-		//p.equip(new CtrlShield());
-		//p.equip(new CtrlBow());
 		add(p);
+		
+		AStarGraph a = new AStarGraph(5, 5, 3000, 160, new Rectangle(new Point(-5, -3), new Point(10, 3)));
+		Orc.setGraph(a);
+		//add(new CtrlElementScene(new ElementScene(new Point(0, 0), 9000),a)); // A SUPPRIMER POUR ENLEVER LA VUE PATHFINDING
 	}
 	
 	public void initImage() {
@@ -156,7 +171,7 @@ public class CtrlLevel_1 extends CtrlLevel {
 	}
 	
 	private CtrlElementCollidable scarecrow(Point coord) {
-		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(10, 32), new Point(11, 4))), new PresImage(scarecrow));
+		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(10, 32), new Point(11, 7))), new PresImage(scarecrow));
 	}
 	
 	private CtrlElementCollidable arrowTarget(Point coord) {

@@ -68,4 +68,16 @@ public class Rectangle extends Polygon {
 	public String toString() {
 		return "Rectangle coord left top " + getCoord() + " dimension : " + dimension;
 	}
+
+	@Override
+	public Point[] getPoints() {
+		Point[] ar = new Point[4];
+		//System.out.println(getCoord() + "RECT");
+		ar[0] = getCoord().copy();
+		ar[1] = ar[0].copy().add(getDimension().getX(), 0);
+		ar[2] = ar[0].copy().add(getDimension().getX(), getDimension().getY());
+		ar[3] = ar[0].copy().add(0, getDimension().getY());
+		return ar;
+	}
 }
+

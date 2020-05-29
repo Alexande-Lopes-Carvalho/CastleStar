@@ -14,6 +14,13 @@ public class CtrlShield extends CtrlEquipment {
 		presShield = new PresShield(shield.getCooldownTime(), this);
 		setPresEquipment(presShield);
 	}
+	
+	public CtrlShield(Shield e) {
+		super(e);
+		shield = (Shield)getEquipment();
+		presShield = new PresShield(shield.getCooldownTime(), this);
+		setPresEquipment(presShield);
+	}
 
 	@Override
 	public void handleCtrlWarrior() {

@@ -17,7 +17,7 @@ public class PresPlayer extends PresWarrior {
 	private static AnimatedOrientedImage img_lanceFront, img_lanceBack;
 	private static AnimatedOrientedImage img_dagger;
 	private static AnimatedProjectileLauncher img_bowFront;
-	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
+	public static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
 	private boolean left, right, up, down;
 	private PresInventory presInventory;
@@ -116,42 +116,42 @@ public class PresPlayer extends PresWarrior {
 		
 		img_dagger = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Dagger");
 		
-		System.out.println(img_lanceFront.getImages()[0].length + " " + img_lanceBack.getImages()[0].length);
+		//System.out.println(img_lanceFront.getImages()[0].length + " " + img_lanceBack.getImages()[0].length);
 	}
 	
 	public AnimatedOrientedImage getSword() {
-		return img_sword;
+		return new AnimatedOrientedImage(img_sword);
 	}
 	
 	public AnimatedOrientedImage getDagger() {
-		return img_dagger;
+		return new AnimatedOrientedImage(img_dagger);
 	}
 	
 	public AnimatedOrientedImage getShield() {
-		return img_shield;
+		return new AnimatedOrientedImage(img_shield);
 	}
 	
 	public AnimatedProjectileLauncher getBowFront() {
-		return img_bowFront;
+		return new AnimatedProjectileLauncher(img_bowFront);
 	}
 	
 	public AnimatedOrientedImage getBowBack() {
-		return img_bowBack;
+		return new AnimatedOrientedImage(img_bowBack);
 	}
 	
 	public AnimatedOrientedImage getLanceFront() {
-		return img_lanceFront;
+		return new AnimatedOrientedImage(img_lanceFront);
 	}
 	
 	public AnimatedOrientedImage getLanceBack() {
-		return img_lanceBack;
+		return new AnimatedOrientedImage(img_lanceBack);
 	}
 	
 	public AnimatedOrientedImage getHandBack() {
-		return img_handBack;
+		return new AnimatedOrientedImage(img_handBack);
 	}
 	
 	public AnimatedOrientedImage getHandFront() {
-		return img_handFront;
+		return new AnimatedOrientedImage(img_handFront);
 	}
 }

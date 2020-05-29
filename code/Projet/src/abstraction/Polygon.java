@@ -20,6 +20,9 @@ public abstract class Polygon {
 	 * utilisé pour les operation "coup d'épée" ect ...
 	 */
 	abstract public Point getCenter();
+	
+	abstract public Point[] getPoints();
+	
 	public void setCoord(Point _coord) {
 		coord.set(_coord);
 	}

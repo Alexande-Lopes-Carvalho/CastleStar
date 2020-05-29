@@ -59,4 +59,13 @@ public class ConvexPolygon extends Polygon {
 		return res.div(points.length).add(getCoord());
 	}
 
+	@Override
+	public Point[] getPoints() {
+		Point[] res = new Point[points.length];
+		for(int i = 0; i < res.length; i++) {
+			res[i] = getCoord().copy().add(points[i]);
+		}
+		return res;
+	}
+
 }

@@ -1,6 +1,8 @@
 package presentation;
 
+import controle.CtrlPlayer;
 import shapeSceneFX.Point;
+import shapeSceneFX.EventHandling.Event;
 
 public class PresOrc extends PresEnemy {
 	private static OrientedImage img_body;
@@ -11,12 +13,51 @@ public class PresOrc extends PresEnemy {
 	private static AnimatedOrientedImage img_sword;
 	private static AnimatedOrientedImage img_shield;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
+	private static final int refreshRate = 100, actionRate = 900;
+	private PresWeapon weapon;
+	private PresShield shield;
 	public PresOrc() {
-		super(img_body, img_shoulder, img_leg, img_walkingLegs);
+		super(img_body, img_shoulder, img_leg, img_walkingLegs, actionRate);
 	}
 	
-	// A COMPLETER
-	// ...
+	public void action() {
+		if(getCtrlPlayer().getPlayer().getCoord().getDist(getCtrlEnemy().getEnemy().getCoord()) < 35) {
+			//System.out.println("ACTION FROM " + getCoord() + " " + weapon + " " + weapon.getCtrlEquipment());
+			weapon.launchAction();
+		}
+	}
+	
+	public void setPresEquipmentFront(PresEquipment e) {
+		super.setPresEquipmentFront(e);
+		if(e instanceof PresWeapon) {
+			weapon = (PresWeapon)e;
+		}
+	}
+	
+	public void setPresEquipmentBack(PresEquipment e) {
+		super.setPresEquipmentBack(e);
+		if(e instanceof PresShield) {
+			shield = (PresShield)e;
+			shield.requestUse();
+		}
+	}
+	
+	public void setCtrlPlayer(CtrlPlayer _ctrlPlayer) {
+		super.setCtrlPlayer(_ctrlPlayer);
+		//System.out.println("FOCUS FROM " + getCoord() + _ctrlPlayer);
+		if(getCtrlPlayer() != null) {
+			addEvent(new RefreshEvent().in(0));
+		}
+	}
+	
+
+	public class RefreshEvent implements Event{
+		@Override
+		public void handleEvent() {
+			getCtrlEnemy().refreshItinary();
+			addEvent(new RefreshEvent().in(refreshRate));
+		}
+	}
 	
 	public static void initImage() {
 		frontEquipment.mult(MainEventHandler.pxSize);
@@ -38,18 +79,18 @@ public class PresOrc extends PresEnemy {
 	}
 	
 	public AnimatedOrientedImage getSword() {
-		return img_sword;
+		return new AnimatedOrientedImage(img_sword);
 	}
 	
 	public AnimatedOrientedImage getShield() {
-		return img_shield;
+		return new AnimatedOrientedImage(img_shield);
 	}
 	
 	public AnimatedOrientedImage getHandBack() {
-		return img_handBack;
+		return new AnimatedOrientedImage(img_handBack);
 	}
 	
 	public AnimatedOrientedImage getHandFront() {
-		return img_handFront;
+		return new AnimatedOrientedImage(img_handFront);
 	}
 }

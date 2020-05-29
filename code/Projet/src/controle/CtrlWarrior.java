@@ -28,7 +28,7 @@ public abstract class CtrlWarrior extends CtrlEntity {
 		equip(ctrlHandFront);
 	}
 	
-	public abstract List<CtrlEntity> getListOfEnemy();
+	public abstract List<? extends CtrlEntity> getListOfEnemy();
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -75,6 +75,7 @@ public abstract class CtrlWarrior extends CtrlEntity {
 	}
 	
 	public void equip(CtrlEquipment e) {
+		//System.out.println(e + " " + e.getPresEquipment());
 		e.setCtrlWarrior(this);
 		e.putOnWarrior();
 	}

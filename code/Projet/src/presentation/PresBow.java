@@ -29,8 +29,10 @@ public class PresBow extends PresEquipment {
 	}
 	
 	public void activate() {
-		isShooting = true;
-		getAnimatedOrientedImage().setIndex(1);
+		if(canShoot && !onCooldown) {
+			isShooting = true;
+			getAnimatedOrientedImage().setIndex(1);
+		}
 	}
 	
 	public void desactivate() {
@@ -39,20 +41,22 @@ public class PresBow extends PresEquipment {
 	}
 	
 	public void shoot() {
-		ctrlBow.use();
-		desactivate();
-		onCooldown = true;
-		addEvent(new ShootEvent().in(cooldownTime));
+		if(canShoot && isShooting) {
+			ctrlBow.use();
+			desactivate();
+			onCooldown = true;
+			addEvent(new ShootEvent().in(cooldownTime));
+		}
 	}
 	
 	public void mousePressed() {
-		if(mouseButton().equals(MouseButton.PRIMARY) && canShoot && !onCooldown) {
+		if(mouseButton().equals(MouseButton.PRIMARY)) {
 			activate();
 		}
 	}
 	
 	public void mouseReleased() {
-		if(mouseButton().equals(MouseButton.PRIMARY) && canShoot && isShooting) {
+		if(mouseButton().equals(MouseButton.PRIMARY)) {
 			shoot();
 		}
 	}
