@@ -9,7 +9,6 @@ import java.util.Observer;
 
 import abstraction.ElementCollidable;
 import abstraction.ElementScene;
-import abstraction.GraphGame;
 import abstraction.Level;
 import abstraction.Rectangle;
 import presentation.MainEventHandler;
@@ -23,11 +22,11 @@ public class CtrlLevel implements Observer {
 	private List<CtrlEntity> ctrlEntityList;
 	private List<CtrlPlayer> ctrlPlayerList;
 	private List<CtrlItem> ctrlItemList;
-	private GraphGame graphGame;
-	private Point levelSize;
+	private List<CtrlEnemy> ctrlEnemyList;
+	private List<CtrlLootable> ctrlLootableList;
 	private Level level;
 	private PresLevel presLevel;
-	public CtrlLevel(Point levelSize) {
+	public CtrlLevel() {
 		initImage();
 		CtrlElementScene.currentLevel = this;
 		level = new Level();
@@ -40,24 +39,10 @@ public class CtrlLevel implements Observer {
 		ctrlEntityList = new ArrayList<CtrlEntity>();
 		ctrlPlayerList = new ArrayList<CtrlPlayer>();
 		ctrlItemList = new ArrayList<CtrlItem>();
-		this.levelSize = levelSize;
-		
-	
-	
-		
-		
+		ctrlLootableList = new ArrayList<CtrlLootable>();
+		ctrlEnemyList = new ArrayList<>();
 	}
-	public void setupGraph() {
-		ArrayList<ElementCollidable> temp = new ArrayList<ElementCollidable>();
-		for(CtrlElementCollidable c: ctrlElementCollidableList) {
-			temp.add(c.getElementCollidable());
-			
-			
-		}
-		
-		this.graphGame = new GraphGame(temp,levelSize,200);
-		
-	}
+	
 	public void updateCamera() {
 		level.updateCamera(ctrlPlayerList);
 	}
@@ -72,12 +57,6 @@ public class CtrlLevel implements Observer {
 	public List<CtrlElementScene> getCtrlElementSceneList(){
 		return ctrlElementSceneList;
 	}
-	public GraphGame getGraphGame() {
-		return graphGame;
-	}
-	public List<CtrlPlayer> getCtrlPlayerList(){
-		return ctrlPlayerList;
-	}
 	
 	public List<CtrlElementCollidable> getCtrlElementCollidableList(){
 		return ctrlElementCollidableList;
@@ -85,6 +64,10 @@ public class CtrlLevel implements Observer {
 	
 	public List<CtrlEntity> getCtrlEntityList(){
 		return ctrlEntityList;
+	}
+	
+	public List<CtrlPlayer> getCtrlPlayerList(){
+		return ctrlPlayerList;
 	}
 	
 	public void add(CtrlElementScene e) {
@@ -107,6 +90,16 @@ public class CtrlLevel implements Observer {
 		ctrlEntityList.add(e);
 	}
 	
+	public void add(CtrlLootable e) {
+		add((CtrlEntity) e);
+		ctrlLootableList.add(e);
+	}
+	
+	public void add(CtrlEnemy e) {
+		add((CtrlEntity) e);
+		ctrlEnemyList.add(e);
+	}
+	
 	public void add(CtrlPlayer e) {
 		add((CtrlEntity) e);
 		ctrlPlayerList.add(e);
@@ -124,11 +117,24 @@ public class CtrlLevel implements Observer {
 		presLevel.remove(e.getPresElementScene());
 	}
 	
+	public void remove(CtrlLootable e) {
+		ctrlLootableList.remove(e);
+		ctrlElementSceneList.remove(e);
+		ctrlElementCollidableList.remove(e);
+		ctrlEntityList.remove(e);
+		presLevel.remove(e.getPresElementScene());
+	}
+	
 	public void remove(CtrlEntity e) {
 		ctrlElementSceneList.remove(e);
 		ctrlElementCollidableList.remove(e);
 		ctrlEntityList.remove(e);
 		presLevel.remove(e.getPresElementScene());
+	}
+	
+	public void remove(CtrlEnemy e) {
+		remove((CtrlEnemy) e);
+		ctrlEnemyList.remove(e);
 	}
 	
 	public void remove(CtrlPlayer e) {
@@ -145,6 +151,9 @@ public class CtrlLevel implements Observer {
 		}
 		for(CtrlItem k : toRemoveList) {
 			remove(k);
+		}
+		for(CtrlEnemy k : ctrlEnemyList) {
+			k.playerMoved(ctrlPlayer);
 		}
 	}
 	
@@ -204,5 +213,4 @@ public class CtrlLevel implements Observer {
 	
 	public void initImage() {
 	}
-	
 }

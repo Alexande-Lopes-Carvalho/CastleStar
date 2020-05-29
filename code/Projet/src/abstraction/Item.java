@@ -6,7 +6,7 @@ import shapeSceneFX.Point;
 public abstract class Item extends ElementScene{
 	private Ellipse ellipse;
 	public Item(Point coord, Ellipse _ellipse) {
-		super(coord, -_ellipse.getDimension().getY()/2.);
+		super(coord);
 		ellipse = _ellipse;
 	}
 	

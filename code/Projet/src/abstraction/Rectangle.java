@@ -1,7 +1,5 @@
 package abstraction;
 
-import java.util.ArrayList;
-
 import shapeSceneFX.Point;
 
 
@@ -16,6 +14,8 @@ import shapeSceneFX.Point;
  *   <------------------------->
  *         dimension.getX()
  *   
+ * @author Administrator
+ *
  */
 public class Rectangle extends Polygon {
 	private Point dimension;
@@ -70,12 +70,14 @@ public class Rectangle extends Polygon {
 	}
 
 	@Override
-	public ArrayList<Point> getPoints(){
-		ArrayList<Point> pointList = new ArrayList<Point>();
-		pointList.add(this.getCoord());
-		pointList.add(new Point(this.getCoord().getX()+getDimension().getX(),this.getCoord().getY()));
-		pointList.add(new Point(this.getCoord().getX(),this.getCoord().getY()-getDimension().getY()));
-		pointList.add(new Point(this.getCoord().getX()+getDimension().getX(),this.getCoord().getY()-getDimension().getY()));
-		return pointList;
+	public Point[] getPoints() {
+		Point[] ar = new Point[4];
+		//System.out.println(getCoord() + "RECT");
+		ar[0] = getCoord().copy();
+		ar[1] = ar[0].copy().add(getDimension().getX(), 0);
+		ar[2] = ar[0].copy().add(getDimension().getX(), getDimension().getY());
+		ar[3] = ar[0].copy().add(0, getDimension().getY());
+		return ar;
 	}
 }
+

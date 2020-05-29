@@ -1,7 +1,5 @@
 package abstraction;
 
-import java.util.ArrayList;
-
 import shapeSceneFX.Point;
 
 /**
@@ -61,8 +59,9 @@ public class Ellipse extends Polygon {
 	}
 
 	@Override
-	public ArrayList<Point> getPoints() {
+	public Point[] getPoints() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 }
+

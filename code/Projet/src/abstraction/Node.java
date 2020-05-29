@@ -5,122 +5,108 @@ import java.util.List;
 
 import shapeSceneFX.Point;
 
-public class Node extends Rectangle{
-	
-	private boolean hasObstacle;
-	private boolean hasPlayer;
-	private Position  positionGraph;
-	private double f_cost;
-	private double h_cost;
-	private double score;
-	private Node parent;
-	public Node(Point coord,Point dimension,int i,int j, boolean hasObstacle,boolean hasPlayer){
-		super(coord,dimension);
-		this.hasObstacle = hasObstacle;
-		this.hasPlayer = hasPlayer;
-		this.f_cost = 0;
-		this.h_cost = 0;
-		this.score = 0;
-		this.positionGraph =new Position(i,j);
-		this.parent = null;
-		
-		
+public class Node {
+	private Point coord;
+	private Node link;
+	private List<Node> neighbours;
+	private boolean lock, visit;
+	private boolean wall, entity;
+	private double hCost, gCost;
+	public Node(Point _coord) {
+		coord = _coord;
+		neighbours = new ArrayList<Node>();
 	}
 	
-	public Node getParent() {
-		return parent;
-	}
-
-	public void setParent(Node parent) {
-		this.parent = parent;
-	}
-
-	public Position getPositionGraph() {
-		return positionGraph;
-	}
-
-	public void setPositionGraph(Position positionGraph) {
-		this.positionGraph = positionGraph;
-	}
-
-	public double getF_cost() {
-		return f_cost;
-	}
-
-	public void setF_cost(double f_cost) {
-		this.f_cost = f_cost;
-	}
-
-	public double getH_cost() {
-		return h_cost;
-	}
-
-	public void setH_cost(double h_cost) {
-		this.h_cost = h_cost;
-	}
-
-	public double getScore() {
-		return score;
-	}
-
-	public void setScore(double score) {
-		this.score = score;
-	}
-
-	public boolean isHasObstacle() {
-		return hasObstacle;
-	}
-
-
-
-	public void setHasObstacle(boolean hasObstacle) {
-		this.hasObstacle = hasObstacle;
-	}
-
-
-
-	public boolean isHasPlayer() {
-		return hasPlayer;
-	}
-
-
-
-	public void setHasPlayer(boolean hasPlayer) {
-		this.hasPlayer = hasPlayer;
+	public void reset() {
+		lock = false;
+		visit = false;
+		entity = false;
+		hCost = 0;
+		gCost = 0;
+		link = null;
 	}
 	
-
-	
-	public double distBwNode(Node a) {
-		return this.getCoord().getDist(a.getCoord());
-	}
-	public void calcF_cost(Node end) {
-		setF_cost(this.distBwNode(end));
-	}
-	public void calcH_cost(Node start) {
-		setH_cost(this.distBwNode(start));
+	public void setWall(boolean value) {
+		wall = value;
 	}
 	
-	public void calcScore(Node end, Node start) {
-		calcF_cost(end);
-		calcH_cost(start);
-		setScore(this.getF_cost()+this.getH_cost());
+	public void setEntity(boolean value) {
+		entity = value;
 	}
-	public boolean equals(Object o) {
-		if(!(o instanceof Node)) {
-			return false;
+	
+	public void lock(List<Node> visitedNode, Node end) {
+		for(Node k : neighbours) {
+			if(!k.isLocked() && k.canVisit()) {
+				if(!k.visit) {
+					visitedNode.add(k);
+				}
+				k.visitedFrom(this, end);
+			}
 		}
-		Node n = (Node) o;
-		if(this.getPositionGraph().getI() == n.getPositionGraph().getI() &&this.getPositionGraph().getJ() == n.getPositionGraph().getJ()) {
-			return true;
+		lock = true;
+	}
+	
+	public void visitedFrom(Node k, Node end) {
+		if(!visit) {
+			hCost = getDist(end);
 		}
-		return false;
-	}
-	public String toString() {
-		return "Node Position " + getPositionGraph().getI()+" "+getPositionGraph().getJ()+" "+isHasPlayer();
+		double gCostFromK = getDist(k)+k.getGCost();
+		if(!visit || gCostFromK < gCost) {
+			gCost = gCostFromK;
+			link = k;
+		}
+		visit = true;
 	}
 	
-
+	public Node getLink() {
+		return link;
+	}
 	
-
+	public void setLink(Node _link) {
+		link = _link;
+	}
+	
+	public double getFCost() {
+		return gCost+hCost;
+	}
+	
+	public double getGCost() {
+		return gCost;
+	}
+	
+	public double getDist(Node e) {
+		return coord.getDist(e.coord);
+	}
+	
+	public void addNeighbours(Node n) {
+		neighbours.add(n);
+	}
+	
+	public void removeNeighbours(Node n) {
+		neighbours.remove(n);
+	}
+	
+	public boolean isLocked() {
+		return lock;
+	}
+	
+	public boolean canVisit() {
+		return !wall && !entity && !lock;
+	}
+	
+	public List<Node> getNeighbours(){
+		return neighbours;
+	}
+	
+	public Point getCoord() {
+		return coord.copy();
+	}
+	
+	public boolean getWall() {
+		return wall;
+	}
+	
+	public boolean getEntity() {
+		return entity;
+	}
 }

@@ -15,6 +15,11 @@ public class AnimatedProjectileLauncher extends AnimatedOrientedImage {
 		projectileCoord = _projectileCoord;
 	}
 	
+	public AnimatedProjectileLauncher(AnimatedProjectileLauncher a) {
+		super(a);
+		projectileCoord = a.getProjectileCoord().copy();
+	}
+	
 	public Point getProjectileCoord() {
 		return projectileCoord;
 	}

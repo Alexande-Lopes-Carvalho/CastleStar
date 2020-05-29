@@ -2,12 +2,14 @@ package presentation;
 
 import controle.CtrlBow;
 import javafx.scene.input.MouseButton;
+import presentation.PresWeapon.ActionEvent;
 import shapeSceneFX.EventHandling.Event;
 
 public class PresBow extends PresEquipment {
 	private int cooldownTime;
 	private CtrlBow ctrlBow;
 	private boolean canShoot, isShooting, onCooldown;
+	
 	private AnimatedProjectileLauncher animatedProjectileLauncher;
 	public PresBow(int _cooldownTime, CtrlBow _ctrlBow) {
 		cooldownTime = _cooldownTime;
@@ -27,10 +29,20 @@ public class PresBow extends PresEquipment {
 			desactivate();
 		}
 	}
+	public void launchAction( ) {
+		
+		if(!isShooting) {
+			activate();
+			shoot();
+			
+		}
+	}
 	
 	public void activate() {
-		isShooting = true;
-		getAnimatedOrientedImage().setIndex(1);
+		if(canShoot && !onCooldown) {
+			isShooting = true;
+			getAnimatedOrientedImage().setIndex(1);
+		}
 	}
 	
 	public void desactivate() {
@@ -39,20 +51,22 @@ public class PresBow extends PresEquipment {
 	}
 	
 	public void shoot() {
-		ctrlBow.use();
-		desactivate();
-		onCooldown = true;
-		addEvent(new ShootEvent().in(cooldownTime));
+		if(canShoot && isShooting) {
+			ctrlBow.use();
+			desactivate();
+			onCooldown = true;
+			addEvent(new ShootEvent().in(cooldownTime));
+		}
 	}
 	
 	public void mousePressed() {
-		if(mouseButton().equals(MouseButton.PRIMARY) && canShoot && !onCooldown) {
+		if(mouseButton().equals(MouseButton.PRIMARY)) {
 			activate();
 		}
 	}
 	
 	public void mouseReleased() {
-		if(mouseButton().equals(MouseButton.PRIMARY) && canShoot && isShooting) {
+		if(mouseButton().equals(MouseButton.PRIMARY)) {
 			shoot();
 		}
 	}

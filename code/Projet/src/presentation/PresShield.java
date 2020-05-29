@@ -16,21 +16,29 @@ public class PresShield extends PresEquipment {
 		use = false;
 	}
 	
+	public void requestUse() {
+		use = true;
+		if(canUse) {
+			getCtrlEquipment().use();
+		}
+	}
+	
+	public void resquestDontUse() {
+		use = false;
+		if(canUse) {
+			ctrlShield.stopUse();
+		}
+	}
+	
 	public void mousePressed() {
 		if(mouseButton().equals(MouseButton.SECONDARY)) {
-			use = true;
-			if(canUse) {
-				getCtrlEquipment().use();
-			}
+			requestUse();
 		}
 	}
 	
 	public void mouseReleased() {
 		if(mouseButton().equals(MouseButton.SECONDARY)) {
-			use = false;
-			if(canUse) {
-				ctrlShield.stopUse();
-			}
+			resquestDontUse();
 		}
 	}
 	

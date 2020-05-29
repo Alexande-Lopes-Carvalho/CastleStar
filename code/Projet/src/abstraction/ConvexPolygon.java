@@ -1,7 +1,5 @@
 package abstraction;
 
-import java.util.ArrayList;
-
 import shapeSceneFX.Point;
 import shapeSceneFX.Segment;
 
@@ -60,12 +58,14 @@ public class ConvexPolygon extends Polygon {
 		}
 		return res.div(points.length).add(getCoord());
 	}
-	public ArrayList<Point> getPoints(){
-		ArrayList<Point> Points = new ArrayList<Point>();
-		for (int i = 0 ;i<this.points.length;i++) {
-			Points.add(this.points[i]);
+
+	@Override
+	public Point[] getPoints() {
+		Point[] res = new Point[points.length];
+		for(int i = 0; i < res.length; i++) {
+			res[i] = getCoord().copy().add(points[i]);
 		}
-		return Points;
-		
+		return res;
 	}
+
 }

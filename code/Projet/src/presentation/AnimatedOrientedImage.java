@@ -37,6 +37,12 @@ public class AnimatedOrientedImage {
 		}
 	}
 	
+	public AnimatedOrientedImage(AnimatedOrientedImage a) {
+		coord = a.getCoord().copy();
+		index = a.getIndex();
+		img = a.getImages();
+	}
+	
 	public Image[][] getImages() {
 		return img;
 	}

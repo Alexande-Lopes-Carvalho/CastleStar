@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.ScheduledEvent;
-import shapeSceneFX.EventHandling.TransferableEvent;
 
 public class PresWarrior extends PresElementScene {
 	private static Image[] missingTexture;
@@ -149,6 +148,10 @@ public class PresWarrior extends PresElementScene {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	
+	public AnimatedOrientedImage getDagger() {
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
+	}
+	
 	public AnimatedOrientedImage getShield() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
@@ -158,6 +161,14 @@ public class PresWarrior extends PresElementScene {
 	}
 	
 	public AnimatedOrientedImage getBowBack(){
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
+	}
+	
+	public AnimatedOrientedImage getLanceFront() {
+		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
+	}
+	
+	public AnimatedOrientedImage getLanceBack() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
 	

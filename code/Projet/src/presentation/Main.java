@@ -1,6 +1,5 @@
 package presentation;
 
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import shapeSceneFX.FXCanvas;

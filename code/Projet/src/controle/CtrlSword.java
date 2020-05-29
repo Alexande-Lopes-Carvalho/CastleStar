@@ -8,7 +8,7 @@ public class CtrlSword extends CtrlInventoryEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;
 	public CtrlSword() {
-		this(new Weapon(1, 28.3d, 270));
+		this(new Weapon(1, 29d, 270));
 	}
 	
 	public CtrlSword(Weapon _weapon) {

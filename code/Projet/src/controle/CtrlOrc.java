@@ -1,30 +1,19 @@
 package controle;
 
-
 import abstraction.Orc;
-
+import abstraction.Shield;
 import presentation.PresOrc;
-import shapeSceneFX.Point;
 
 public class CtrlOrc extends CtrlEnemy {
 	private PresOrc presOrc;
 	private Orc orc;
-	public CtrlOrc(Orc orc, PresOrc presOrc) {
-		super(orc,presOrc);
-		this.orc =orc;
-		this.presOrc = presOrc;
+	public CtrlOrc(Orc _orc, boolean withShield) {
+		super(_orc, new PresOrc());
+		orc = _orc;
+		presOrc = (PresOrc)getPresWarrior();
+		equip(new CtrlSword());
+		if(withShield) {
+			equip(new CtrlShield(new Shield(1500)));
+		}
 	}
-	public CtrlOrc setupCtrlOrc() {
-		return(this);
-	}
-	public void refreshItinary() {
-		orc.refreshItinary(currentLevel.getGraphGame());
-		
-	
-	}
-	public void move(Point deplacement) {
-		super.move(deplacement);
-		
-	}
-
 }

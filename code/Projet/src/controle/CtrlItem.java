@@ -1,5 +1,8 @@
 package controle;
 
+import java.util.Observable;
+
+import abstraction.ElementScene;
 import abstraction.Item;
 import presentation.MainEventHandler;
 import presentation.PresImage;
@@ -17,5 +20,17 @@ public class CtrlItem extends CtrlElementScene{
 	
 	public boolean playerMoved(CtrlPlayer player) {
 		return item.playerMoved(player);
+	}
+	
+	public void update(Observable o, Object arg) {
+		if(arg.equals(ElementScene.COORD_UPDATE)) {
+			presItem.setCoord(item.getCoord().copy().sub((presItem.getWidth()/2.)/MainEventHandler.pxSize, (presItem.getHeight()/2.)/MainEventHandler.pxSize));
+			return;
+		}
+		super.update(o, arg);
+	}
+	
+	public Item getItem() {
+		return item;
 	}
 }

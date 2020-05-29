@@ -1,7 +1,5 @@
 package abstraction;
 
-import java.util.ArrayList;
-
 import shapeSceneFX.Point;
 
 public abstract class Polygon {
@@ -22,7 +20,9 @@ public abstract class Polygon {
 	 * utilisé pour les operation "coup d'épée" ect ...
 	 */
 	abstract public Point getCenter();
-	abstract public ArrayList<Point> getPoints();
+	
+	abstract public Point[] getPoints();
+	
 	public void setCoord(Point _coord) {
 		coord.set(_coord);
 	}

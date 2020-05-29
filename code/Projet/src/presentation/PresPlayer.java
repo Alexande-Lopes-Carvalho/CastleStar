@@ -14,8 +14,10 @@ public class PresPlayer extends PresWarrior {
 	private static AnimatedOrientedImage img_sword;
 	private static AnimatedOrientedImage img_shield;
 	private static AnimatedOrientedImage img_bowBack;
+	private static AnimatedOrientedImage img_lanceFront, img_lanceBack;
+	private static AnimatedOrientedImage img_dagger;
 	private static AnimatedProjectileLauncher img_bowFront;
-	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
+	public static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
 	private boolean left, right, up, down;
 	private PresInventory presInventory;
@@ -108,29 +110,48 @@ public class PresPlayer extends PresWarrior {
 		img_shield = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Shield");
 		img_bowFront = new AnimatedProjectileLauncher(new Point(6, 1).mult(MainEventHandler.pxSize), frontEquipment, "./data/Character/Equipment/Bow/Front");
 		img_bowBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Bow/Back");
+		
+		img_lanceFront = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Lance/Front");
+		img_lanceBack = new AnimatedOrientedImage(backEquipment, "./data/Character/Equipment/Lance/Back");
+		
+		img_dagger = new AnimatedOrientedImage(frontEquipment, "./data/Character/Equipment/Dagger");
+		
+		//System.out.println(img_lanceFront.getImages()[0].length + " " + img_lanceBack.getImages()[0].length);
 	}
 	
 	public AnimatedOrientedImage getSword() {
-		return img_sword;
+		return new AnimatedOrientedImage(img_sword);
+	}
+	
+	public AnimatedOrientedImage getDagger() {
+		return new AnimatedOrientedImage(img_dagger);
 	}
 	
 	public AnimatedOrientedImage getShield() {
-		return img_shield;
+		return new AnimatedOrientedImage(img_shield);
 	}
 	
 	public AnimatedProjectileLauncher getBowFront() {
-		return img_bowFront;
+		return new AnimatedProjectileLauncher(img_bowFront);
 	}
 	
 	public AnimatedOrientedImage getBowBack() {
-		return img_bowBack;
+		return new AnimatedOrientedImage(img_bowBack);
+	}
+	
+	public AnimatedOrientedImage getLanceFront() {
+		return new AnimatedOrientedImage(img_lanceFront);
+	}
+	
+	public AnimatedOrientedImage getLanceBack() {
+		return new AnimatedOrientedImage(img_lanceBack);
 	}
 	
 	public AnimatedOrientedImage getHandBack() {
-		return img_handBack;
+		return new AnimatedOrientedImage(img_handBack);
 	}
 	
 	public AnimatedOrientedImage getHandFront() {
-		return img_handFront;
+		return new AnimatedOrientedImage(img_handFront);
 	}
 }
