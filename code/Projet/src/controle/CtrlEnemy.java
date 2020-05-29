@@ -33,6 +33,9 @@ public class CtrlEnemy extends CtrlWarrior {
 		enemy.refreshItinary(this);
 	}
 	
+	public void kill() {
+		currentLevel.remove(this);
+	}
 	
 	@Override
 	public List<? extends CtrlEntity> getListOfEnemy() {

@@ -42,6 +42,12 @@ public class CtrlPlayer extends CtrlWarrior {
 		return player;
 	}
 	
+	public void reset() {
+		getPlayer().setLookingTo(new Point(50, 0));
+		getPlayer().heal(getPlayer().getMaxLife());
+		presPlayer.reset();
+	}
+	
 	public void kill() {
 		currentLevel.remove(this);
 	}

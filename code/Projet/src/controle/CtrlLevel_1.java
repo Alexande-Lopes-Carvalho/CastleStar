@@ -29,7 +29,8 @@ public class CtrlLevel_1 extends CtrlLevel {
 	private Image kingChair, tablePot;
 	private Image littleTables;
 	private Image littleHouse;
-	public CtrlLevel_1() {
+	public CtrlLevel_1(CtrlPlayer c, MainEventHandler e) {
+		super(e, 2515);
 		loadBackground("./data/Level_1/Background", new Point(29, 83));
 		loadWall("./data/Level_1/Wall", new Point(105, 0));
 		
@@ -113,16 +114,20 @@ public class CtrlLevel_1 extends CtrlLevel {
 		add(new CtrlOrc(new Orc(new Point(1798, 125)), false));
 		add(new CtrlOrc(new Orc(new Point(1918, 117)), false));
 		
-		add(new CtrlOrc(new Orc(new Point(2260, 96)), true));
-		add(new CtrlOrc(new Orc(new Point(2307, 128)), true));
+		add(new CtrlOrc(new Orc(new Point(2360, 96)), true));
+		add(new CtrlOrc(new Orc(new Point(2407, 128)), true));
 
 		//System.out.println("PLAYR");
-		CtrlPlayer p = new CtrlPlayer(new Player(10, new Point(50, 0), 10, new Point(110, 110)), new PresPlayer()); 
-		add(p);
+		c.getPlayer().setCoord(new Point(110, 110));
+		add(c);
 		
 		AStarGraph a = new AStarGraph(5, 5, 3000, 160, new Rectangle(new Point(-5, -3), new Point(10, 3)));
 		Orc.setGraph(a);
 		//add(new CtrlElementScene(new ElementScene(new Point(0, 0), 9000),a)); // A SUPPRIMER POUR ENLEVER LA VUE PATHFINDING
+	}
+	
+	public void levelSuccess() {
+		getMainEventHandler().setMaxLevel(2);
 	}
 	
 	public void initImage() {

@@ -23,6 +23,11 @@ public class CtrlInventory implements Observer {
 	
 	public void add(CtrlInventoryEquipment ct) {
 		for(int i = 0; i < ctrlInventoryEquipment.length; i++) {
+			if(ctrlInventoryEquipment[i] != null && ct.getClass() == ctrlInventoryEquipment[i].getClass()) {
+				return;
+			}
+		}
+		for(int i = 0; i < ctrlInventoryEquipment.length; i++) {
 			if(ctrlInventoryEquipment[i] == null) {
 				ctrlInventoryEquipment[i] = ct;
 				presInventory.setInventoryImage(ct.getInventoryImage(), i);

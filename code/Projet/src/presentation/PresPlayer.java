@@ -40,6 +40,13 @@ public class PresPlayer extends PresWarrior {
 		}
 	}
 	
+	public void reset() {
+		left = false;
+		right = false;
+		up = false;
+		down = false;
+	}
+	
 	public void keyPressed() {
 		//System.out.println("Press " + keyCode());
 		setMove(true, keyCode());

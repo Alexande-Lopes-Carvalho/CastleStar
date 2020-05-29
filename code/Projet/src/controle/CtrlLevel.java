@@ -26,7 +26,11 @@ public class CtrlLevel implements Observer {
 	private List<CtrlLootable> ctrlLootableList;
 	private Level level;
 	private PresLevel presLevel;
-	public CtrlLevel() {
+	private MainEventHandler mainEventHandler;
+	private double endX;
+	public CtrlLevel(MainEventHandler _mainEventHandler, double _endX) {
+		endX = _endX;
+		mainEventHandler = _mainEventHandler;
 		initImage();
 		CtrlElementScene.currentLevel = this;
 		level = new Level();
@@ -133,16 +137,42 @@ public class CtrlLevel implements Observer {
 	}
 	
 	public void remove(CtrlEnemy e) {
-		remove((CtrlEnemy) e);
+		remove((CtrlEntity) e);
 		ctrlEnemyList.remove(e);
+		//System.out.println("REMOVE " + e);
 	}
 	
 	public void remove(CtrlPlayer e) {
 		remove((CtrlEntity) e);
 		ctrlPlayerList.remove(e);
+		if(ctrlPlayerList.size() == 0) {
+			mainEventHandler.endLevel();
+		}
+	}
+	
+	public MainEventHandler getMainEventHandler() {
+		return mainEventHandler;
+	}
+	
+	public void levelSuccess() {
 	}
 	
 	public void playerMoved(CtrlPlayer ctrlPlayer) {
+		if(ctrlPlayer.getPlayer().getCoord().getX() >= endX) {
+			//System.out.println("CheckEndLevel");
+			boolean endLevel = true;
+			for(CtrlEnemy k : ctrlEnemyList) {
+				if(k.getPresElementScene().doRender(presLevel.getCamera())) { // s'il y a un enemi visible a l'ecran 
+					//System.out.println(k.getEntity().getCoord() + " " + (k instanceof CtrlOrc) + " " + k);
+					endLevel = false;
+					break;
+				}
+			}
+			if(endLevel) {
+				levelSuccess();
+				mainEventHandler.endLevel();
+			}
+		}
 		ArrayList<CtrlItem> toRemoveList = new ArrayList<CtrlItem>();
 		for(CtrlItem k : ctrlItemList) {
 			if(k.playerMoved(ctrlPlayer)) {
