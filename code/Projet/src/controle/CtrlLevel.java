@@ -11,10 +11,12 @@ import abstraction.ElementCollidable;
 import abstraction.ElementScene;
 import abstraction.Level;
 import abstraction.Rectangle;
+import javafx.scene.image.Image;
 import presentation.MainEventHandler;
 import presentation.PresImage;
 import presentation.PresLevel;
 import shapeSceneFX.Point;
+import shapeSceneFX.EventHandling.EventHandler;
 
 public class CtrlLevel implements Observer {
 	private List<CtrlElementScene> ctrlElementSceneList;
@@ -239,6 +241,18 @@ public class CtrlLevel implements Observer {
 			//System.out.println(c.getElementCollidable().getCoord());
 			//System.out.println(rect.getCoord() + " " + rect.getDimension());
 		}
+	}
+	
+	public Image[] loadImages(String path, int pxSize) {
+		File file = new File(path);
+		File[] fileAr = (file.isDirectory())? file.listFiles() : new File[] {file};
+		Arrays.sort(fileAr);
+		Image[] res = new Image[fileAr.length];
+		for(int i = 0; i < fileAr.length; i++) {
+			System.out.println(fileAr[i].getPath());
+			res[i] = EventHandler.loadPixelatedImage(fileAr[i].getPath(), pxSize);
+		}
+		return res;
 	}
 	
 	public void initImage() {

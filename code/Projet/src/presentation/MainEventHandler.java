@@ -3,6 +3,7 @@ package presentation;
 import abstraction.Player;
 import controle.CtrlLevel;
 import controle.CtrlLevel_1;
+import controle.CtrlLevel_2;
 import controle.CtrlPlayer;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -15,10 +16,10 @@ public class MainEventHandler extends EventHandler {
 	public static int pxSize = 3;
 	private CtrlLevel ctrlLevel;
 	private PresLevel presLevel;
-	private Image background, logo, button, human, lock;
+	private Image background, logo, button, human, lock, detailSelection, hideDetail;
 	private int state = 0;
 	private ButtonImage[] btn;
-	private MovingImage movingLogo, movingHuman;
+	private MovingImage movingLogo, movingHuman, movingDetail;
 	private int levelSelected;
 	private int maxLevel;
 	private Point[] levels;
@@ -43,8 +44,11 @@ public class MainEventHandler extends EventHandler {
 			k.mult(pxSize);
 		}
 		movingHuman = new MovingImage(575, human, levels[0].copy().sub(human.getWidth()/2.,human.getHeight()));
+		movingDetail = new MovingImage(375, detailSelection, new Point(274*pxSize, 155*pxSize));
 		levelSelected = 0;
+		
 		maxLevel = 1;
+		
 		ctrlPlayer = new CtrlPlayer(new Player(10, new Point(50, 0), 10, new Point(0, 0)), new PresPlayer());
 		setState(0);
 		/*
@@ -58,6 +62,7 @@ public class MainEventHandler extends EventHandler {
 		} else {
 			movingLogo.calc(timePassed);
 			movingHuman.calc(timePassed);
+			movingDetail.calc(timePassed);
 		}
 	}
 
@@ -67,6 +72,8 @@ public class MainEventHandler extends EventHandler {
 		} else {
 			image(background, 0, 0);
 			movingLogo.render();
+			movingDetail.render();
+			image(hideDetail,274*pxSize, 149*pxSize);
 			if (state == 0) {
 				for (ButtonImage k : btn) {
 					k.render();
@@ -121,7 +128,7 @@ public class MainEventHandler extends EventHandler {
 			presLevel = new CtrlLevel_1(ctrlPlayer, this).getPresLevel();
 		} else if(levelSelected == 1) {
 			System.out.println("LEVEL 2");
-			presLevel = new CtrlLevel_1(ctrlPlayer, this).getPresLevel(); // A CHANGER
+			presLevel = new CtrlLevel_2(ctrlPlayer, this).getPresLevel();
 		}
 	}
 	
@@ -144,14 +151,18 @@ public class MainEventHandler extends EventHandler {
 		button = loadPixelatedImage("./data/Menu/ButtonIcon.png", 3);
 		human = loadPixelatedImage("./data/Menu/HumanIcon.png", pxSize);
 		lock = loadPixelatedImage("./data/Menu/Lock.png", pxSize);
+		detailSelection = loadPixelatedImage("./data/Menu/SelectionDetail.png", pxSize);
+		hideDetail = loadPixelatedImage("./data/Menu/HideDetail.png", pxSize);
 	}
 
 	public void setState(int _state) {
 		state = _state;
 		if (state == 0) {
 			movingLogo.setObjective(new Point(width() / 2. - logo.getWidth() / 2., 0));
+			movingDetail.setObjective(new Point(274*pxSize, 155*pxSize));
 		} else if(state == 1) {
 			movingLogo.setObjective(new Point(width() / 2. - logo.getWidth() / 2., -logo.getHeight()));
+			movingDetail.setObjective(new Point(274*pxSize, 128*pxSize));
 		}
 	}
 

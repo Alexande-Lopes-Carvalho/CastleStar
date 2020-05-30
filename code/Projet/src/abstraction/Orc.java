@@ -13,9 +13,13 @@ public class Orc extends Enemy {
 		super(200, 0, new Point(-50, 0), 0.05, 8, _coord, new Rectangle(new Point(-5, -3), new Point(10, 3)));
 	}
 	
+	public int getNbVisit() {
+		return nbVisit;
+	}
+	
 	public void refreshItinary(CtrlEnemy e) {
 		if(getPlayerFocused() != null) {
-			pathList = aStarGraph.getPath(nbVisit, e, getPlayerFocused());
+			pathList = aStarGraph.getPath(getNbVisit(), e, getPlayerFocused());
 			if(pathList == null) {
 				setObjective(null);
 			} else if(pathList.size() > 0) {

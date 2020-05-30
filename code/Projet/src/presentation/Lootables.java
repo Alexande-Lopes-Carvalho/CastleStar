@@ -11,7 +11,7 @@ import shapeSceneFX.EventHandling.EventHandler;
 public class Lootables {
 	private static Image barrel;
 	public static CtrlLootable barrel(Point coord, CtrlItem ... items) {
-		return new CtrlLootable(new Lootable(4, 1, coord, new Rectangle(new Point(0, 15), new Point(13, 4))), new PresImage(barrel), items);
+		return new CtrlLootable(new Lootable(2, 1, coord, new Rectangle(new Point(0, 15), new Point(13, 4))), new PresImage(barrel), items);
 	}
 	
 	public static void initImage() {

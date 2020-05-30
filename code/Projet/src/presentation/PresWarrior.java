@@ -64,11 +64,10 @@ public class PresWarrior extends PresElementScene {
 	}
 	
 	public void setWalk(boolean value) {
+		removeEvent(walkingEvent);
 		if(value) {
 			walkingEvent = new WalkingEvent().in(0);
 			addEvent(walkingEvent);
-		} else {
-			removeEvent(walkingEvent);
 		}
 		walking = value;
 	}

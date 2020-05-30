@@ -36,9 +36,6 @@ public class CtrlEntity extends CtrlElementCollidable {
 	
 	public void damage(int damage) {
 		entity.damage(damage);
-		if(entity.isDead()) {
-			kill();
-		}
 	}
 	
 	public void heal(int heal) {

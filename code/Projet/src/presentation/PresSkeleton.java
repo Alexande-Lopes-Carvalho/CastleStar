@@ -1,5 +1,6 @@
 package presentation;
 
+import abstraction.Skeleton;
 import controle.CtrlPlayer;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
@@ -14,7 +15,7 @@ public class PresSkeleton extends PresEnemy {
 	private static AnimatedOrientedImage img_bowBack;
 	private static AnimatedProjectileLauncher img_bowFront;
 	private PresBow bow;
-	private static final int refreshRate = 100, actionRate = 900, shootingTime = 100;
+	private static final int refreshRate = 100, actionRate = 1200, shootingTime = 100;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private ScheduledEvent shootingEvent;
 	public PresSkeleton() {
@@ -22,7 +23,7 @@ public class PresSkeleton extends PresEnemy {
 	}
 
 	public void action() {
-		if(getCtrlPlayer().getPlayer().getCoord().getDist(getCtrlEnemy().getEnemy().getCoord()) < 200 && shootingEvent == null) {
+		if(getCtrlPlayer().getPlayer().getCoord().getDist(getCtrlEnemy().getEnemy().getCoord()) < Skeleton.range && shootingEvent == null) {
 			shootingEvent = new ShootingEvent().in(shootingTime);
 			addEvent(shootingEvent);
 		}
