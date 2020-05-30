@@ -3,7 +3,11 @@ package presentation;
 import controle.CtrlPlayer;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
-
+/**
+ * Represente un Orc
+ * @author Administrator
+ *
+ */
 public class PresOrc extends PresEnemy {
 	private static OrientedImage img_body;
 	private static OrientedImage img_shoulder;
@@ -50,7 +54,11 @@ public class PresOrc extends PresEnemy {
 		}
 	}
 	
-
+	/**
+	 * Evenement qui rafraichit l'itinéraire que l'orc doit prendre, et qui programme un prochain rafraichissement de l'itineraire dans refresRate milliseconde
+	 * @author Administrator
+	 * @see PresOrc#refreshRate
+	 */
 	public class RefreshEvent implements Event{
 		@Override
 		public void handleEvent() {
@@ -58,7 +66,9 @@ public class PresOrc extends PresEnemy {
 			addEvent(new RefreshEvent().in(refreshRate));
 		}
 	}
-	
+	/**
+	 * charge les images
+	 */
 	public static void initImage() {
 		frontEquipment.mult(MainEventHandler.pxSize);
 		backEquipment.mult(MainEventHandler.pxSize);

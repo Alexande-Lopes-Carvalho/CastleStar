@@ -4,7 +4,11 @@ import controle.CtrlPlayer;
 import javafx.scene.input.KeyCode;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.TransferableEvent;
-
+/**
+ * represente un joueur
+ * @author Administrator
+ *
+ */
 public class PresPlayer extends PresWarrior {
 	private static OrientedImage img_body;
 	private static OrientedImage img_shoulder;
@@ -19,6 +23,9 @@ public class PresPlayer extends PresWarrior {
 	private static AnimatedProjectileLauncher img_bowFront;
 	public static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
 	private CtrlPlayer ctrlPlayer;
+	/**
+	 * attribut indiquant le deplacement du personnage
+	 */
 	private boolean left, right, up, down;
 	private PresInventory presInventory;
 	public PresPlayer() {
@@ -39,7 +46,13 @@ public class PresPlayer extends PresWarrior {
 			getCtrlPlayer().move(deplacement);
 		}
 	}
-	
+	/**
+	 * procedure appelé a la fin du niveau pour reset l'equipement et les attribut de deplacement du personnage
+	 * @see PresPlayer#left
+	 * @see PresPlayer#right
+	 * @see PresPlayer#up
+	 * @see PresPlayer#down
+	 */
 	public void reset() {
 		left = false;
 		right = false;
@@ -48,17 +61,29 @@ public class PresPlayer extends PresWarrior {
 		getPresEquipment()[0].reset();
 		getPresEquipment()[1].reset();
 	}
-	
+	/**
+	 * interprete la pression d'une touche sur le clavier
+	 * Z pour aller en haut
+	 * Q pour aller a gauche
+	 * S pour aller en bas
+	 * D pour aller a droite
+	 */
 	public void keyPressed() {
 		//System.out.println("Press " + keyCode());
 		setMove(true, keyCode());
 	}
-	
+	/**
+	 * interprete le relachement d'une touche sur le clavier
+	 */
 	public void keyReleased() {
 		//System.out.println("Releas " + keyCode());
 		setMove(false, keyCode());
 	}
-	
+	/**
+	 * interprete l'evenement clavier lié au deplacement du personnage et l'anime en conséquence
+	 * @param value
+	 * @param k
+	 */
 	public void setMove(boolean value, KeyCode k) {
 		if(k.equals(KeyCode.D)) {
 			right = value;
@@ -91,7 +116,9 @@ public class PresPlayer extends PresWarrior {
 	public PresInventory getPresInventory() {
 		return presInventory;
 	}
-	
+	/**
+	 * transfere les evenement clavier souris au deux bras du personnage (intance de PresEquipment) et a l'inventaire du personnage
+	 */
 	public void transferEvent(TransferableEvent e) {
 		addEvent(e.in(0));
 		getPresInventory().addEvent(e.transfer().in(0));
@@ -99,7 +126,9 @@ public class PresPlayer extends PresWarrior {
 			k.addEvent(e.in(0));
 		}
 	}
-	
+	/**
+	 * charge les images en mémoires
+	 */
 	public static void initImage() {
 		frontEquipment.mult(MainEventHandler.pxSize);
 		backEquipment.mult(MainEventHandler.pxSize);

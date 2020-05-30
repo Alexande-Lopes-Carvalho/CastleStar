@@ -9,10 +9,23 @@ import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.EventHandler;
 import shapeSceneFX.EventHandling.TransferableEvent;
-
+/**
+ * represente un niveau
+ * @author Administrator
+ *
+ */
 public class PresLevel extends EventHandler {
+	/**
+	 * camera du jeu
+	 */
 	private Point camera;
+	/**
+	 * les des element affichable present dans le niveau
+	 */
 	private List<PresElementScene> listElementScene;
+	/**
+	 * liste des joueur
+	 */
 	private List<PresPlayer> listPlayer;
 	private CtrlLevel ctrlLevel;
 	public PresLevel() {
@@ -45,7 +58,11 @@ public class PresLevel extends EventHandler {
 			k.getPresInventory().render();
 		}
 	}	
-	
+	/**
+	 * tire les element affichable en fonction de leur renderPriority (algorithme du peintre)
+	 * 
+	 * @see PresElementScene#getRenderPrio()
+	 */
 	public void sortByRenderOrder() {
 		Collections.sort(listElementScene);
 	}
@@ -74,7 +91,9 @@ public class PresLevel extends EventHandler {
 	public void remove(PresElementScene e) {
 		addEvent(new RemovePresElementSceneEvent(e).in(0));
 	}
-	
+	/**
+	 * transfere les evenement clavier souris au joueur
+	 */
 	public void transferEvent(TransferableEvent e) {
 		addEvent(e.in(0));
 		for(PresPlayer k : listPlayer) {
@@ -82,7 +101,10 @@ public class PresLevel extends EventHandler {
 			k.addEvent(e.transfer().in(0));
 		}
 	}
-	
+	/**
+	 * Evenement qui supprime un PresElementScene du niveau (pour evité les ConcurrentModificationException)
+	 * @author Administrator
+	 */
 	public class RemovePresElementSceneEvent implements Event{ // Present pour ne pas avoir de ConcurrentModificationException lors de la suppression (calc(long timePassed))
 		private PresElementScene e;
 		public RemovePresElementSceneEvent(PresElementScene _e) {
@@ -94,7 +116,11 @@ public class PresLevel extends EventHandler {
 			listElementScene.remove(e);
 		}
 	}
-	
+	/**
+	 * Evenement qui ajoute un PresElementScene au niveau (pour evité les ConcurrentModificationException)
+	 * @author Administrator
+	 *
+	 */
 	public class AddPresElementSceneEvent implements Event{
 		private PresElementScene e;
 		public AddPresElementSceneEvent(PresElementScene _e) {

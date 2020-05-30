@@ -5,15 +5,28 @@ import javafx.scene.image.Image;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.ScheduledEvent;
-
+/**
+ * represente un combattant
+ * @author Administrator
+ *
+ */
 public class PresWarrior extends PresElementScene {
+	/**
+	 * image indiquant que la sous classe de PresWarrior ne possede pas l'image qui a été demandé
+	 */
 	private static Image[] missingTexture;
+	/**
+	 * vitesse deplacement du combattant
+	 */
 	private static Point speedCoef = new Point(3, 2);
 	private double speed;
 	private CtrlWarrior ctrlWarrior;
 	private OrientedImage body, shoulder, leg;
 	private PresEquipment[] presEquipment;
 	private OrientedImage[] walkingLeg;
+	/**
+	 * indique vers quel point le personnage regarde
+	 */
 	private Point lookingTo;
 	private boolean walking;
 	private int walkingIndex;
@@ -79,7 +92,11 @@ public class PresWarrior extends PresElementScene {
 	public int getWalkingTimeAnimation() {
 		return 120;
 	}
-	
+	/**
+	 * Evenement qui change l'index de l'image des jambe du personnage pour permettre une animation de deplacement (evenement lancé toute les 120 milliseconde si le personnage marche)
+	 * @author Administrator
+	 * @see PresWarrior#getWalkingTimeAnimation()
+	 */
 	public class WalkingEvent implements Event{
 		@Override
 		public void handleEvent() {
@@ -124,7 +141,7 @@ public class PresWarrior extends PresElementScene {
 	}
 
 	@Override
-	public boolean doRender(Point camera) {  // A FAIRE
+	public boolean doRender(Point camera) { 
 		Image frontEquipment = presEquipment[1].getImage(), backEquipment = presEquipment[0].getImage();
 		Point frontCoord = presEquipment[1].getAnimatedOrientedImage().getCoord().copy().add(presEquipment[1].getCoord()), backCoord = presEquipment[0].getAnimatedOrientedImage().getCoord().copy().add(presEquipment[0].getCoord());
 		double maxLength = Math.max(Math.sqrt(Math.pow(frontEquipment.getWidth(), 2)+ Math.pow(frontEquipment.getHeight(), 2)),Math.sqrt(Math.pow(backEquipment.getWidth(), 2)+ Math.pow(backEquipment.getHeight(), 2)))/2.;
@@ -133,49 +150,84 @@ public class PresWarrior extends PresElementScene {
 		//System.out.println(getCoord() + " " + posDim);
 		return (posDim.getX() <= camera.getX() && posDim.getX()+posDim.getY() >= camera.getX()+width()) || between(posDim.getX(), camera.getX(), camera.getX()+width()) || between(posDim.getX()+posDim.getY(), camera.getX(), camera.getX()+width());
 	}
-	
+	/**
+	 * charge les images
+	 */
 	public static void initImage() {
 		missingTexture = new Image[2];
 		missingTexture[0] = loadPixelatedImage("./data/missingTexture.png", MainEventHandler.pxSize);
 		missingTexture[1] = OrientedImage.reverseImage(missingTexture[0]);
 	}
-	/*
-	 * méthode qui seront overridé par Player et Enemy si les texture sont existante
-	 * (pour construire les PresHand)
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
 	 */
 	public AnimatedOrientedImage getSword() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getDagger() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getShield() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedProjectileLauncher getBowFront() {
 		return new AnimatedProjectileLauncher(new Point(0, 0), new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getBowBack(){
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getLanceFront() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getLanceBack() {
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getHandBack() {
 		//System.out.println("image WarriorgetHandBack");
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);
 	}
-	
+	/**
+	 * méthode a overridé par les sous classe si les texture sont existante
+	 * (pour construire les PresEquipment)
+	 * @see PresEquipment
+	 */
 	public AnimatedOrientedImage getHandFront() {
 		//System.out.println("image WarriorgetHandFront");
 		return new AnimatedOrientedImage(new Point(0, 0), missingTexture);

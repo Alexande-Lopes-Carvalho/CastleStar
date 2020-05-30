@@ -13,17 +13,45 @@ import shapeSceneFX.EventHandling.EventHandler;
 import shapeSceneFX.EventHandling.TransferableEvent;
 
 public class MainEventHandler extends EventHandler {
+	/**
+	 * Taille d'un pixel pour les images pixelisées qui seront redimensionnées au démarage
+	 */
 	public static int pxSize = 3;
 	private CtrlLevel ctrlLevel;
 	private PresLevel presLevel;
+	/**
+	 * reference d'image a afficher dans le menu du jeu
+	 */
 	private Image background, logo, button, human, lock, detailSelection, hideDetail;
+	/**
+	 * Etat du menu du jeu :
+	 *  - 0 menu de démarage avec les bouton Start et Quit
+	 *  - 1 selection de niveau
+	 */
 	private int state = 0;
+	/**
+	 * Bouton (Start Quit)
+	 */
 	private ButtonImage[] btn;
 	private MovingImage movingLogo, movingHuman, movingDetail;
+	/**
+	 * Le niveau selectionné
+	 */
 	private int levelSelected;
+	/**
+	 * Le nombre de niveau accessible 
+	 */
 	private int maxLevel;
+	/**
+	 * coordonnée pour localisé un niveau dans la selection (utilisé par le verrou et l'icone de joueur)
+	 */
 	private Point[] levels;
 	private CtrlPlayer ctrlPlayer;
+	/**
+	 * Demarage du canvas, specifiquation de la taille de la fenetre (depend de pxSize)
+	 * Initialisation des images (item, conteneur d'item, Joueur, Enemy, Inventaire)
+	 * Preparation du Menu
+	 */
 	public void setup() {
 		size(pxSize * 402, pxSize * 160);
 		initImage();
@@ -55,7 +83,11 @@ public class MainEventHandler extends EventHandler {
 		 * ctrlLevel = new CtrlLevel_1(); presLevel = ctrlLevel.getPresLevel();
 		 */
 	}
-
+	
+	/**
+	 * procedure de calcul, 
+	 * Mise a jour du menu ou du niveau si present
+	 */
 	protected void calc(long timePassed) {
 		if (presLevel != null) {
 			presLevel.calcEvent(timePassed);
@@ -65,7 +97,10 @@ public class MainEventHandler extends EventHandler {
 			movingDetail.calc(timePassed);
 		}
 	}
-
+	/**
+	 * procedure de rendu
+	 * affichage du menu ou du niveau si present 
+	 */
 	public void render() {
 		if (presLevel != null) {
 			presLevel.render();
@@ -91,7 +126,11 @@ public class MainEventHandler extends EventHandler {
 		text(Math.round(frameRate()) + "", 15, 170);
 		stroke(0);
 	}
-
+	
+	/**
+	 * On verifie si lors de la pression d'un bouton de la souris, elle se trouvait au dessus d'un bouton, 
+	 * le bouton s'actione si c'est le cas
+	 */
 	public void mousePressed() {
 		if(state == 0) {
 			for (ButtonImage k : btn) {
@@ -103,7 +142,15 @@ public class MainEventHandler extends EventHandler {
 	public void keyPressed(javafx.scene.input.KeyEvent e) {
 		keyPressed();
 	}
-	
+	/**
+	 * Lorsqu'une touche du clavier est enfoncé, 
+	 * si l'on se trouve dans la selection du niveau
+	 * 	on ferme la fenetre s'il s'agit de la touche ECHAP
+	 * 
+	 * si l'on se trouve dans le menu de selection du niveau
+	 *  on lance le niveau selection sur pression de ENTRE
+	 *  on navigue entre les niveau sur pression de Q ou D
+	 */
 	public void keyPressed() {
 		if(state == 0) {
 			if(keyCode().equals(KeyCode.ESCAPE)) {
@@ -122,6 +169,9 @@ public class MainEventHandler extends EventHandler {
 		}
 	}
 	
+	/**
+	 * procedure qui lance le niveau selectionné
+	 */
 	public void putLevel() {
 		if(levelSelected == 0) {
 			//System.out.println("pass");
@@ -131,20 +181,28 @@ public class MainEventHandler extends EventHandler {
 			presLevel = new CtrlLevel_2(ctrlPlayer, this).getPresLevel();
 		}
 	}
-	
+	/**
+	 * change le nombre de niveau accessible
+	 * @param k
+	 */
 	public void setMaxLevel(int k) {
 		if(maxLevel >= 0) {
 			maxLevel = k;
 		}
 	}
-	
+	/**
+	 * selectionne un niveau et anime l'icone en conséquence
+	 * @param s
+	 */
 	public void selectLevel(int s) {
 		if(s >= 0 && s < maxLevel) {
 			levelSelected = s;
 			movingHuman.setObjective(levels[levelSelected].copy().sub(human.getWidth()/2.,human.getHeight()));
 		}
 	}
-
+	/**
+	 * charge toute les image requise au fonctionnement du menu
+	 */
 	public void initImage() {
 		background = loadPixelatedImage("./data/Menu/Fond.png", pxSize);
 		logo = loadPixelatedImage("./data/Menu/Logo.png", 3);
@@ -154,7 +212,14 @@ public class MainEventHandler extends EventHandler {
 		detailSelection = loadPixelatedImage("./data/Menu/SelectionDetail.png", pxSize);
 		hideDetail = loadPixelatedImage("./data/Menu/HideDetail.png", pxSize);
 	}
-
+	
+	/**
+	 * change l'etat du menu du jeu :
+	 *  - 0 menu de demarrage
+	 *  - 1 selection de niveau
+	 * @param _state
+	 * @see MainEventHandler#state
+	 */
 	public void setState(int _state) {
 		state = _state;
 		if (state == 0) {
@@ -165,10 +230,24 @@ public class MainEventHandler extends EventHandler {
 			movingDetail.setObjective(new Point(274*pxSize, 128*pxSize));
 		}
 	}
-
+	
+	/**
+	 * Image cliquable, lance la procedure press, si l'on clique dessus
+	 * @author Administrator
+	 *
+	 */
 	public abstract class ButtonImage {
+		/**
+		 * coordonnée pour l'affichage de l'image
+		 */
 		private Point p;
+		/**
+		 * texte a afficher au dessus de l'image
+		 */
 		private String txt;
+		/**
+		 * l'image
+		 */
 		private Image img;
 
 		public ButtonImage(String _txt, Image _img, Point _p) {
@@ -176,7 +255,9 @@ public class MainEventHandler extends EventHandler {
 			img = _img;
 			p = _p;
 		}
-
+		/**
+		 * procedure de rendu
+		 */
 		public void render() {
 			imageMode(CENTER);
 			setTextAlign(CENTER);
@@ -187,17 +268,26 @@ public class MainEventHandler extends EventHandler {
 			setTextAlign(LEFT);
 			imageMode(CORNER);
 		}
-
+		/**
+		 * procedure lancé en cas de pression d'un bouton de la souris, verifie si la souris est au dessus de l'image et lance la méthode press() si c'est le cas
+		 * @see ButtonImage#press()
+		 */
 		public void check() {
 			if (mouseX() >= p.getX() - img.getWidth() / 2. && mouseX() <= p.getX() + img.getWidth() / 2
 					&& mouseY() >= p.getY() - img.getHeight() / 2 && mouseY() <= p.getY() + img.getHeight() / 2.) {
 				press();
 			}
 		}
-
+		/**
+		 * méthode appeler lorsque l'utilisateur clique sur l'image 
+		 */
 		public abstract void press();
 	}
-
+	/**
+	 * Bouton dont l'action est de passer a la selection de niveau
+	 * @author Administrator
+	 *
+	 */
 	public class StartButton extends ButtonImage {
 		public StartButton(Point coord) {
 			super("START", button, coord);
@@ -207,7 +297,11 @@ public class MainEventHandler extends EventHandler {
 			setState(1);
 		}
 	}
-
+	/**
+	 * boutons dont l'action est de passer a la fermuture de la fenetre et la terminaison du programme
+	 * @author Administrator
+	 *
+	 */
 	public class QuitButton extends ButtonImage {
 		public QuitButton(Point coord) {
 			super("QUIT", button, coord);
@@ -217,7 +311,11 @@ public class MainEventHandler extends EventHandler {
 			exit();
 		}
 	}
-
+	/**
+	 * Image qui se deplace vers la coordonnée precisé progressivement dans un temps donné
+	 * @author Administrator
+	 *
+	 */
 	public class MovingImage {
 		private Point p, obj;
 		private int timeCount, time;
@@ -230,31 +328,47 @@ public class MainEventHandler extends EventHandler {
 			time = _time;
 			timeCount = 0;
 		}
-
+		/**
+		 * procedure de calcul
+		 * @param timePassed
+		 */
 		public void calc(long timePassed) {
 			timeCount += timePassed;
 		}
-
+		/**
+		 * procedure de rendu
+		 */
 		public void render() {
 			Point k = getCoord();
 			//System.out.println(k);
 			image(img, Math.round(k.getX()), Math.round(k.getY()));
 		}
-
+		/**
+		 * definit une coordonné a atteindre
+		 * @param o
+		 */
 		public void setObjective(Point o) {
 			p = getCoord();
 			timeCount = 0;
 			//System.out.println("OBJ " + o);
 			obj = o;
 		}
-
+		/**
+		 * calcul la coordonnée 
+		 * @return
+		 */
 		public Point getCoord() {
 			int tCount = Math.min(timeCount, time);
 			//System.out.println(tCount + " " + ( ((Math.tanh(((tCount/ ((float)time) )*375+86)*0.006)-Math.tanh(86*0.006))/(1-Math.tanh(86*0.006))) / (((Math.tanh((375+86)*0.006)-Math.tanh(86*0.006))/(1-Math.tanh(86*0.006)))) ));
 			return p.copy().add(p.getVector(obj).mult( ( ((Math.tanh(((tCount/ ((float)time) )*375+86)*0.006)-Math.tanh(86*0.006))/(1-Math.tanh(86*0.006))) / (((Math.tanh((375+86)*0.006)-Math.tanh(86*0.006))/(1-Math.tanh(86*0.006)))) )));
 		}
 	}
-
+	/**
+	 * Methode qui transfère les evenement transferrable (clavier, souris, flag)
+	 * au niveau si present
+	 * 
+	 * @see EventHandler#transferEvent(TransferableEvent)
+	 */
 	public void transferEvent(TransferableEvent e) {
 		// System.out.println("TransferEvent From MainEventHandler");
 		if (presLevel != null) {
@@ -263,7 +377,9 @@ public class MainEventHandler extends EventHandler {
 			addEvent(e.in(0));
 		}
 	}
-	
+	/**
+	 * méthode appeler a la fin d'un niveau, reset le joueur (remise de la vie au max)
+	 */
 	public void endLevel() {
 		ctrlPlayer.reset();
 		presLevel = null;

@@ -3,13 +3,26 @@ package presentation;
 import controle.CtrlEquipment;
 import javafx.scene.image.Image;
 import shapeSceneFX.Point;
-
+/**
+ * Represente le bres d'un personnage
+ * @author Administrator
+ *
+ */
 public class PresEquipment extends PresElementScene {
 	private AnimatedOrientedImage img;
+	/**
+	 * indique dans quel sens on doit afficher l'image
+	 */
 	private boolean facingLeft;
+	/**
+	 * la rotation a appliqué pour l'affichage de l'image
+	 */
 	private double rotation;
 	private CtrlEquipment ctrlEquipment;
 	private Point imgCoord;
+	/**
+	 * dans certain cas on veut que le bras reste droit et ne s'aligne pas avec la vue du personnage (exemple arc), on utilise donc lockArm 
+	 */
 	private boolean lockArm;
 	public PresEquipment() {
 		imgCoord = new Point(0, 0);
@@ -39,7 +52,10 @@ public class PresEquipment extends PresElementScene {
 		//rotation = _rotation+((facingLeft)? Math.PI: 0);
 		calcRotation(_lookingTo);
 	}
-	
+	/**
+	 * met a jour la rotation 
+	 * @param _lookingTo
+	 */
 	public void calcRotation(Point _lookingTo) {
 		if(lockArm) {
 			setRotation((getFacingLeft())? Math.PI*2: 0 );
@@ -75,7 +91,9 @@ public class PresEquipment extends PresElementScene {
 	public CtrlEquipment getCtrlEquipment() {
 		return ctrlEquipment;
 	}
-	
+	/**
+	 * methode appeler pour reinitialisé le bras, principalement utilisé sur un Joueur a la fin d'un niveau 
+	 */
 	public void reset() { // pour joueur a fin de niveau 
 	}
 	

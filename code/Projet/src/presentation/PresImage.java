@@ -2,7 +2,11 @@ package presentation;
 
 import javafx.scene.image.Image;
 import shapeSceneFX.Point;
-
+/**
+ * Represente une image a afficher dans le niveau
+ * @author Administrator
+ *
+ */
 public class PresImage extends PresElementScene {
 	private Image img;
 	public PresImage(String _img) {

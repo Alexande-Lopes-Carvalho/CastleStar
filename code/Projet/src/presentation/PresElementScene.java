@@ -2,9 +2,19 @@ package presentation;
 
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
-
+/**
+ * Represente un element du niveau a afficher
+ * @author Administrator
+ *
+ */
 public abstract class PresElementScene extends EventHandler implements Comparable<PresElementScene> {
+	/**
+	 * coordonnée de l'element a afficher
+	 */
 	private Point coord;
+	/**
+	 * priorité d'affichge de l'evenement (algorithme du peintre)
+	 */
 	private double renderPriority;
 	public PresElementScene() {
 		coord = new Point(0, 0);
@@ -24,7 +34,11 @@ public abstract class PresElementScene extends EventHandler implements Comparabl
 	public void setRenderPriority(double _renderPriority) {
 		renderPriority = _renderPriority;
 	}
-	
+	/**
+	 * méthode qui permet de savoir s'il l'element sera present sur le canavs si l'on appelle sa methode render
+	 * @param camera
+	 * @return
+	 */
 	public abstract boolean doRender(Point camera);
 
 	@Override

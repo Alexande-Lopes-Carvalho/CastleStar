@@ -4,11 +4,22 @@ import controle.CtrlEnemy;
 import controle.CtrlPlayer;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
-
+/**
+ * Represente un enemi
+ * @author Administrator
+ *
+ */
 public class PresEnemy extends PresWarrior {
+	/**
+	 * coordonnée vers laquelle l'enemy doit se rendre
+	 */
 	private Point objective;
 	private CtrlEnemy ctrlEnemy;
 	private CtrlPlayer ctrlPlayer;
+	/**
+	 * temps en ms entre les appel de la methode action
+	 * @see PresEnemy#action()
+	 */
 	private int actionRate;
 	public PresEnemy(OrientedImage _body, OrientedImage _shoulder, OrientedImage _leg, OrientedImage[] _walkingLeg, int _actionRate) {
 		super(_body, _shoulder, _leg, _walkingLeg);
@@ -27,7 +38,10 @@ public class PresEnemy extends PresWarrior {
 		}
 		super.render();
 	}
-	
+	/**
+	 * méthode de calcul du deplacement de l'enemi pour atteindre l'objectif
+	 * @param timePassed
+	 */
 	public void calcMove(long timePassed) {
 		if(objective != null && timePassed > 0) {
 			/*Point vec = getCoord().getVector(objective);
@@ -80,10 +94,17 @@ public class PresEnemy extends PresWarrior {
 	public CtrlPlayer getCtrlPlayer() {
 		return ctrlPlayer;
 	}
-	
+	/**
+	 * méthode appeler à intervalle regulié (actionRate), pour gerer les attaque de l'enemy 
+	 * @see PresEnemy#actionRate
+	 */
 	public void action() {
 	}
-	
+	/**
+	 * Evenement qui lorsqu'il est lancé appel la methode action et programme un evenement pour lancé action plus tard
+	 * @author Administrator
+	 *
+	 */
 	public class ActionEvent implements Event {
 		@Override
 		public void handleEvent() {

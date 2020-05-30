@@ -5,7 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
-
+/**
+ * represente l'inventaire d'un joueur
+ * @author Administrator
+ *
+ */
 public class PresInventory extends EventHandler {
 	private static int pxSize = 3;
 	private static int slotSpace = 7, heartSpace = 1;
@@ -64,7 +68,11 @@ public class PresInventory extends EventHandler {
 		
 		translateBack(coord);
 	}
-	
+	/**
+	 * change l'equipement selectionné
+	 * la touche & selectionne le premier equipement
+	 * la touche é le deuxieme ...
+	 */
 	public void keyPressed() {
 		//System.out.println(keyCode());
 		if(keyCode().equals(KeyCode.DIGIT1)) {
@@ -93,7 +101,9 @@ public class PresInventory extends EventHandler {
 	public void setNbArrow(int _nbArrow) {
 		nbArrow = _nbArrow;
 	}
-	
+	/**
+	 * charge les image
+	 */
 	public static void initImage() {
 		inventorySlot = loadPixelatedImage("./data/Inventory/InventorySlot.png", pxSize);
 		selectedSlot = loadPixelatedImage("./data/Inventory/SelectedSlot.png", pxSize);

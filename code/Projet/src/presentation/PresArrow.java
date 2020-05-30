@@ -4,11 +4,21 @@ import controle.CtrlArrow;
 
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
-
+/**
+ * Representation graphique d'une fleche
+ * @author Administrator
+ *
+ */
 public class PresArrow extends PresElementScene {
 	private static OrientedImage arrow;
 	private CtrlArrow ctrlArrow;
+	/**
+	 * vitesse de la fleche (en pixel par ms)
+	 */
 	private double celerity;
+	/**
+	 * sens de la fleche
+	 */
 	private boolean facingLeft;
 
 	public PresArrow(Point coord, double _celerity, boolean _facingLeft) {
@@ -38,7 +48,9 @@ public class PresArrow extends PresElementScene {
 		}
 
 	}
-
+	/**
+	 * charge les image
+	 */
 	public static void initImage() {
 		arrow = new OrientedImage(new Point(0, 0),
 				EventHandler.loadPixelatedImage("./data/arrow.png", MainEventHandler.pxSize));

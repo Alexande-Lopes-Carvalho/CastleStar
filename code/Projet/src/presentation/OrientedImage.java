@@ -7,9 +7,19 @@ import javafx.scene.image.WritableImage;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
 
+/**
+ * Image ayant une coordonnée et un sens (gauche droite)
+ * @author Administrator
+ *
+ */
 public class OrientedImage {
 	private Image[] img = new Image[2];
 	private Point coord;
+	/**
+	 * charge l'image indiqué par le chemin path
+	 * @param _coord
+	 * @param path
+	 */
 	public OrientedImage(Point _coord, String path) {
 		this(_coord, EventHandler.loadPixelatedImage(path, MainEventHandler.pxSize));
 	}
@@ -28,7 +38,11 @@ public class OrientedImage {
 	public Image[] getImages() {
 		return img;
 	}
-	
+	/**
+	 * retourne l'image en fonction du sens demandé
+	 * @param pos indique le sens de l'image, (false image normal, true image symetrique par rapport a l'axe Y)
+	 * @return
+	 */
 	public Image getImage(boolean pos) {
 		return img[(pos)? 1 : 0];
 	}
@@ -36,7 +50,11 @@ public class OrientedImage {
 	public Point getCoord() {
 		return coord;
 	}
-	
+	/**
+	 * retourne le symetrique de l'image par rapport a l'axe Y
+	 * @param img
+	 * @return
+	 */
 	public static Image reverseImage(Image img) {
 		WritableImage res = new WritableImage((int)img.getWidth(), (int)img.getHeight());
 		PixelWriter writer = res.getPixelWriter();

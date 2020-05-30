@@ -5,7 +5,11 @@ import controle.CtrlPlayer;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.Event;
 import shapeSceneFX.EventHandling.ScheduledEvent;
-
+/**
+ * represente un squelette
+ * @author Administrator
+ *
+ */
 public class PresSkeleton extends PresEnemy {
 	private static OrientedImage img_body;
 	private static OrientedImage img_shoulder;
@@ -43,7 +47,12 @@ public class PresSkeleton extends PresEnemy {
 			addEvent(new RefreshEvent().in(0));
 		}
 	}
-	
+	/**
+	 * Evenement qui rafraishit l'itinéraire du squelette et qui programme un prochain rafraichissement dans refreshRate milliseconde
+	 * 
+	 * @author Administrator
+	 * @see PresSkeleton#refreshRate
+	 */
 	public class RefreshEvent implements Event{
 		@Override
 		public void handleEvent() {
@@ -52,7 +61,11 @@ public class PresSkeleton extends PresEnemy {
 			addEvent(new RefreshEvent().in(refreshRate));
 		}
 	}
-	
+	/**
+	 * Evenement qui prepare une fleche a sa création et qui tire une fleche lorsqu'il est lancé
+	 * @author Administrator
+	 *
+	 */
 	public class ShootingEvent implements Event {
 		public ShootingEvent() {
 			bow.activate();
