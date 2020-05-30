@@ -65,4 +65,8 @@ public class PresShield extends PresEquipment {
 			}
 		}
 	}
+	
+	public void reset() {
+		resquestDontUse();
+	}
 }

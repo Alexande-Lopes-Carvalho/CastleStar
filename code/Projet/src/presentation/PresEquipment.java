@@ -76,6 +76,9 @@ public class PresEquipment extends PresElementScene {
 		return ctrlEquipment;
 	}
 	
+	public void reset() { // pour joueur a fin de niveau 
+	}
+	
 	@Override
 	public boolean doRender(Point camera) {
 		return true;

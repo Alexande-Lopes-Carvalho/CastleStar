@@ -51,7 +51,6 @@ public class CtrlEnemy extends CtrlWarrior {
 		if(arg.equals(Enemy.FOCUS_PLAYER)) {
 			presEnemy.setCtrlPlayer(enemy.getPlayerFocused());
 		} else if(arg.equals(Enemy.OBJECTIVE_UPDATE)) {
-			//System.out.println("obj " + enemy.getCoord());
 			presEnemy.setObjective((enemy.getObjective() == null)? null : enemy.getObjective().copy().mult(MainEventHandler.pxSize));
 		}
 	}

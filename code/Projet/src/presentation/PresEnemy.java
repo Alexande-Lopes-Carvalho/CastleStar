@@ -51,9 +51,9 @@ public class PresEnemy extends PresWarrior {
 	}
 	
 	public void setObjective(Point _objective) {
-		//System.out.println("OBJECTIF  " + _objective);
 		if(_objective != null && objective != null && objective.equals(_objective)) {
 			getCtrlEnemy().endObjective();
+			return;
 		}
 		objective = _objective;
 		if(getWalk() && (objective == null || getCoord().equals(objective))) {

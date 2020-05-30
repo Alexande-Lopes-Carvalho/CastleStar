@@ -86,8 +86,10 @@ public class MainEventHandler extends EventHandler {
 	}
 
 	public void mousePressed() {
-		for (ButtonImage k : btn) {
-			k.check();
+		if(state == 0) {
+			for (ButtonImage k : btn) {
+				k.check();
+			}
 		}
 	}
 	

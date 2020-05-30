@@ -7,6 +7,7 @@ import abstraction.ElementScene;
 import abstraction.Orc;
 import abstraction.Player;
 import abstraction.Rectangle;
+import abstraction.Skeleton;
 import javafx.scene.image.Image;
 import presentation.Items;
 import presentation.Lootables;
@@ -116,6 +117,8 @@ public class CtrlLevel_1 extends CtrlLevel {
 		
 		add(new CtrlOrc(new Orc(new Point(2360, 96)), true));
 		add(new CtrlOrc(new Orc(new Point(2407, 128)), true));
+		
+		//add(new CtrlSkeleton(new Skeleton(new Point(517, 131))));
 
 		//System.out.println("PLAYR");
 		c.getPlayer().setCoord(new Point(110, 110));

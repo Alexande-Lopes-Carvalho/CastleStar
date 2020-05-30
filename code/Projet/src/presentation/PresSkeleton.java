@@ -1,6 +1,9 @@
 package presentation;
 
+import controle.CtrlPlayer;
 import shapeSceneFX.Point;
+import shapeSceneFX.EventHandling.Event;
+import shapeSceneFX.EventHandling.ScheduledEvent;
 
 public class PresSkeleton extends PresEnemy {
 	private static OrientedImage img_body;
@@ -10,14 +13,56 @@ public class PresSkeleton extends PresEnemy {
 	private static AnimatedOrientedImage img_handFront, img_handBack;
 	private static AnimatedOrientedImage img_bowBack;
 	private static AnimatedProjectileLauncher img_bowFront;
+	private PresBow bow;
+	private static final int refreshRate = 100, actionRate = 900, shootingTime = 100;
 	private static Point frontEquipment = new Point(-5, -20), backEquipment = new Point(3, -20);
+	private ScheduledEvent shootingEvent;
 	public PresSkeleton() {
-		super(img_body, img_shoulder, img_leg, img_walkingLegs, 0);
+		super(img_body, img_shoulder, img_leg, img_walkingLegs, actionRate);
 	}
 
-	// A COMPLETER
-	// ...
-
+	public void action() {
+		if(getCtrlPlayer().getPlayer().getCoord().getDist(getCtrlEnemy().getEnemy().getCoord()) < 200 && shootingEvent == null) {
+			shootingEvent = new ShootingEvent().in(shootingTime);
+			addEvent(shootingEvent);
+		}
+	}
+	
+	public void setPresEquipmentFront(PresEquipment e) {
+		super.setPresEquipmentFront(e);
+		if(e instanceof PresBow) {
+			bow = (PresBow)e;
+		}
+	}
+	
+	public void setCtrlPlayer(CtrlPlayer _ctrlPlayer) {
+		super.setCtrlPlayer(_ctrlPlayer);
+		//System.out.println("FOCUS FROM " + getCoord() + _ctrlPlayer);
+		if(getCtrlPlayer() != null) {
+			addEvent(new RefreshEvent().in(0));
+		}
+	}
+	
+	public class RefreshEvent implements Event{
+		@Override
+		public void handleEvent() {
+			getCtrlEnemy().refreshItinary();
+		
+			addEvent(new RefreshEvent().in(refreshRate));
+		}
+	}
+	
+	public class ShootingEvent implements Event {
+		public ShootingEvent() {
+			bow.activate();
+		}
+		@Override
+		public void handleEvent() {
+			bow.shoot();
+			shootingEvent = null;
+		}
+	}
+	
 	public static void initImage() {
 		frontEquipment.mult(MainEventHandler.pxSize);
 		backEquipment.mult(MainEventHandler.pxSize);

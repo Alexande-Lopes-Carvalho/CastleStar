@@ -45,6 +45,8 @@ public class PresPlayer extends PresWarrior {
 		right = false;
 		up = false;
 		down = false;
+		getPresEquipment()[0].reset();
+		getPresEquipment()[1].reset();
 	}
 	
 	public void keyPressed() {

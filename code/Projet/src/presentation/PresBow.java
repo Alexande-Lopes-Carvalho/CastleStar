@@ -67,4 +67,8 @@ public class PresBow extends PresEquipment {
 			onCooldown = false;
 		}
 	}
+	
+	public void reset() {
+		desactivate();
+	}
 }

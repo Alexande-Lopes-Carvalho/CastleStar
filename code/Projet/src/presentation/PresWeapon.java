@@ -2,10 +2,12 @@ package presentation;
 
 import javafx.scene.input.MouseButton;
 import shapeSceneFX.EventHandling.Event;
+import shapeSceneFX.EventHandling.ScheduledEvent;
 
 public class PresWeapon extends PresEquipment {
 	private long actionTime;
 	private boolean action;
+	private ScheduledEvent actionEvent;
 	public PresWeapon(long _actionTime) {
 		actionTime = _actionTime;
 		action = false;
@@ -20,10 +22,17 @@ public class PresWeapon extends PresEquipment {
 		}
 	}
 	
+	public void reset() {
+		removeEvent(actionEvent);
+		action = false;
+		getAnimatedOrientedImage().setIndex(0);
+	}
+	
 	public void launchAction() {
 		if(!action) {
 			action = true;
-			addEvent(new ActionEvent().in(0));
+			actionEvent = new ActionEvent().in(0);
+			addEvent(actionEvent);
 		}
 	}
 	
@@ -37,7 +46,8 @@ public class PresWeapon extends PresEquipment {
 				getCtrlEquipment().use();
 				return;
 			}
-			addEvent(new ActionEvent().in(actionTime/a.getLength()));
+			actionEvent = new ActionEvent().in(actionTime/a.getLength());
+			addEvent(actionEvent);
 		}
 	}
 }
