@@ -52,22 +52,24 @@ public class Arrow extends ElementScene{
 	 * Deplacement de la fleche
 	 * @param deplacement vecteur
 	 */
-	public void move(Point deplacement) {
+	public void move(Point deplacement, List<CtrlEntity> entityAlive) {
 		//System.out.println(deplacement.getX());
 		dist += deplacement.getX();
 		Rectangle r = new Rectangle(getCoord().copy().add(rect.getCoord()), new Point(deplacement.getX()+rect.getDimension().getX(), rect.getDimension().getY()));
 		setCoord(getCoord().copy().add(deplacement));
 		for(CtrlEntity k : enemyList) {
-			Point[] c = new Point[4];
-			c[0] = new Point(k.getEntity().getCoord().copy().add(deplacement).add(k.getEntity().getRectangle().getCoord()));
-			c[1] = c[0].copy().add(k.getEntity().getRectangle().getDimension().getX(), 0);
-			c[2] = c[0].copy().add(k.getEntity().getRectangle().getDimension().getX(), k.getEntity().getRectangle().getDimension().getY());
-			c[3] = c[0].copy().add(0, k.getEntity().getRectangle().getDimension().getY());
-			for(Point l : c) {
-				if(r.pointInside(l)) {
-					k.damage(damage);
-					kill();
-					return;
+			if(entityAlive.contains(k)) {
+				Point[] c = new Point[4];
+				c[0] = new Point(k.getEntity().getCoord().copy().add(deplacement).add(k.getEntity().getRectangle().getCoord()));
+				c[1] = c[0].copy().add(k.getEntity().getRectangle().getDimension().getX(), 0);
+				c[2] = c[0].copy().add(k.getEntity().getRectangle().getDimension().getX(), k.getEntity().getRectangle().getDimension().getY());
+				c[3] = c[0].copy().add(0, k.getEntity().getRectangle().getDimension().getY());
+				for(Point l : c) {
+					if(r.pointInside(l)) {
+						k.damage(damage);
+						kill();
+						return;
+					}
 				}
 			}
 		}

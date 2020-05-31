@@ -41,6 +41,6 @@ public class CtrlArrow extends CtrlElementScene{
 	
 	public void move(Point deplacement){
 		//d'ou viens currrentlevel? => CtrlElementScene via un champ static
-		arrow.move(deplacement.div(MainEventHandler.pxSize));
+		arrow.move(deplacement.div(MainEventHandler.pxSize), currentLevel.getCtrlEntityList());
 	}
 }
