@@ -18,7 +18,7 @@ public class CtrlLance extends CtrlInventoryEquipment {
 	 */
 	private CtrlLanceBack ctrlLanceBack;
 	public CtrlLance() {
-		this(new Weapon(2, 39, 500));
+		this(new Weapon(4, 39, 500));
 	}
 	
 	public CtrlLance(Weapon _weapon) {

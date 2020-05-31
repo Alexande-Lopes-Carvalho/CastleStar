@@ -52,6 +52,6 @@ public class Bow extends Equipment {
 	public void use(Warrior warrior, List<? extends CtrlEntity> enemy) {
 		//System.out.println(projectileCoord.copy().add(warrior.getCoord()) + " " + warrior.getCoord());
 		warrior.setNbArrow(warrior.getNbArrow() - 1);
-		CtrlElementScene.currentLevel.add(new CtrlArrow(new Arrow(warrior.getFacingLeft(), 2, enemy, projectileCoord.copy().add(warrior.getCoord()), new Rectangle(new Point(0, -projectileCoord.getY()-7), new Point(((warrior.getFacingLeft())? -15 :15) , 14)))));
+		CtrlElementScene.currentLevel.add(new CtrlArrow(new Arrow(warrior.getFacingLeft(), 4, enemy, projectileCoord.copy().add(warrior.getCoord()), new Rectangle(new Point(0, -projectileCoord.getY()-7), new Point(((warrior.getFacingLeft())? -15 :15) , 14)))));
 	}
 }

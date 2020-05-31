@@ -14,7 +14,7 @@ public class Skeleton extends Enemy {
 	 */
 	public static final double range = 230;
 	public Skeleton(Point _coord) {
-		super(range, 1, new Point(-50, 0), 0.05, 6, _coord, new Rectangle(new Point(-5, -3), new Point(10, 3)));
+		super(range, 1, new Point(-50, 0), 0.05, 4, _coord, new Rectangle(new Point(-5, -3), new Point(10, 3)));
 	}
 	
 	public void setNbArrow(int _nbArrow) {

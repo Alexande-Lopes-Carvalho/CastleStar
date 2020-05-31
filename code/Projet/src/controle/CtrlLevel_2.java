@@ -78,17 +78,6 @@ public class CtrlLevel_2 extends CtrlLevel {
 		addHitbox(coord.copy().add(58, 55), new ConvexPolygon(new Point(0, 0), new Point(0, 0), new Point(14, 14), new Point(186, 14), new Point(172, 0)));
 		addHitbox(coord.copy().add(65, 62), new Rectangle(new Point(0, 0), new Point(10, 7)));
 	}
-	/**
-	 * Ajoute une hitbox invisible
-	 * @param coord
-	 * @param poly
-	 */
-	public void addHitbox(Point coord, Polygon poly) {
-		add(new CtrlElementCollidable(new ElementCollidable(coord, poly), new PresElementScene() {
-			public boolean doRender(Point cam){
-			return false;
-		}}));
-	}
 
 	public void initImage() {
 		tent = EventHandler.loadPixelatedImage("./data/Level_2/Decor/Tent.png", MainEventHandler.pxSize);

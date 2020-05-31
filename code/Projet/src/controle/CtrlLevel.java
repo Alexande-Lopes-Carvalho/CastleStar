@@ -10,9 +10,11 @@ import java.util.Observer;
 import abstraction.ElementCollidable;
 import abstraction.ElementScene;
 import abstraction.Level;
+import abstraction.Polygon;
 import abstraction.Rectangle;
 import javafx.scene.image.Image;
 import presentation.MainEventHandler;
+import presentation.PresElementScene;
 import presentation.PresImage;
 import presentation.PresLevel;
 import shapeSceneFX.Point;
@@ -298,7 +300,7 @@ public class CtrlLevel implements Observer {
 		Arrays.sort(fileAr);
 		Image[] res = new Image[fileAr.length];
 		for(int i = 0; i < fileAr.length; i++) {
-			System.out.println(fileAr[i].getPath());
+			//System.out.println(fileAr[i].getPath());
 			res[i] = EventHandler.loadPixelatedImage(fileAr[i].getPath(), pxSize);
 		}
 		return res;
@@ -307,5 +309,17 @@ public class CtrlLevel implements Observer {
 	 * on charge les image
 	 */
 	public void initImage() {
+	}
+	
+	/**
+	 * Ajoute une hitbox invisible
+	 * @param coord
+	 * @param poly
+	 */
+	public void addHitbox(Point coord, Polygon poly) {
+		add(new CtrlElementCollidable(new ElementCollidable(coord, poly), new PresElementScene() {
+			public boolean doRender(Point cam){
+			return false;
+		}}));
 	}
 }

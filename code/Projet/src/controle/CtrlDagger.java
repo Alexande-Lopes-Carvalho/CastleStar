@@ -13,7 +13,7 @@ public class CtrlDagger extends CtrlInventoryEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;
 	public CtrlDagger() {
-		this(new Weapon(1, 19, 135));
+		this(new Weapon(2, 19, 135));
 	}
 	
 	public CtrlDagger(Weapon _weapon) {

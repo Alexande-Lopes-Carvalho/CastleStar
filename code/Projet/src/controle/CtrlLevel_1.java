@@ -235,6 +235,8 @@ public class CtrlLevel_1 extends CtrlLevel {
 	}
 	
 	private CtrlElementCollidable doorFront(Point coord) {
+		addHitbox(coord.copy().add(22, 102), new Rectangle(new Point(0, 0), new Point(10, 8)));
+		addHitbox(coord.copy().add(72, 151), new Rectangle(new Point(0, 0), new Point(17, 9)));
 		CtrlElementCollidable c = new CtrlElementCollidable(new ElementCollidable(coord, new ConvexPolygon(new Point(22, 102), new Point(0, 0), new Point(58, 58), new Point(97, 58), new Point(97, 0))), new PresImage(doorFront));
 		c.setRenderPriority(102);
 		return c;

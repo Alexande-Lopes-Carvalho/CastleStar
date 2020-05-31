@@ -131,6 +131,7 @@ public abstract class CtrlWarrior extends CtrlEntity {
 	public void putEquipmentFront(CtrlEquipment _front) {
 		if(front != null) {
 			getWarrior().deleteObserver(front);
+			front.getPresEquipment().reset();
 		}
 		front = _front;
 		getWarrior().addObserver(front);
@@ -145,6 +146,7 @@ public abstract class CtrlWarrior extends CtrlEntity {
 	public void putEquipmentBack(CtrlEquipment _back) {
 		if(back != null) {
 			getWarrior().deleteObserver(_back);
+			back.getPresEquipment().reset();
 		}
 		back = _back;
 		getWarrior().addObserver(back);

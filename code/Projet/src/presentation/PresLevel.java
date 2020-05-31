@@ -28,10 +28,12 @@ public class PresLevel extends EventHandler {
 	 */
 	private List<PresPlayer> listPlayer;
 	private CtrlLevel ctrlLevel;
+	private List<AddPresElementSceneEvent> addElementList;
 	public PresLevel() {
 		camera = new Point(0, 0);
 		listElementScene = new ArrayList<PresElementScene>();
 		listPlayer = new ArrayList<PresPlayer>();
+		addElementList = new ArrayList<>();
 	}
 	
 	protected void calc(long timePassed) {
@@ -81,6 +83,7 @@ public class PresLevel extends EventHandler {
 	}
 	
 	public void add(PresElementScene e) {
+		//System.out.println("\nadd " + getTimePresent() + " " + e);
 		addEvent(new AddPresElementSceneEvent(e).in(0));
 	}
 	
@@ -89,6 +92,15 @@ public class PresLevel extends EventHandler {
 	}
 	
 	public void remove(PresElementScene e) {
+		//System.out.println("\nremove " + getTimePresent() + " " + e);
+		for(AddPresElementSceneEvent k : addElementList) { 
+			//System.out.println("     " + k.getPresElementScene());
+			if(k.getPresElementScene() == e) {
+				//System.out.println("CANCEL");
+				k.cancel();
+				return;
+			}
+		}
 		addEvent(new RemovePresElementSceneEvent(e).in(0));
 	}
 	/**
@@ -123,12 +135,24 @@ public class PresLevel extends EventHandler {
 	 */
 	public class AddPresElementSceneEvent implements Event{
 		private PresElementScene e;
+		private boolean cancel;
 		public AddPresElementSceneEvent(PresElementScene _e) {
 			e = _e;
+			cancel = false;
+			addElementList.add(this);
 		}
 		@Override
 		public void handleEvent() {
-			listElementScene.add(e);
+			if(!cancel) {
+				listElementScene.add(e);
+			}
+			addElementList.remove(this);
+		}
+		public void cancel() {
+			cancel = true;
+		}
+		public PresElementScene getPresElementScene() {
+			return e;
 		}
 	}
 }

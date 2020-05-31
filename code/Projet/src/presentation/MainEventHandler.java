@@ -177,7 +177,7 @@ public class MainEventHandler extends EventHandler {
 			//System.out.println("pass");
 			presLevel = new CtrlLevel_1(ctrlPlayer, this).getPresLevel();
 		} else if(levelSelected == 1) {
-			System.out.println("LEVEL 2");
+			//System.out.println("LEVEL 2");
 			presLevel = new CtrlLevel_2(ctrlPlayer, this).getPresLevel();
 		}
 	}
