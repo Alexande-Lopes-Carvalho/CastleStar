@@ -7,7 +7,12 @@ import abstraction.Inventory;
 import abstraction.Player;
 import presentation.PresPlayer;
 import shapeSceneFX.Point;
-
+/**
+ * Joueur
+ * @author Administrator
+ * @see Player
+ * @see PresPlayer
+ */
 public class CtrlPlayer extends CtrlWarrior {
 	private PresPlayer presPlayer;
 	private Player player;
@@ -41,7 +46,10 @@ public class CtrlPlayer extends CtrlWarrior {
 	public Player getPlayer() {
 		return player;
 	}
-	
+	/**
+	 * Reinitialise le joueur pour le lancement d'un prochain niveau
+	 * @see PresPlayer#reset()
+	 */
 	public void reset() {
 		getPlayer().setLookingTo(new Point(50, 0));
 		getPlayer().heal(getPlayer().getMaxLife());

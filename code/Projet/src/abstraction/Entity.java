@@ -4,14 +4,27 @@ import java.util.List;
 
 import controle.CtrlElementCollidable;
 import shapeSceneFX.Point;
-
+/**
+ * Entité, element du niveau ayant une vie, et pouvant se deplacé
+ * @author Administrator
+ *
+ */
 public class Entity extends ElementCollidable {
 	public static final Object DAMAGE = 2;
 	public static final Object HEAL = 3;
 	public static final Object MOVE = 4;
 	public static final Object COLLIDE = -2;
+	/**
+	 * information lié a la vie de l'entité
+	 */
 	private int life, maxLife;
+	/**
+	 * vitesse de deplacement de l'entité en (unité : 1 = MainEventHandler.pxSize) par milliseconde
+	 */
 	private double speed;
+	/**
+	 * hitbox
+	 */
 	private Rectangle rectangle;
 
 	public Entity(double _speed, int _maxLife, Point _coord, Rectangle _rectangle) {
@@ -24,13 +37,20 @@ public class Entity extends ElementCollidable {
 			throw new IllegalArgumentException("Entity can't have a maxLife <= 0");
 		}
 	}
-
+	/**
+	 * degat reçu 
+	 * @param damage
+	 */
 	public void damage(int damage) {
 		life = Math.max(life - damage, 0);
 		setChanged();
 		notifyObservers(DAMAGE);
 	}
-
+	
+	/**
+	 * soin reçu
+	 * @param heal
+	 */
 	public void heal(int heal) {
 		life = Math.min(life + heal, maxLife);
 		setChanged();
@@ -56,7 +76,12 @@ public class Entity extends ElementCollidable {
 	public Rectangle getRectangle() {
 		return rectangle;
 	}
-
+	/**
+	 * regarde si l'entité peut se deplacer suivant le vecteur deplacement sans entré en collision
+	 * @param deplacement
+	 * @param list
+	 * @return
+	 */
 	private boolean canMove(Point deplacement, List<CtrlElementCollidable> list) {
 		Point[] c = new Point[4];
 		c[0] = new Point(getCoord().copy().add(deplacement).add(getRectangle().getCoord()));
@@ -75,7 +100,11 @@ public class Entity extends ElementCollidable {
 		}
 		return true;
 	}
-
+	/**
+	 * deplacement de l'entité
+	 * @param deplacement
+	 * @param list
+	 */
 	public void move(Point deplacement, List<CtrlElementCollidable> list) {
 		if(canMove(deplacement, list)) {
 			setCoord(getCoord().copy().add(deplacement));

@@ -3,7 +3,12 @@ package controle;
 import abstraction.Weapon;
 import presentation.PresInventory;
 import presentation.PresWeapon;
-
+/**
+ * Dague
+ * @author Administrator
+ * @see Weapon
+ * @see PresWeapon
+ */
 public class CtrlDagger extends CtrlInventoryEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;

@@ -8,10 +8,18 @@ import presentation.MainEventHandler;
 import presentation.PresBow;
 import presentation.PresInventory;
 import shapeSceneFX.Point;
-
+/**
+ * Arc
+ * @author Administrator
+ * @see Bow
+ * @see PresBow
+ */
 public class CtrlBow extends CtrlInventoryEquipment {
 	private Bow bow;
 	private PresBow presBow;
+	/**
+	 * second bras a mettre lorsque l'arc est équipé
+	 */
 	private CtrlBowBack ctrlBowBack;
 	public CtrlBow() {
 		super(new Bow(200), PresInventory.bow);
@@ -50,7 +58,11 @@ public class CtrlBow extends CtrlInventoryEquipment {
 	public void putOnWarrior() {
 		getCtrlWarrior().putEquipment(this, ctrlBowBack);
 	}
-	
+	/**
+	 * Second bras, pour coherence avec l'animation du tir a l'arc
+	 * @author Administrator
+	 *
+	 */
 	public class CtrlBowBack extends CtrlHandBack{
 		public void handleCtrlWarrior() {
 			getPresEquipment().set(getCtrlWarrior().getPresWarrior().getBowBack());

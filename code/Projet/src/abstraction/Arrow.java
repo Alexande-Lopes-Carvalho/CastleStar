@@ -4,15 +4,40 @@ import java.util.List;
 
 import controle.CtrlEntity;
 import shapeSceneFX.Point;
-
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public class Arrow extends ElementScene{
+	/**
+	 * Distance maximale (unité : 1 = MainEventHandler.pxSize) que la fleche va parcourir avant de disparaitre
+	 */
 	private static final float maxDist = 800;
 	public static final Object KILL = 11;
+	/**
+	 * Vitesse en (unité : 1 = MainEventHandler.pxSize) par milliseconde
+	 */
 	private static final double celerity = 0.25;
+	/**
+	 * Distance que la fleche a deja parcouru
+	 */
 	private float dist;
+	/**
+	 * Sens de la fleche
+	 */
 	private boolean facingLeft;
+	/**
+	 * degat que la fleche infligera a l'impact
+	 */
 	private int damage;
+	/**
+	 * hitbox
+	 */
 	private Rectangle rect;
+	/**
+	 * liste des enemi ou la fleche peut infligé des degat
+	 */
 	private List<? extends CtrlEntity> enemyList;
 	public Arrow(boolean _facingLeft, int _damage, List<? extends CtrlEntity> _enemyList,Point _coord, Rectangle _rect) {
 		super(_coord, _rect.getCoord().getY()+_rect.getDimension().getY()/2.);
@@ -23,7 +48,10 @@ public class Arrow extends ElementScene{
 		rect = _rect;
 		dist = 0;
 	}
-	
+	/**
+	 * Deplacement de la fleche
+	 * @param deplacement vecteur
+	 */
 	public void move(Point deplacement) {
 		//System.out.println(deplacement.getX());
 		dist += deplacement.getX();
@@ -47,7 +75,9 @@ public class Arrow extends ElementScene{
 			kill();
 		}
 	}
-	
+	/**
+	 * suppression de la fleche dans le niveau
+	 */
 	public void kill() {
 		setChanged();
 		notifyObservers(KILL);

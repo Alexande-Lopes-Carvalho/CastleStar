@@ -16,7 +16,11 @@ import presentation.PresImage;
 import presentation.PresPlayer;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
-
+/**
+ * Niveau 1
+ * @author Administrator
+ *
+ */
 public class CtrlLevel_1 extends CtrlLevel {
 	private Image bigBarrel;
 	private Image chair;
@@ -151,41 +155,77 @@ public class CtrlLevel_1 extends CtrlLevel {
 		littleHouse = EventHandler.loadPixelatedImage("./data/Level_1/Decor/LittleHouse.png", MainEventHandler.pxSize);
 		rightWall = EventHandler.loadPixelatedImage("./data/Level_1/Decor/RightWall.png", MainEventHandler.pxSize);
 	}
-	
+	/**
+	 * Retourne un gros tonneau a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable bigBarrel(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(31, 37))), new PresImage(bigBarrel));
 	}
-	
+	/**
+	 * Retourne une chaise a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable chair(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(1, 17), new Point(15, 4))), new PresImage(chair));
 	}
-	
+	/**
+	 * Retourne un mur a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable leftWall(Point coord) {
 		CtrlElementCollidable res = new CtrlElementCollidable(new ElementCollidable(coord, new ConvexPolygon(new Point(0, 0), new Point(106, 82), new Point(28.5, 159.5), new Point(20, 159.5), new Point(97.5, 82))), new PresImage(leftWall));
 		res.setRenderPriority(-0.5);
 		return res;
 	}
-	
+	/**
+	 * Retourne une table a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable table_0(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(4, 16), new Point(38, 16))), new PresImage(table_0));
 	}
-	
+	/**
+	 * Retourne une table a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable table_1(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(4, 16), new Point(44, 16))), new PresImage(table_1));
 	}
-	
+	/**
+	 * Retourne une grande table a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable biggerTable(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(4, 16), new Point(51, 16))), new PresImage(biggerTable));
 	}
-	
+	/**
+	 * Retourne un epouvantail a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable scarecrow(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(10, 32), new Point(11, 7))), new PresImage(scarecrow));
 	}
-	
+    /**
+     * Retourne une cible pour tirer a l'arc a la coordonné precisé
+     * @param coord
+     * @return
+     */
 	private CtrlElementCollidable arrowTarget(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 23), new Point(20, 6))), new PresImage(arrowTarget));
 	}
-	
+	/**
+	 * Retourne un lit a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable bed(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 39), new Point(56, 6))), new PresImage(bed));
 	}
@@ -199,29 +239,53 @@ public class CtrlLevel_1 extends CtrlLevel {
 		c.setRenderPriority(102);
 		return c;
 	}
-	
+	/**
+	 * Retourne une porte a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable door(Point coord) {
 		add(doorBack(coord.copy().add(new Point(0, 43))));
 		return doorFront(coord);
 	}
-	
+	/**
+	 * Retourne un trone a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable kingChair(Point coord) {
 		add(tablePot(coord.copy().add(12, 36)));
 		return new CtrlElementCollidable(new ElementCollidable(coord, new ConvexPolygon(new Point(0, 41), new Point(0, 0), new Point(4, 4), new Point(24, 4), new Point(20, 0))), new PresImage(kingChair));
 	}
-	
+	/**
+	 * Retourne une table avec un vase a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable tablePot(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new ConvexPolygon(new Point(-8, 9), new Point(0, 0), new Point(8, 8), new Point(28, 8), new Point(20, 0))), new PresImage(tablePot));
 	}
-	
+	/**
+	 * Retourne trois petite table a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable littleTables(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 9), new Point(59, 5))), new PresImage(littleTables));
 	}
-	
+	/**
+	 * Retourne une petite maison a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable littleHouse(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 61), new Point(56, 14))), new PresImage(littleHouse));
 	}
-	
+	/**
+	 * Retourne un mur a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	private CtrlElementCollidable rightWall(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(-20, 0), new Point(105, 160))), new PresImage(rightWall));
 	}

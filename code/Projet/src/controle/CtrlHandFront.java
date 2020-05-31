@@ -2,7 +2,11 @@ package controle;
 
 import abstraction.Hand;
 import presentation.PresEquipment;
-
+/**
+ * Main devant le personnage
+ * @author Administrator
+ *
+ */
 public class CtrlHandFront extends CtrlEquipment {
 
 	public CtrlHandFront() {

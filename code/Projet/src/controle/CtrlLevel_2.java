@@ -18,7 +18,11 @@ import presentation.PresElementScene;
 import presentation.PresImage;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
-
+/**
+ * Niveau 2
+ * @author Administrator
+ *
+ */
 public class CtrlLevel_2 extends CtrlLevel {
 	private Image tent;
 	private Image lodge;
@@ -65,20 +69,27 @@ public class CtrlLevel_2 extends CtrlLevel {
 		Orc.setGraph(a);
 		//add(new CtrlElementScene(new ElementScene(new Point(0, 0), 9000),a)); // A SUPPRIMER POUR ENLEVER LA VUE PATHFINDING
 	}
-	
+	/**
+	 * Ajoute les hitbox pour le pont
+	 * @param coord
+	 */
 	public void addWaterBridge(Point coord) {
 		addHitbox(coord.copy().add(3, -8), new ConvexPolygon(new Point(0, 0), new Point(0, 0), new Point(8, 8), new Point(156, 8), new Point(148, 0)));
 		addHitbox(coord.copy().add(58, 55), new ConvexPolygon(new Point(0, 0), new Point(0, 0), new Point(14, 14), new Point(186, 14), new Point(172, 0)));
 		addHitbox(coord.copy().add(65, 62), new Rectangle(new Point(0, 0), new Point(10, 7)));
 	}
-	
+	/**
+	 * Ajoute une hitbox invisible
+	 * @param coord
+	 * @param poly
+	 */
 	public void addHitbox(Point coord, Polygon poly) {
 		add(new CtrlElementCollidable(new ElementCollidable(coord, poly), new PresElementScene() {
 			public boolean doRender(Point cam){
 			return false;
 		}}));
 	}
-	
+
 	public void initImage() {
 		tent = EventHandler.loadPixelatedImage("./data/Level_2/Decor/Tent.png", MainEventHandler.pxSize);
 		lodge = EventHandler.loadPixelatedImage("./data/Level_2/Decor/Lodge.png", MainEventHandler.pxSize);
@@ -88,15 +99,27 @@ public class CtrlLevel_2 extends CtrlLevel {
 		mazeDiagonal = loadImages("./data/Level_2/Decor/Maze/Diagonal", MainEventHandler.pxSize);
 				
 	}
-	
+	/**
+	 * Retourne une tente a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	public CtrlElementCollidable tent(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 19), new Point(40, 11))), new PresImage(tent));
 	}
-	
+	/**
+	 * Retourne une hutte a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	public CtrlElementCollidable lodge(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(-4, 41), new Point(63, 7))), new PresImage(lodge));
 	}
-	
+	/**
+	 * Retourne un seche linge a la coordonné precisé
+	 * @param coord
+	 * @return
+	 */
 	public CtrlElementCollidable laundry(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 11), new Point(30, 6))), new PresImage(laundry));
 	}
@@ -104,7 +127,10 @@ public class CtrlLevel_2 extends CtrlLevel {
 	public CtrlElementCollidable collapsedWall(Point coord) {
 		return new CtrlElementCollidable(new ElementCollidable(coord, new Rectangle(new Point(0, 19), new Point(63, 6))), new PresImage(collapsedWall));
 	}
-	
+	/**
+	 * Place le labyrithe a la coordonné precisé
+	 * @param x
+	 */
 	public void putMaze(double x) {
 		Point coord = new Point(x, 71);
 		add(new CtrlElementCollidable(new ElementCollidable(coord.copy(), new Rectangle(new Point(0, 10), new Point(606,4))), new PresImage(mazeLine[0])));

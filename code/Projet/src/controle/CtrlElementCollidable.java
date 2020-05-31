@@ -3,7 +3,12 @@ package controle;
 
 import abstraction.ElementCollidable;
 import presentation.PresElementScene;
-
+/**
+ * Element possedant une hitbox
+ * @author Administrator
+ * @see ElementCollidable
+ * @see PresElementScene
+ */
 public class CtrlElementCollidable extends CtrlElementScene {
 	private ElementCollidable elementCollidable;
 	public CtrlElementCollidable(ElementCollidable _elementCollidable, PresElementScene _presElementScene) {

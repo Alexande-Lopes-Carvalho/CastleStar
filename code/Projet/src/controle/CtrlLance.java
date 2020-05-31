@@ -4,10 +4,18 @@ import abstraction.Hand;
 import abstraction.Weapon;
 import presentation.PresInventory;
 import presentation.PresWeapon;
-
+/**
+ * Lance
+ * @author Administrator
+ * @see Weapon
+ * @see PresWeapon
+ */
 public class CtrlLance extends CtrlInventoryEquipment {
 	private PresWeapon presWeapon;
 	private Weapon weapon;
+	/**
+	 * Main derriere a placé lors de l'equipement de la lance
+	 */
 	private CtrlLanceBack ctrlLanceBack;
 	public CtrlLance() {
 		this(new Weapon(2, 39, 500));
@@ -36,7 +44,11 @@ public class CtrlLance extends CtrlInventoryEquipment {
 	public void putOnWarrior() {
 		getCtrlWarrior().putEquipment(this, ctrlLanceBack);
 	}
-	
+	/**
+	 * Main derriere, suit l'animation d'attaque a la lance
+	 * @author Administrator
+	 *
+	 */
 	public class CtrlLanceBack extends CtrlEquipment {
 		public CtrlLanceBack() {
 			super(new Hand());

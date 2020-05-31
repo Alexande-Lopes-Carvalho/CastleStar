@@ -7,10 +7,18 @@ import abstraction.Inventory;
 import abstraction.Player;
 import presentation.PresInventory;
 import shapeSceneFX.Point;
-
+/**
+ * Inventaire d'un joueur
+ * @author Administrator
+ * @see Inventory
+ * @see PresInventory
+ */
 public class CtrlInventory implements Observer {
 	private PresInventory presInventory;
 	private Inventory inventory;
+	/**
+	 * Equipement present dans l'inventaire
+	 */
 	private CtrlInventoryEquipment[] ctrlInventoryEquipment;
 	private CtrlPlayer ctrlPlayer;
 	public CtrlInventory(Inventory _inventory, CtrlPlayer _ctrlPlayer) {
@@ -20,7 +28,10 @@ public class CtrlInventory implements Observer {
 		ctrlInventoryEquipment = new CtrlInventoryEquipment[inventory.getLength()];
 		inventory.addObserver(this);
 	}
-	
+	/**
+	 * Ajoute un equipement dans l'inventaire
+	 * @param ct
+	 */
 	public void add(CtrlInventoryEquipment ct) {
 		for(int i = 0; i < ctrlInventoryEquipment.length; i++) {
 			if(ctrlInventoryEquipment[i] != null && ct.getClass() == ctrlInventoryEquipment[i].getClass()) {

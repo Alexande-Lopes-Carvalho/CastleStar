@@ -3,7 +3,12 @@ package controle;
 import abstraction.Orc;
 import abstraction.Shield;
 import presentation.PresOrc;
-
+/**
+ * Orc
+ * @author Administrator
+ * @see Orc
+ * @see PresOrc
+ */
 public class CtrlOrc extends CtrlEnemy {
 	private PresOrc presOrc;
 	private Orc orc;

@@ -2,7 +2,12 @@ package controle;
 
 import abstraction.Skeleton;
 import presentation.PresSkeleton;
-
+/**
+ * Squelette
+ * @author Administrator
+ * @see Skeleton
+ * @see PresSkeleton
+ */
 public class CtrlSkeleton  extends CtrlEnemy{
 	private Skeleton skeleton;
 	private PresSkeleton presSkeleton;

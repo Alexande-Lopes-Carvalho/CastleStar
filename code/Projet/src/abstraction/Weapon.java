@@ -5,10 +5,23 @@ import java.util.List;
 
 import controle.CtrlEntity;
 import shapeSceneFX.Point;
-
+/**
+ * Une arme qui n'envoie pas de projectile 
+ * @author Administrator
+ *
+ */
 public class Weapon extends Equipment {
+	/**
+	 * degat que l'arme produit
+	 */
 	private int damage;
+	/**
+	 * temps en milliseconde pour attaqué avec l'arme
+	 */
 	private int actionTime;
+	/**
+	 * hitbox de l'arme
+	 */
 	private Ellipse range;
 	public Weapon(int _damage, double _range, int _actionTime) {
 		damage = _damage;

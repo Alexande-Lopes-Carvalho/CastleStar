@@ -2,6 +2,11 @@ package abstraction;
 
 import shapeSceneFX.Point;
 
+/**
+ * Joueur
+ * @author Administrator
+ *
+ */
 public class Player extends Warrior {
 
 	public Player(int _nbArrow, Point _lookingTo, int _maxLife, Point _coord) {

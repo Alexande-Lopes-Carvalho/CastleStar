@@ -1,9 +1,16 @@
 package abstraction;
 
 import java.util.Observable;
-
+/**
+ * Inventaire d'un joueur
+ * @author Administrator
+ *
+ */
 public class Inventory extends Observable {
 	public static final Object INDEX_UPDATE = 12;
+	/**
+	 * information lié au item
+	 */
 	private int index, length;
 	public Inventory(int _index, int _length) {
 		index = _index;

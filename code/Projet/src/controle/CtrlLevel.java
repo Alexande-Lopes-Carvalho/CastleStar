@@ -17,18 +17,47 @@ import presentation.PresImage;
 import presentation.PresLevel;
 import shapeSceneFX.Point;
 import shapeSceneFX.EventHandling.EventHandler;
-
+/**
+ * Niveau
+ * @author Administrator
+ * @see Level
+ * @see PresLevel
+ */
 public class CtrlLevel implements Observer {
+	/**
+	 * Liste des elemnt present
+	 */
 	private List<CtrlElementScene> ctrlElementSceneList;
+	/**
+	 * liste des element ayant une hitbox present
+	 */
 	private List<CtrlElementCollidable> ctrlElementCollidableList;
+	/**
+	 * liste de entité presente
+	 */
 	private List<CtrlEntity> ctrlEntityList;
+	/**
+	 * liste des joueur present
+	 */
 	private List<CtrlPlayer> ctrlPlayerList;
+	/**
+	 * liste des item present
+	 */
 	private List<CtrlItem> ctrlItemList;
+	/**
+	 * liste des enemi present
+	 */
 	private List<CtrlEnemy> ctrlEnemyList;
+	/**
+	 * liste des conteneur d'item present
+	 */
 	private List<CtrlLootable> ctrlLootableList;
 	private Level level;
 	private PresLevel presLevel;
 	private MainEventHandler mainEventHandler;
+	/**
+	 * Au dela de endX on verifie s'il n'y a plus d'enemi visible pour declaré la fin du niveau et basculé vers le menu
+	 */
 	private double endX;
 	public CtrlLevel(MainEventHandler _mainEventHandler, double _endX) {
 		endX = _endX;
@@ -155,10 +184,17 @@ public class CtrlLevel implements Observer {
 	public MainEventHandler getMainEventHandler() {
 		return mainEventHandler;
 	}
-	
+	/**
+	 * procedure executé si le jouueur a terminé le niveau 
+	 */
 	public void levelSuccess() {
 	}
-	
+	/**
+	 * On relaie l'information aux item et au enemi, on verifie aussi si le niveau est terminé
+	 * @param ctrlPlayer
+	 * @see CtrlEnemy#playerMoved(CtrlPlayer)
+	 * @see CtrlItem#playerMoved(CtrlPlayer)
+	 */
 	public void playerMoved(CtrlPlayer ctrlPlayer) {
 		if(ctrlPlayer.getPlayer().getCoord().getX() >= endX) {
 			//System.out.println("CheckEndLevel");
@@ -192,7 +228,11 @@ public class CtrlLevel implements Observer {
 	public PresLevel getPresLevel() {
 		return presLevel;
 	}
-	
+	/**
+	 * on charge le sol et on determine sa hitbox
+	 * @param folder
+	 * @param _coord
+	 */
 	public void loadBackground(String folder, Point _coord) {
 		File[] fileAr = new File(folder).listFiles();
 		Arrays.sort(fileAr);
@@ -218,7 +258,11 @@ public class CtrlLevel implements Observer {
 			//System.out.println(rect.getCoord() + " " + rect.getDimension());
 		}
 	}
-	
+	/**
+	 * on charge les mur et on determine sa hitbox
+	 * @param folder
+	 * @param _coord
+	 */
 	public void loadWall(String folder, Point _coord) {
 		File[] fileAr = new File(folder).listFiles();
 		Arrays.sort(fileAr);
@@ -242,7 +286,12 @@ public class CtrlLevel implements Observer {
 			//System.out.println(rect.getCoord() + " " + rect.getDimension());
 		}
 	}
-	
+	/**
+	 * On charge plusieurs images contenu dans le repertoire path et on les redimensionne
+	 * @param path
+	 * @param pxSize
+	 * @return
+	 */
 	public Image[] loadImages(String path, int pxSize) {
 		File file = new File(path);
 		File[] fileAr = (file.isDirectory())? file.listFiles() : new File[] {file};
@@ -254,7 +303,9 @@ public class CtrlLevel implements Observer {
 		}
 		return res;
 	}
-	
+	/**
+	 * on charge les image
+	 */
 	public void initImage() {
 	}
 }

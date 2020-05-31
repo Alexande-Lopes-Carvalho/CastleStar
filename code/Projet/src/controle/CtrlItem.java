@@ -6,7 +6,12 @@ import abstraction.ElementScene;
 import abstraction.Item;
 import presentation.MainEventHandler;
 import presentation.PresImage;
-
+/**
+ * Item
+ * @author Administrator
+ * @see Item
+ * @see PresImage
+ */
 public class CtrlItem extends CtrlElementScene{
 	private Item item;
 	private PresImage presItem;
@@ -17,7 +22,12 @@ public class CtrlItem extends CtrlElementScene{
 		this.presItem = presItem;
 		presItem.setCoord(item.getCoord().copy().sub((presItem.getWidth()/2.)/MainEventHandler.pxSize, (presItem.getHeight()/2.)/MainEventHandler.pxSize));
 	}
-	
+	/**
+	 * relaie l'information de mouvement du joueur a item
+	 * @param player
+	 * @return indique si l'item a été recup et si l'on doit le supprimer du niveau
+	 * @see Item#playerMoved(CtrlPlayer)
+	 */
 	public boolean playerMoved(CtrlPlayer player) {
 		return item.playerMoved(player);
 	}

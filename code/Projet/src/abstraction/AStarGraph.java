@@ -13,12 +13,38 @@ import presentation.PresElementScene;
 import presentation.PresElementScene;
 import presentation.PresLevel;*/
 import shapeSceneFX.Point;
-
+/**
+ * Utilisé pour calculé l'itineraire d'ennemi,
+ * On genere un graphe par echantillonage du niveau, puis on verifie si l'hitbox renseigné peut etre presente sur chaque noeud
+ * On ajoute systematiquement les Entité lorsque l'on doit trouver un itinéraire car les Entité peuvent se deplacé dans le niveau
+ * 
+ * La resolution de l'itinéraire se fait via l'arlgorithme du A*
+ * 
+ * Notre classe est une sous classe de PresElementScene uniquement pour avoir une representation de notre graph (debogage)
+ * 
+ * @author Administrator
+ *
+ */
 public class AStarGraph  extends PresElementScene {
+	/**
+	 * matrice de Noeud
+	 */
 	private Node[][] nodes;
+	/**
+	 * espace qui separe les noeud les un des autre dans le graphe
+	 */
 	private double xSpace, ySpace;
+	/**
+	 * hitbox
+	 */
 	private Rectangle rect;
+	/**
+	 * liste des noeud visité lors de l'execution du A*
+	 */
 	private List<Node> visitedNode;
+	/**
+	 * liste des noeud a reinitialisé pour la prochaine recherche d'un itinéraire
+	 */
 	private List<Node> toCleanNode; // liste des Nodes visité/entité (pour allégé le reset)
 	public AStarGraph(double _xSpace, double _ySpace, double width, double height, Rectangle _rect) {
 		xSpace = _xSpace;
@@ -82,7 +108,10 @@ public class AStarGraph  extends PresElementScene {
 			}
 		}
 	}
-	
+	/**
+	 * reinitialise le graph (sans supprimé les information propre au obstacle, sauf pour les entité), pour un nouveau calcul de l'itineraire
+	 * @see Node#reset()
+	 */
 	public void reset() {
 		for(Node a : toCleanNode) {
 			a.reset();
@@ -93,7 +122,11 @@ public class AStarGraph  extends PresElementScene {
 		}
 		visitedNode.clear();
 	}
-	
+	/**
+	 * Ajoute un noeud propre a la coordonné de l'entité renseigné en parametre
+	 * @param a
+	 * @return
+	 */
 	private Node addNode(CtrlEntity a) {
 		//System.out.println("START " + a.getEntity().getCenterHitbox());
 		Node k = new Node(a.getEntity().getCenterHitbox());
@@ -126,7 +159,10 @@ public class AStarGraph  extends PresElementScene {
 		}
 		return k;
 	}
-	
+	/**
+	 * Supprime un noeud du graphe
+	 * @param a
+	 */
 	private void eraseNode(Node a) {
 		ArrayList<Node> l = new ArrayList<>(a.getNeighbours());
 		for(Node k : l) {
@@ -135,7 +171,13 @@ public class AStarGraph  extends PresElementScene {
 		}
 	}
 	
-	
+	/**
+	 * Trouve l'itineraire pour que l'entité a rejoigne l'entité b a l'aide du A*
+	 * @param nbVisite nombre de noeud maximale a visité avant l'abondond de la recherche
+	 * @param a 
+	 * @param b
+	 * @return
+	 */
 	public List<Point> getPath(int nbVisite, CtrlEntity a, CtrlEntity b){
 		reset();
 		
@@ -169,7 +211,12 @@ public class AStarGraph  extends PresElementScene {
 		
 		return null;
 	}
-	
+	/**
+	 * Prend en compte dans le graphe tout les obstacle lié au entité, sauf l'entité a et b
+	 * @param a
+	 * @param b
+	 * @see AStarGraph#getPath(int, CtrlEntity, CtrlEntity)
+	 */
 	public void setEntityNode(CtrlEntity a, CtrlEntity b) {
 		List<CtrlEntity> list = new ArrayList<CtrlEntity>(CtrlElementScene.currentLevel.getCtrlEntityList());
 		list.remove(a);
@@ -195,7 +242,10 @@ public class AStarGraph  extends PresElementScene {
 			}
 		}
 	}
-	
+	/**
+	 * Selectionne un noeud selon l'algorithme du A*
+	 * @return
+	 */
 	public Node selectNode() {
 		Node res = null;
 		for(Node l : visitedNode) {
@@ -205,7 +255,12 @@ public class AStarGraph  extends PresElementScene {
 		}
 		return res;
 	}
-	
+	/**
+	 * interprete le graphe et genere l'itineraire que l'entité a devra prendre
+	 * @param b
+	 * @param a
+	 * @return
+	 */
 	private List<Point> createPath(Node b, CtrlEntity a) {
 		ArrayList<Point> path = new ArrayList<Point>();
 		Point vec = a.getEntity().getCenterHitbox().getVector(a.getEntity().getCoord());

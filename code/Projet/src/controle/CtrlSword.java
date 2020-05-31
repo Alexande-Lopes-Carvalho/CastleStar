@@ -3,7 +3,12 @@ package controle;
 import abstraction.Weapon;
 import presentation.PresInventory;
 import presentation.PresWeapon;
-
+/**
+ * Arme qui n'envoie pas de projectile
+ * @author Administrator
+ * @see Weapon
+ * @see PresWeapon
+ */
 public class CtrlSword extends CtrlInventoryEquipment {
 	private Weapon weapon;
 	private PresWeapon presWeapon;

@@ -7,7 +7,12 @@ import java.util.Observable;
 import abstraction.Enemy;
 import presentation.MainEventHandler;
 import presentation.PresEnemy;
-
+/**
+ * Enemy
+ * @author Administrator
+ * @see Enemy
+ * @see PresEnemy
+ */
 public class CtrlEnemy extends CtrlWarrior {
 	private Enemy enemy;
 	private PresEnemy presEnemy;
@@ -20,7 +25,11 @@ public class CtrlEnemy extends CtrlWarrior {
 		presEnemy.setObjective((enemy.getObjective() == null)? null : enemy.getObjective().copy().mult(MainEventHandler.pxSize));
 		//System.out.println("b");
 	}
-	
+	/**
+	 * Si un joueur c'est deplacé on relaie l'information a enemy
+	 * @param p
+	 * @see Enemy#playerMoved(CtrlPlayer)
+	 */
 	public void playerMoved(CtrlPlayer p) {
 		enemy.playerMoved(p);
 	}
@@ -41,7 +50,10 @@ public class CtrlEnemy extends CtrlWarrior {
 	public List<? extends CtrlEntity> getListOfEnemy() {
 		return new ArrayList<>(currentLevel.getCtrlPlayerList());
 	}
-	
+	/**
+	 * Si l'enemi a atteint son objectif on relaie l'information a enemy
+	 * @see Enemy#endObjective()
+	 */
 	public void endObjective() {
 		enemy.endObjective();
 	}

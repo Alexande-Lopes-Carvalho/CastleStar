@@ -3,7 +3,12 @@ package controle;
 
 import abstraction.Lootable;
 import presentation.PresElementScene;
-
+/**
+ * Conteneur d'item
+ * @author Administrator
+ * @see CtrlItem
+ * @see Lootable
+ */
 public class CtrlLootable extends CtrlEntity {
 	private CtrlItem[] items;
 	private Lootable lootable;
@@ -12,7 +17,9 @@ public class CtrlLootable extends CtrlEntity {
 		items = _items;
 		lootable = _lootable;
 	}
-	
+	/**
+	 * On tue le conteneur et fait apparaitre les item
+	 */
 	public void kill() {
 		for(CtrlItem k : items) {
 			double dist = Math.random()*lootable.getDistSpawn(), ang = Math.random()*2*Math.PI;

@@ -4,20 +4,25 @@ import shapeSceneFX.Point;
 
 
 /**
- * 
- * coord -----------------------
- *   |                         |   / \
- *   |                         |    |  dimension.getY()
- *   |                         |   \ /
- *   ---------------------------
- *       
- *   <------------------------->
- *         dimension.getX()
+ * <pre>
+ * {@code
+   coord -----------------------
+     |                         |   / \
+     |                         |    |  dimension.getY()
+     |                         |   \ /
+     ---------------------------
+         
+     <------------------------->
+           dimension.getX()
+  }</pre>
  *   
  * @author Administrator
  *
  */
 public class Rectangle extends Polygon {
+	/**
+	 * dimension du rectangle
+	 */
 	private Point dimension;
 	public Rectangle(Point _coord, Point _dimension){
 		super(_coord);

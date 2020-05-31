@@ -5,8 +5,16 @@ import java.util.Observer;
 
 import abstraction.ElementScene;
 import presentation.PresElementScene;
-
+/**
+ * Element du niveau
+ * @author Administrator
+ * @see ElementScene
+ * @see PresElementScene
+ */
 public class CtrlElementScene implements Observer {
+	/**
+	 * Niveau en cour
+	 */
 	public static CtrlLevel currentLevel;
 	private PresElementScene presElementScene;
 	private ElementScene elementScene;

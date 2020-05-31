@@ -8,7 +8,12 @@ import shapeSceneFX.Point;
 import java.util.Observable;
 
 import abstraction.Arrow;
-
+/**
+ * Fleche
+ * @author Administrator
+ * @see Arrow
+ * @see PresArrow
+ */
 public class CtrlArrow extends CtrlElementScene{
 	private Arrow arrow;
 	private PresArrow presArrow;

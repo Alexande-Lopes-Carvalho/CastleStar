@@ -3,10 +3,17 @@ package abstraction;
 import java.util.Observable;
 
 import shapeSceneFX.Point;
-
+/**
+ * Element du niveau
+ * @author Administrator
+ *
+ */
 public class ElementScene extends Observable {
 	public static final Object RENDER_PRIORITY_UPDATE = 0;
 	public static final Object COORD_UPDATE = 1;
+	/**
+	 * coordonné de l'element
+	 */
 	private Point coord;
 	private double renderPriority, renderPriorityAdd;
 	public ElementScene(Point _coord, double _renderPriorityAdd) {

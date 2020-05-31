@@ -9,8 +9,17 @@ import shapeSceneFX.Point;
 
 public class Bow extends Equipment {
 	public static final Object UPDATE_CAN_SHOOT = 10;
+	/**
+	 * temps en milliseconde a attendre avant de pouvoir tiré a nouveau
+	 */
 	private int cooldownTime;
+	/**
+	 * indique si le personnage possede au minimum une fleche et donc s'il peut tiré
+	 */
 	private boolean canShoot;
+	/**
+	 * coordonné de depart pour faire apparaitre la fleche
+	 */
 	private Point projectileCoord;
 	public Bow(int _cooldownTime) {
 		cooldownTime = _cooldownTime;
@@ -36,7 +45,9 @@ public class Bow extends Equipment {
 	public int getCooldownTime() {
 		return cooldownTime;
 	}
-
+	/**
+	 * Fait apparaitre une fleche 
+	 */
 	@Override
 	public void use(Warrior warrior, List<? extends CtrlEntity> enemy) {
 		//System.out.println(projectileCoord.copy().add(warrior.getCoord()) + " " + warrior.getCoord());
