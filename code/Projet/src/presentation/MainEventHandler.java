@@ -16,7 +16,7 @@ public class MainEventHandler extends EventHandler {
 	/**
 	 * Taille d'un pixel pour les images pixelisées qui seront redimensionnées au démarage
 	 */
-	public static int pxSize = 3;
+	public static int pxSize = 4;
 	private CtrlLevel ctrlLevel;
 	private PresLevel presLevel;
 	/**
